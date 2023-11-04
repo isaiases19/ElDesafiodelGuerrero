@@ -27,7 +27,7 @@ morir(){
 
 }
 
-class enemigo extends Personaje{
+class Enemigo extends Personaje{
 
 
 }
