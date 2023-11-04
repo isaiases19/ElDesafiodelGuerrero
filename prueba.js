@@ -1,0 +1,7 @@
+function main(){
+
+
+
+}
+//inicializacion
+main();
