@@ -1,9 +1,11 @@
 class Personaje{
 
-    constructor(nombre,vida,tipo) {
+    constructor(nombre,vida,tipo,fuerza,velocidad) {
         this.nombre = nombre;
         this.vida = vida;
         this.tipo=tipo;
+        this.fuerza=fuerza;
+        this.velocidad=velocidad;
       }
 
       atacar(enemigo) {
