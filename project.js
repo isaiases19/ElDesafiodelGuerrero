@@ -29,6 +29,12 @@ morir(){
 
 class Enemigo extends Personaje{
 
+  constructor(){
+
+  }
+
+  
+  
 
 }
 
