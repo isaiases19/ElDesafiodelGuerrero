@@ -1,4 +1,3 @@
-
 class Personaje{
 
     constructor(nombre,vida,tipo) {
@@ -27,14 +26,4 @@ morir(){
 
 }
 
-class Enemigo extends Personaje{
-
-  constructor(){
-
-  }
-
-  
-  
-
-}
-
+export {Personaje};
