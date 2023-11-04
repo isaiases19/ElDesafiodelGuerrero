@@ -1,5 +1,5 @@
-import { Enemigo } from "./class/Enemigo";
-import { Guerrero } from "./class/Guerrero";
+import { Enemigo } from "./class/Enemigo.js";
+import { Guerrero } from "./class/Guerrero.js";
 function main(){
 
     const guerrero = new Guerrero("Conan",0,0,0,0);

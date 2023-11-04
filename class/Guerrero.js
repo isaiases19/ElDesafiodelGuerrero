@@ -1,4 +1,4 @@
-import { Personaje } from "./personaje";
+import { Personaje } from "./personaje.js";
 
 var fuerzaGuerrero=15;
 var velocidadGuerrero=5;
