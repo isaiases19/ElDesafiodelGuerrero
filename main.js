@@ -49,7 +49,7 @@ function turnoGuerrero() {
     let opcion = 0;
     let ataque = { "KeyZ": 1, "KeyX": 2, "KeyC": 3 };
     
-    drawText(" Z Estocada | X  Corte Feroz | C  Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .90, fontSize: 30 }).render()
+    drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .878, fontSize: 35 }).render()
     //linten for key
     addEventListener("keyup", (e) => {
         opcion = ataque[e.code];
@@ -72,7 +72,7 @@ async function update(MSG, color) {
         return
     }else{
         drawVida(enemigo, guerrero);
-        drawText(MSG, app, { color, x: app.width * .5, y: app.height * .8, fontSize: 30,fontFamily:"Comic Sans" }).render();
+        drawText(MSG, app, { color, x: app.width * .5, y: app.height * .75, fontSize: 40,fontFamily:"Comic Sans" }).render();
         
        
         await delay(3000);

@@ -22,7 +22,7 @@ class Text{
             this.drawRect();
             this.ctx.fillStyle = this.color;
             this.ctx.fillText(line, this.x, this.y);
-            this.y += this.fontSize*1.5;
+            this.y += this.fontSize*1.793;
             
         });
 
@@ -30,7 +30,7 @@ class Text{
     }
 
     drawRect(){
-        this.ctx.fillStyle = "#000000ff";
+        this.ctx.fillStyle = "#000000c9";
         this.ctx.beginPath();
         this.ctx.roundRect(this.x - this.textlength*.33,this.y - this.fontSize + this.fontSize*0.1,this.textlength/1.5,this.fontSize*1.8,20);
         this.ctx.fill();
