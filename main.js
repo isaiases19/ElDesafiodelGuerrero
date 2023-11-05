@@ -27,7 +27,7 @@ const app = {
 async function init() {
     drawInicio(app).render()
 }
-const guerrero = new Guerrero("Conan", "player", 0, 0, 0);
+const guerrero = new Guerrero("Conan", "player", 100,3, 6);
 const enemigo = new Enemigo("Troll", "enemy",randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
 async function setUp() {
@@ -68,7 +68,7 @@ async function update(MSG, color) {
         app.turno = 0;
         const url = guerrero.muerto ? "/sounds/failure.mp3": "/sounds/success.mp3"
         guerrero.playSound(url);
-        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre.toUpperCase()} a vencido!!🎉 \n 🤩`, app, { color: "#64f177", fontSize: 50 }).render() : drawText(` Has sido vencido por ${enemigo.nombre.toUpperCase()}!! \n 😭`, app, { color: "#e33030", fontSize: 50 }).render();
+        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 \n 🤩`, app, { color: "#64f177", fontSize: 50 }).render() : drawText(` Has sido vencido por ${enemigo.nombre.toUpperCase()}!! \n 😭`, app, { color: "#e33030", fontSize: 50 }).render();
         return
     }else{
         drawVida(enemigo, guerrero);
