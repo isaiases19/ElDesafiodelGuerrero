@@ -22,7 +22,7 @@ class Personaje{
       }
 
 morir(){
-   console.log("Has Muerto"); 
+   console.log("Ha Muerto "+ this.nombre); 
 }
 
 
