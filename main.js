@@ -3,6 +3,8 @@ import { Guerrero } from "./class/Guerrero.js";
 import { Enemigo } from "./class/Enemigo.js";
 import { drawText } from "./class/views/Text.js";
 import { randomMinMax } from "./utility/utility.js";
+import { drawSprite } from "./class/views/Image.js";
+
 const canvas = document.querySelector("canvas");
 const backGroundMuisc = new Audio("/sounds/background.mp3");
 
@@ -13,9 +15,11 @@ const app = {
     context: canvas.getContext("2d"),
     turno: 0,
     appStart: false,
+    timeOut: 5,
     clearCanvas: () => {
         canvas.width = app.width;
         canvas.height = app.height;
+        clearTimeout(app.timeOut);
     }
 };
 
@@ -23,15 +27,17 @@ const app = {
 async function init() {
     drawInicio(app).render()
 }
-const guerrero = new Guerrero("Conan", 0, 0, 0, 0);
-const enemigo = new Enemigo("Troll", 0,randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
+const guerrero = new Guerrero("Conan", "player", 0, 0, 0);
+const enemigo = new Enemigo("Troll", "enemy",randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
-function setUp() {
+async function setUp() {
     backGroundMuisc.loop = true;
     backGroundMuisc.play()
     backGroundMuisc.volume = 0.3;
-    app.turno = guerrero.velocidad > enemigo.velocidad ? 1 : 2;
-    ejecutarTurno();
+
+    await delay(1000);
+    drawVida(enemigo, guerrero);
+    ejecutarTurno(guerrero.velocidad > enemigo.velocidad ? 1 : 2);
 }
 function turnoEnemigo() {
     app.clearCanvas();
@@ -42,12 +48,12 @@ function turnoEnemigo() {
 function turnoGuerrero() {
     let opcion = 0;
     let ataque = { "KeyZ": 1, "KeyX": 2, "KeyC": 3 };
-
+    
     drawText(" Z Estocada | X  Corte Feroz | C  Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .90, fontSize: 30 }).render()
     //linten for key
     addEventListener("keyup", (e) => {
         opcion = ataque[e.code];
-        if ((app.turno  % 2) && opcion > 0) {
+        if ((app.turno  % 2) === 1 && opcion > 0) {
             update(guerrero.realizarAtaque(opcion, enemigo), "#64f177");
         }
     });
@@ -58,45 +64,39 @@ function turnoGuerrero() {
 
 async function update(MSG, color) {
     app.clearCanvas()
-    if (enemigo.muerto) {
+    if (enemigo.muerto || guerrero.muerto) {
         app.turno = 0;
-        guerrero.playSound("/sounds/success.mp3");
-        drawText(` 🎉${guerrero.nombre.toUpperCase()} ah vencido!!🎉 `, app, { color: "#64f177", fontSize: 50 }).render()
+        const url = guerrero.muerto ? "/sounds/failure.mp3": "/sounds/success.mp3"
+        guerrero.playSound(url);
+        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre.toUpperCase()} a vencido!!🎉 \n 🤩`, app, { color: "#64f177", fontSize: 50 }).render() : drawText(` Has sido vencido por ${enemigo.nombre.toUpperCase()}!! \n 😭`, app, { color: "#e33030", fontSize: 50 }).render();
         return
-    } if (guerrero.muerto) {
-        app.turno = 0;
-        guerrero.playSound("/sounds/failure.mp3");
-        drawText(` Hazido vencido por ${enemigo.nombre.toUpperCase()}!! `, app, { color: "#e33030", fontSize: 50 }).render()
+    }else{
+        drawVida(enemigo, guerrero);
+        drawText(MSG, app, { color, x: app.width * .5, y: app.height * .8, fontSize: 30,fontFamily:"Comic Sans" }).render();
+        
+       
+        await delay(3000);
+        ejecutarTurno(app.turno + 1);
         return
     }
-
-    drawVida(enemigo, guerrero);
-    drawText(MSG, app, { color, x: app.width * .5, y: app.height * .7, fontSize: 30,fontFamily:"Comic Sans" }).render();
-
-    app.turno++;
-    await delay(3000);
-    ejecutarTurno()
 }
 
-function ejecutarTurno() {
-    if ((app.turno  % 2)) {
-        turnoGuerrero()
-    } else {
-        turnoEnemigo()
-    }
+function ejecutarTurno(turno) {
+    app.turno = turno;
+    (turno % 2) === 1 ? turnoGuerrero() : turnoEnemigo();
 }
 
 
 function drawVida(enemigo, guerrero) {
     const {fontFamily,fontSize} = {fontFamily:"Impact",fontSize: 30};
   
-    drawText(` ${guerrero.nombre} ${guerrero.vida}💖`, app, { x: app.width * .2, y: app.height * .50, fontSize,fontFamily }).render();
-    drawText(`${enemigo.nombre} ${enemigo.vida}💖`, app, { x: app.width * .80, y: app.height * .50, fontSize,fontFamily}).render();
+    drawText(` ${guerrero.nombre} ${guerrero.vida}❤️`, app, { x: app.width * .15, y: app.height * .52, fontSize,fontFamily }).render();
+    drawText(` ${enemigo.nombre} ${enemigo.vida}💚`, app, { x: app.width * .85, y: app.height * .50, fontSize,fontFamily}).render();
 }
 
 async function delay(ms) {
     return new Promise(resolve => {
-        setTimeout(resolve, ms);
+       app.timeOut = setTimeout(resolve, ms);
     });
 }
 

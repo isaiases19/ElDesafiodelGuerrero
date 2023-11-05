@@ -1,7 +1,7 @@
 class Personaje{
 
     constructor(nombre,vida,tipo,fuerza,velocidad) {
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
         this.vida = vida;
         this.tipo=tipo;
         this.fuerza=fuerza;
@@ -42,7 +42,7 @@ class Personaje{
 
       morir(){
           this.muerto = true;
-        console.log("Ha Muerto "+ this.nombre); 
+          console.log("Ha Muerto "+ this.nombre); 
       }
 }
 
