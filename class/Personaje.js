@@ -6,6 +6,7 @@ class Personaje{
         this.tipo=tipo;
         this.fuerza=fuerza;
         this.velocidad=velocidad;
+        this.muerto = false;
       }
 
       atacar(enemigo) {
@@ -22,6 +23,7 @@ class Personaje{
       }
 
 morir(){
+    this.muerto = true;
    console.log("Ha Muerto "+ this.nombre); 
 }
 

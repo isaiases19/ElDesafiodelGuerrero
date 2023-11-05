@@ -19,45 +19,87 @@ const app = {
 function init(){
    drawInicio(app).render()
 }
+const guerrero = new Guerrero("Conan",0,0,0,0);
+const enemigo = new Enemigo("Troll",0,20,3,2);
 
+let delayC;
+function delay(func,time){
+    delayC = setTimeout(func,2000);
+}
 
 function setUp(){
-    setInterval(update,5000/app.FPS);
+    if(guerrero.velocidad > enemigo.velocidad){
+        delay(turnoGuerrero,1000)
+    }else{
+        turnoEnemigo();
+    }
+}
+function turnoEnemigo(){
+    app.clearCanvas();
+    let enemigoMSG = enemigo.realizarAtaque(guerrero);
+    update(enemigoMSG,"brown")
+    delay(turnoGuerrero,3000);
+}
+
+function turnoGuerrero(){
+    app.clearCanvas();
+    drawText("[Z]Estocada [X]Corte Feroz [C]Tajo Desgarrador",app,{color:"#64aaf1",x:100,fontSize:30}).render()
+    document.addEventListener("keyup",(e)=>{
+        let ataque = 0;
+        
+        switch(e.code){
+            case "KeyZ":
+                ataque = 1;
+                break;
+            case "KeyX":
+                ataque = 2;
+                break;
+            case "KeyC":
+                ataque = 3;
+                break;
+
+        }
+
+        if(ataque !== 0){
+            document.removeEventListener("keyup",(e)=>{});
+            let guerreroMSG = guerrero.realizarAtaque(ataque,enemigo);
+            update(guerreroMSG,"#2f6742");
+            ataque = 0;
+            delay(turnoEnemigo,3000);
+        }
+      
+    })
+   
 }
 
 
-let arena = drawArena(app)
-const guerrero = new Guerrero("Conan",0,0,0,0);
-const enemigo = new Enemigo("Troll",0,20,3,2);
-function update(){
-    app.clearCanvas()
- 
-    let enemigoMSG = enemigo.realizarAtaque(guerrero);
-    let guerreroMSG = guerrero.ataqueBasico(enemigo);
-    
-    drawVida(enemigo,guerrero);
-    drawText(enemigoMSG,app,{color:"brown",x:150}).render(app.context)
-    setTimeout(()=>{
-        app.clearCanvas()
-        drawText(guerreroMSG,app,{color:"#2f6742",x:150}).render(app.context);
-        drawVida(enemigo,guerrero);
-    },3000);
-    
-}   
+function update(MSG,color){
+    if(enemigo.muerto){
+        clearTimeout(delayC);
+        drawText("🎉El Guerrero ah vencido!!🎉",app,{color:"#64f177",x:250, fontSize:50}).render()
+    }if(guerrero.muerto){
+        clearTimeout(delayC);
+        drawText(`Hazido vencido por ${enemigo.nombre.toUperCase()}!!`,app,{color:"brown",x:250, fontSize:50}).render()
+    }
 
+    app.clearCanvas()
+    drawVida(enemigo,guerrero);
+    drawText(MSG,app,{color,x:150}).render()
+   
+}   
 init();
 
 
 function drawVida(enemigo,guerrero){
-    drawText(`${guerrero.nombre} ${guerrero.vida}💖`,app,{x:50,y:app.height - 50}).render(app.context);
-    drawText(`${enemigo.nombre} ${enemigo.vida}💖`,app,{x:app.width - 150,y:50}).render(app.context);
+    drawText(`${guerrero.nombre} ${guerrero.vida}💖`,app,{x:50,y:app.height - 50}).render();
+    drawText(`${enemigo.nombre} ${enemigo.vida}💖`,app,{x:app.width - 150,y:50}).render();
 }
 
 
 
-document.addEventListener("keydown",(e)=>{
-    switch(e.keyCode){
-        case 32:
+document.addEventListener("keyup",(e)=>{
+    switch(e.code){
+        case "Space":
             setUp();
             break;
     }

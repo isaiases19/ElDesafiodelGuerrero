@@ -3,6 +3,7 @@ class Text{
         this.text = text;
         this.color = color||"white";
         this.fontSize = fontSize || 20;
+        this.ctx = app.context; 
         
         this.textlength = this.fontSize* this.text.length;
         this.x = x || (app.width/2 - this.textlength/2);
@@ -10,10 +11,10 @@ class Text{
 
     }
 
-    render(ctx){
-        ctx.fillStyle = this.color;
-        ctx.font = `${this.fontSize}pt Arial`
-        ctx.fillText(this.text, this.x, this.y);
+    render(){
+        this.ctx.fillStyle = this.color;
+        this.ctx.font = `${this.fontSize}pt Arial`
+        this.ctx.fillText(this.text, this.x, this.y);
     }
 }
 
