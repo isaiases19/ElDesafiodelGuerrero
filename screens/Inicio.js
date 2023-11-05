@@ -4,7 +4,7 @@ class Inicio extends Screens {
     constructor(app){
         super(app)
         this.content =[
-            drawText("Press Any Key",app,{})
+            drawText("Press Space To Start",app,{x:220,fontSize:50})
         ];
     }
 }

@@ -17,5 +17,7 @@ canvas{
     width: 95vh;
     height: 95vh;
     margin-top: 3vh;
-    background-color: rgb(11, 10, 10);
+    /* background-color: rgb(11, 10, 10); */
+    background-image: url("/img/bg.jpeg");
+    background-size: contain;
 }

@@ -1,14 +1,16 @@
 import { drawInicio } from "./screens/Inicio.js";
-import {drawArena} from "./screens/arena.js"
 import { Guerrero } from "./class/Guerrero.js";
 import { Enemigo } from "./class/Enemigo.js";
 import { drawText } from "./class/views/Text.js";
+import { drawSprite } from "./class/views/Image.js";
 const canvas = document.querySelector("canvas");
 const app = {
     FPS:1,
     width:1080,
     height:1080,
     context:canvas.getContext("2d"),
+    turno: 0,
+    appStart: false,
     clearCanvas:()=>{
         canvas.width = app.width;
         canvas.height = app.height;
@@ -16,91 +18,90 @@ const app = {
 };
 
 
-function init(){
+async function init(){
+
    drawInicio(app).render()
 }
 const guerrero = new Guerrero("Conan",0,0,0,0);
 const enemigo = new Enemigo("Troll",0,20,3,2);
 
-let delayC;
-function delay(func,time){
-    delayC = setTimeout(func,2000);
-}
 
 function setUp(){
-    if(guerrero.velocidad > enemigo.velocidad){
-        delay(turnoGuerrero,1000)
-    }else{
-        turnoEnemigo();
-    }
+    app.turno = guerrero.velocidad > enemigo.velocidad ? 1:2;
+    ejecutarTurno();
 }
 function turnoEnemigo(){
     app.clearCanvas();
-    let enemigoMSG = enemigo.realizarAtaque(guerrero);
-    update(enemigoMSG,"brown")
-    delay(turnoGuerrero,3000);
+    update(enemigo.realizarAtaque(guerrero),"brown");
 }
 
 function turnoGuerrero(){
-    app.clearCanvas();
-    drawText("[Z]Estocada [X]Corte Feroz [C]Tajo Desgarrador",app,{color:"#64aaf1",x:100,fontSize:30}).render()
-    document.addEventListener("keyup",(e)=>{
-        let ataque = 0;
-        
-        switch(e.code){
-            case "KeyZ":
-                ataque = 1;
-                break;
-            case "KeyX":
-                ataque = 2;
-                break;
-            case "KeyC":
-                ataque = 3;
-                break;
-
+    let opcion= 0;
+    let ataque = {"KeyZ":1,"KeyX":2,"KeyC":3};
+  
+    drawText("[Z]Estocada [X]Corte Feroz [C]Tajo Desgarrador",app,{color:"#ffffff",x:app.width*.1,y:app.height*.90,fontSize:30}).render()
+    //linten for key
+    addEventListener("keyup",(e)=>{
+        opcion = ataque[e.code];
+        if(app.turno === 1 && opcion > 0){
+            update(guerrero.realizarAtaque(opcion,enemigo),"#64f177");
         }
-
-        if(ataque !== 0){
-            document.removeEventListener("keyup",(e)=>{});
-            let guerreroMSG = guerrero.realizarAtaque(ataque,enemigo);
-            update(guerreroMSG,"#2f6742");
-            ataque = 0;
-            delay(turnoEnemigo,3000);
-        }
-      
-    })
+    });
+   
    
 }
 
 
-function update(MSG,color){
+async function update(MSG,color){
+    app.clearCanvas()
     if(enemigo.muerto){
-        clearTimeout(delayC);
-        drawText("🎉El Guerrero ah vencido!!🎉",app,{color:"#64f177",x:250, fontSize:50}).render()
+        app.turno = 0;
+        drawText("🎉El Guerrero ah vencido!!🎉",app,{color:"#64f177",x:130, fontSize:50}).render()
+        return
     }if(guerrero.muerto){
-        clearTimeout(delayC);
-        drawText(`Hazido vencido por ${enemigo.nombre.toUperCase()}!!`,app,{color:"brown",x:250, fontSize:50}).render()
+        app.turno = 0;
+        drawText(`Hazido vencido por ${enemigo.nombre.toUpperCase()}!!`,app,{color:"#ee0909",x:100, fontSize:50}).render()
+        return
     }
 
-    app.clearCanvas()
     drawVida(enemigo,guerrero);
-    drawText(MSG,app,{color,x:150}).render()
-   
+    drawText(MSG,app,{color,x:app.width*.1,y:app.height*.70,fontSize:22}).render()
+    
+    app.turno = app.turno === 1 ? 2:1;
+    await delay(3000);
+    ejecutarTurno()
 }   
+
+function ejecutarTurno(){
+    if(app.turno === 1){
+        turnoGuerrero()
+    }else{
+        turnoEnemigo()
+    }
+}
+
+
 init();
 
 
 function drawVida(enemigo,guerrero){
-    drawText(`${guerrero.nombre} ${guerrero.vida}💖`,app,{x:50,y:app.height - 50}).render();
-    drawText(`${enemigo.nombre} ${enemigo.vida}💖`,app,{x:app.width - 150,y:50}).render();
+    drawText(`${guerrero.nombre} ${guerrero.vida}💖`,app,{x:100,y:app.height*.50,fontSize:30}).render();
+    drawText(`${enemigo.nombre} ${enemigo.vida}💖`,app,{x:app.width*.80 ,y:app.height*.50,fontSize:30}).render();
 }
 
-
+async function delay(ms) {
+    return new Promise(resolve => {
+      setTimeout(resolve, ms);
+    });
+  }
 
 document.addEventListener("keyup",(e)=>{
-    switch(e.code){
-        case "Space":
-            setUp();
-            break;
-    }
+    let accions = {"Space":()=>{
+        app.clearCanvas()
+        setUp();
+        app.appStart = true;
+    }}
+    
+    if(!app.appStart)
+        accions[e.code]()
 })
