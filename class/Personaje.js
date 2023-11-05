@@ -8,6 +8,8 @@ class Personaje{
         this.velocidad=velocidad;
 
         this.ataques= [];
+        this.armas = null;
+        this.inventario = [];
         this.muerto = false;
         this.sound = new Audio();
       }
@@ -25,12 +27,18 @@ class Personaje{
         }
       }
 
+      elegirArma(armaName){
+        const arama = this.inventario.find({armaName});
+        this.armas = arama;
+      }
+
       realizarAtaque(opcion, enemigo) {
         if(opcion > 0 && opcion  <= this.ataques.length){
           let tipoAtaque = this.ataques[opcion - 1];
           this.playSound(tipoAtaque.audio);
-          enemigo.recibirAtaque(tipoAtaque.fuerza);
-          return `${this.nombre} atca a ${enemigo.nombre} \n Con ${tipoAtaque.name} con una fuerza de ${tipoAtaque.fuerza}!`;
+          let totalDamge = tipoAtaque.fuerza + (this.armas ? this.armas.usar(): 0);
+          enemigo.recibirAtaque(totalDamge);
+          return `${this.nombre} atca a ${enemigo.nombre} \n Con ${tipoAtaque.name} con daño de ${totalDamge}!`;
         }else{
           return 'Opción no válida. Por favor, elige un ataque válido.';
         }

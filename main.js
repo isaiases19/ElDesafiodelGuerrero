@@ -24,7 +24,7 @@ const app = {
 const guerrero = new Guerrero("Conan", "player", 100,3, 6);
 const enemigo = new Enemigo("Troll", "enemy",randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
-async function init() {
+async function main() {
     drawInicio(app).render()
     const satrt = new Audio("/sounds/click.mp3");
     addEventListener("keyup", (e) => {
@@ -32,7 +32,7 @@ async function init() {
             "Space": () => {
                 app.clearCanvas()
                 satrt.play()
-                setUp();
+                setup();
                 app.appStart = true;
             }
         }
@@ -41,7 +41,7 @@ async function init() {
     })
 }
 
-async function setUp() {
+async function setup() {
     backGroundMuisc.loop = true;
     backGroundMuisc.play()
     backGroundMuisc.volume = 0.3;
@@ -70,5 +70,5 @@ async function update(MSG, color) {
     }
 }
 
-init();
+main();
 export {update}

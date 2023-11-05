@@ -1,5 +1,5 @@
 import { Personaje } from "./personaje.js";
-
+import { espadaNormal } from "./Armas.js";
 
 class Guerrero extends Personaje {
 
@@ -8,6 +8,8 @@ class Guerrero extends Personaje {
     this.vida = vida;
     this.fuerza = fuerza;
     this.velocidad = velocidad;
+
+    this.armas = espadaNormal();
 
     this.ataques = [
       {name:"Ataque Basico",fuerza,audio:"/sounds/punch-estocada.mp3"},

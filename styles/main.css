@@ -1,26 +1,24 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-body{
-    background-color: #121921;
-    color: #fdfd;
+body {
+  background-color: #121921;
+  color: #fdfd;
 }
-
-main{
-    width: fit-content;
-    height: 99vh;
-    margin: 0 auto;
+main {
+  width: fit-content;
+  height: 99vh;
+  margin: 0 auto;
 }
+canvas {
+  width: 95vh;
+  height: 95vh;
+  margin-top: 2vh;
+  /* background-color: rgb(11, 10, 10); */
+  background-image: url("/img/bg.jpeg");
+  background-size: contain;
 
-canvas{
-    width: 95vh;
-    height: 95vh;
-    margin-top: 3vh;
-    /* background-color: rgb(11, 10, 10); */
-    background-image: url("/img/bg.jpeg");
-    background-size: contain;
-
-    border: #0b0e13 solid 5px ;
-    border-radius: .5rem;
+  border: #0b0e13 solid 5px;
+  border-radius: 0.5rem;
 }
