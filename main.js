@@ -32,7 +32,7 @@ const enemigo = new Enemigo("Troll",0,20,3,2);
 function update(){
     app.clearCanvas()
  
-    let enemigoMSG = enemigo.ataqueBasico(guerrero);
+    let enemigoMSG = enemigo.realizarAtaque(guerrero);
     let guerreroMSG = guerrero.ataqueBasico(enemigo);
     
     drawVida(enemigo,guerrero);
