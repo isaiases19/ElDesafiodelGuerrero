@@ -4,6 +4,8 @@ import { Enemigo } from "./class/Enemigo.js";
 import { drawText } from "./class/views/Text.js";
 import { drawSprite } from "./class/views/Image.js";
 const canvas = document.querySelector("canvas");
+const backGroundMuisc = new Audio("/sounds/background.mp3");
+
 const app = {
     FPS:1,
     width:1080,
@@ -21,12 +23,16 @@ const app = {
 async function init(){
 
    drawInicio(app).render()
+  
 }
 const guerrero = new Guerrero("Conan",0,0,0,0);
 const enemigo = new Enemigo("Troll",0,20,3,2);
 
 
 function setUp(){
+    backGroundMuisc.loop = true;
+    backGroundMuisc.play()
+    backGroundMuisc.volume = 0.3;
     app.turno = guerrero.velocidad > enemigo.velocidad ? 1:2;
     ejecutarTurno();
 }
@@ -56,10 +62,12 @@ async function update(MSG,color){
     app.clearCanvas()
     if(enemigo.muerto){
         app.turno = 0;
-        drawText("🎉El Guerrero ah vencido!!🎉",app,{color:"#64f177",x:130, fontSize:50}).render()
+        guerrero.playSound("/sounds/success.mp3");
+        drawText(`🎉${guerrero.nombre} ah vencido!!🎉`,app,{color:"#64f177",x:130, fontSize:50}).render()
         return
     }if(guerrero.muerto){
         app.turno = 0;
+        guerrero.playSound("/sounds/failure.mp3");
         drawText(`Hazido vencido por ${enemigo.nombre.toUpperCase()}!!`,app,{color:"#ee0909",x:100, fontSize:50}).render()
         return
     }
@@ -95,9 +103,12 @@ async function delay(ms) {
     });
   }
 
+
+const satrt = new Audio("/sounds/click.mp3");  
 document.addEventListener("keyup",(e)=>{
     let accions = {"Space":()=>{
         app.clearCanvas()
+        satrt.play()
         setUp();
         app.appStart = true;
     }}

@@ -8,17 +8,20 @@ class Enemigo extends Personaje {
 
 
   ataqueBasico(enemigo) {
+    this.playSound("/sounds/punch-estocada.mp3");
     enemigo.recibirAtaque(this.fuerza);
     return `${this.nombre} realiza un ataque básico a ${enemigo.nombre} con una fuerza de ${this.fuerza}!`;
   }
 
   ataqueEspecial(enemigo) {
+    this.playSound("/sounds/punch-corte-feroz.mp3");
     const danioEspecial = this.fuerza * 2;
     enemigo.recibirAtaque(danioEspecial);
     return `${this.nombre} realiza un ataque especial a ${enemigo.nombre} con una fuerza aumentada de ${danioEspecial}!`;
   }
 
   ataqueDefinitivo(enemigo) {
+    this.playSound("/sounds/punch-tajo-desgarrador.mp3");
     const danioDefinitivo = this.fuerza * 3;
     enemigo.recibirAtaque(danioDefinitivo);
     return `${this.nombre} realiza un ataque definitivo a ${enemigo.nombre} con una fuerza poderosa de ${danioDefinitivo}!`;

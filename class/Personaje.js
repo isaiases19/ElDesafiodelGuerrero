@@ -6,7 +6,9 @@ class Personaje{
         this.tipo=tipo;
         this.fuerza=fuerza;
         this.velocidad=velocidad;
+        
         this.muerto = false;
+        this.sound = new Audio();
       }
 
       atacar(enemigo) {
@@ -20,6 +22,12 @@ class Personaje{
         if (this.vida <= 0) {
           this.morir();
         }
+      }
+
+      playSound(src,volume = 1){
+        this.sound.src = src;
+        this.sound.volume = volume;
+        this.sound.play();
       }
 
 morir(){
