@@ -22,7 +22,7 @@ function init(){
 
 
 function setUp(){
-    setInterval(update,2000/app.FPS);
+    setInterval(update,5000/app.FPS);
 }
 
 
@@ -30,16 +30,31 @@ let arena = drawArena(app)
 const guerrero = new Guerrero("Conan",0,0,0,0);
 const enemigo = new Enemigo("Troll",0,20,3,2);
 function update(){
-    arena.render()
-    arena.update()
-    enemigo.ataqueBasico(guerrero);
-    guerrero.ataqueBasico(enemigo);
-
-    arena.content.push(drawText(`${guerrero.nombre} ${guerrero.vida}💖`,app,{x:50,y:app.height - 50}))
-        (drawText(`${enemigo.nombre} ${enemigo.vida}💖`,app,{x:app.width - 150,y:50}))
-}
+    app.clearCanvas()
+ 
+    let enemigoMSG = enemigo.ataqueBasico(guerrero);
+    let guerreroMSG = guerrero.ataqueBasico(enemigo);
+    
+    drawVida(enemigo,guerrero);
+    drawText(enemigoMSG,app,{color:"brown",x:150}).render(app.context)
+    setTimeout(()=>{
+        app.clearCanvas()
+        drawText(guerreroMSG,app,{color:"#2f6742",x:150}).render(app.context);
+        drawVida(enemigo,guerrero);
+    },3000);
+    
+}   
 
 init();
+
+
+function drawVida(enemigo,guerrero){
+    drawText(`${guerrero.nombre} ${guerrero.vida}💖`,app,{x:50,y:app.height - 50}).render(app.context);
+    drawText(`${enemigo.nombre} ${enemigo.vida}💖`,app,{x:app.width - 150,y:50}).render(app.context);
+}
+
+
+
 document.addEventListener("keydown",(e)=>{
     switch(e.keyCode){
         case 32:

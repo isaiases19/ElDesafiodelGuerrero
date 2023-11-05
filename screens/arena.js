@@ -5,15 +5,6 @@ class Arena extends Screens {
         super(app)
         this.content =[];
     }
-
-    update(){
-        if(this.content.length > 0){
-            setTimeout(()=>{
-                this.content.splice(0,1);
-            },500);
-        }
-        this.content.map((text,index)=> index > 1)
-    }
 }
 
 function drawArena(app){

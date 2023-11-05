@@ -1,4 +1,4 @@
-import { Personaje } from "./personaje";
+import { Personaje } from "./personaje.js";
 
 var fuerzaGuerrero=3;
 var velocidadGuerrero=5;
@@ -13,20 +13,20 @@ class Guerrero extends Personaje{
       }
 
       ataqueBasico(enemigo) {
-        console.log(`${this.nombre} realiza un ataque básico a ${enemigo.nombre} con una fuerza de ${this.fuerza}!`);
         enemigo.recibirAtaque(this.fuerza);
+        return`${this.nombre} realiza un ataque básico a ${enemigo.nombre} con una fuerza de ${this.fuerza}!`;
       }
     
       ataqueEspecial(enemigo) {
         const danioEspecial = this.fuerza * 2;
-        console.log(`${this.nombre} realiza un ataque especial a ${enemigo.nombre} con una fuerza aumentada de ${danioEspecial}!`);
         enemigo.recibirAtaque(danioEspecial);
+        return`${this.nombre} realiza un ataque especial a ${enemigo.nombre} con una fuerza aumentada de ${danioEspecial}!`;
       }
     
       ataqueDefinitivo(enemigo) {
         const danioDefinitivo = this.fuerza * 3;
-        console.log(`${this.nombre} realiza un ataque definitivo a ${enemigo.nombre} con una fuerza poderosa de ${danioDefinitivo}!`);
         enemigo.recibirAtaque(danioDefinitivo);
+        return`${this.nombre} realiza un ataque definitivo a ${enemigo.nombre} con una fuerza poderosa de ${danioDefinitivo}!`;
       }
      
        realizarAtaque(opcion,enemigo) {
@@ -44,7 +44,7 @@ class Guerrero extends Personaje{
             break;
 
           default:
-            console.log('Opción no válida. Por favor, elige un ataque válido.');
+            return'Opción no válida. Por favor, elige un ataque válido.';
         }
       }
 
