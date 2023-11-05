@@ -2,8 +2,7 @@ import { drawInicio } from "./screens/Inicio.js";
 import { Guerrero } from "./class/Guerrero.js";
 import { Enemigo } from "./class/Enemigo.js";
 import { drawText } from "./class/views/Text.js";
-import { randomMinMax } from "./utility/utility.js";
-import { drawSprite } from "./class/views/Image.js";
+import { randomMinMax, drawVida,delay,ejecutarTurno} from "./utility/utility.js";
 
 const canvas = document.querySelector("canvas");
 const backGroundMuisc = new Audio("/sounds/background.mp3");
@@ -22,45 +21,35 @@ const app = {
         clearTimeout(app.timeOut);
     }
 };
-
+const guerrero = new Guerrero("Conan", "player", 100,3, 6);
+const enemigo = new Enemigo("Troll", "enemy",randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
 async function init() {
     drawInicio(app).render()
+    const satrt = new Audio("/sounds/click.mp3");
+    addEventListener("keyup", (e) => {
+        let accions = {
+            "Space": () => {
+                app.clearCanvas()
+                satrt.play()
+                setUp();
+                app.appStart = true;
+            }
+        }
+        if (!app.appStart)
+        accions[e.code]()
+    })
 }
-const guerrero = new Guerrero("Conan", "player", 100,3, 6);
-const enemigo = new Enemigo("Troll", "enemy",randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
 async function setUp() {
     backGroundMuisc.loop = true;
     backGroundMuisc.play()
     backGroundMuisc.volume = 0.3;
 
-    await delay(1000);
-    drawVida(enemigo, guerrero);
-    ejecutarTurno(guerrero.velocidad > enemigo.velocidad ? 1 : 2);
+    await delay(app,1000);
+    drawVida(app,enemigo, guerrero);
+    ejecutarTurno(app,guerrero.velocidad > enemigo.velocidad ? 1 : 2,guerrero,enemigo);
 }
-function turnoEnemigo() {
-    app.clearCanvas();
-    let opcion = randomMinMax(1,enemigo.ataques.length);
-    update(enemigo.realizarAtaque(opcion, guerrero), "#e33030");
-}
-
-function turnoGuerrero() {
-    let opcion = 0;
-    let ataque = { "KeyZ": 1, "KeyX": 2, "KeyC": 3 };
-    
-    drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .878, fontSize: 35 }).render()
-    //linten for key
-    addEventListener("keyup", (e) => {
-        opcion = ataque[e.code];
-        if ((app.turno  % 2) === 1 && opcion > 0) {
-            update(guerrero.realizarAtaque(opcion, enemigo), "#64f177");
-        }
-    });
-
-
-}
-
 
 async function update(MSG, color) {
     app.clearCanvas()
@@ -71,47 +60,15 @@ async function update(MSG, color) {
         enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 \n 🤩`, app, { color: "#64f177", fontSize: 50 }).render() : drawText(` Has sido vencido por ${enemigo.nombre.toUpperCase()}!! \n 😭`, app, { color: "#e33030", fontSize: 50 }).render();
         return
     }else{
-        drawVida(enemigo, guerrero);
+        drawVida(app,enemigo, guerrero);
         drawText(MSG, app, { color, x: app.width * .5, y: app.height * .75, fontSize: 40,fontFamily:"Comic Sans" }).render();
         
        
-        await delay(3000);
-        ejecutarTurno(app.turno + 1);
+        await delay(app,3000);
+        ejecutarTurno(app,app.turno + 1,guerrero,enemigo);
         return
     }
 }
 
-function ejecutarTurno(turno) {
-    app.turno = turno;
-    (turno % 2) === 1 ? turnoGuerrero() : turnoEnemigo();
-}
-
-
-function drawVida(enemigo, guerrero) {
-    const {fontFamily,fontSize} = {fontFamily:"Impact",fontSize: 30};
-  
-    drawText(` ${guerrero.nombre} ${guerrero.vida}❤️`, app, { x: app.width * .15, y: app.height * .52, fontSize,fontFamily }).render();
-    drawText(` ${enemigo.nombre} ${enemigo.vida}💚`, app, { x: app.width * .85, y: app.height * .50, fontSize,fontFamily}).render();
-}
-
-async function delay(ms) {
-    return new Promise(resolve => {
-       app.timeOut = setTimeout(resolve, ms);
-    });
-}
-
-
-const satrt = new Audio("/sounds/click.mp3");
-document.addEventListener("keyup", (e) => {
-    let accions = {
-        "Space": () => {
-            app.clearCanvas()
-            satrt.play()
-            setUp();
-            app.appStart = true;
-        }
-    }
-    if (!app.appStart)
-    accions[e.code]()
-})
 init();
+export {update}
