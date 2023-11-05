@@ -4,45 +4,33 @@ class Enemigo extends Personaje {
   constructor(nombre, tipo, vida, fuerza, velocidad) {
     super(nombre, vida, tipo, fuerza, velocidad);
 
+    this.ataques = [
+      this.ataqueBasico,
+      this.ataqueEspecial,
+      this.ataqueDefinitivo
+    ]
   }
 
 
-  ataqueBasico(enemigo) {
-    this.playSound("/sounds/punch-estocada.mp3");
-    enemigo.recibirAtaque(this.fuerza);
-    return `${this.nombre.toUpperCase()} realiza un ataque básico a ${enemigo.nombre.toUpperCase()} con una fuerza de ${this.fuerza}!`;
+  ataqueBasico(me,enemigo) {
+    me.playSound("/sounds/punch-estocada.mp3");
+    enemigo.recibirAtaque(me.fuerza);
+    return `${me.nombre.toUpperCase()} realiza un ataque básico a \n ${enemigo.nombre.toUpperCase()} con una fuerza de ${me.fuerza}!`;
   }
 
-  ataqueEspecial(enemigo) {
-    this.playSound("/sounds/punch-corte-feroz.mp3");
-    const danioEspecial = this.fuerza * 2;
+  ataqueEspecial(me,enemigo) {
+    me.playSound("/sounds/punch-corte-feroz.mp3");
+    const danioEspecial = me.fuerza * 2;
     enemigo.recibirAtaque(danioEspecial);
-    return `${this.nombre.toUpperCase()} realiza un ataque especial a ${enemigo.nombre.toUpperCase()} con una fuerza aumentada de ${danioEspecial}!`;
+    return `${me.nombre.toUpperCase()} realiza un ataque especial a \n ${enemigo.nombre.toUpperCase()} con una fuerza aumentada de ${danioEspecial}!`;
   }
 
-  ataqueDefinitivo(enemigo) {
-    this.playSound("/sounds/punch-tajo-desgarrador.mp3");
-    const danioDefinitivo = this.fuerza * 3;
+  ataqueDefinitivo(me,enemigo) {
+    me.playSound("/sounds/punch-tajo-desgarrador.mp3");
+    const danioDefinitivo = me.fuerza * 3;
     enemigo.recibirAtaque(danioDefinitivo);
-    return `${this.nombre.toUpperCase()} realiza un ataque definitivo a ${enemigo.nombre.toUpperCase()} con una fuerza poderosa de ${danioDefinitivo}!`;
+    return `${me.nombre.toUpperCase()} realiza un ataque definitivo a \n ${enemigo.nombre.toUpperCase()} con una fuerza poderosa de ${danioDefinitivo}!`;
   }
-
-  realizarAtaque(enemigo) {
-    let opcion = Math.floor(Math.random()*3)+1;
-
-    switch (opcion) {
-      case 1:
-        return this.ataqueBasico(enemigo);
-      case 2:
-        return this.ataqueEspecial(enemigo);
-      case 3:
-        return this.ataqueDefinitivo(enemigo);
-      default:
-        console.log('Opción no válida. Por favor, elige un ataque válido.');
-    }
-  }
-
-
 }
 
 export { Enemigo };

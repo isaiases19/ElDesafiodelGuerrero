@@ -17,7 +17,7 @@ class Sprite{
         this.app = app;
     }
 
-    render(){     
+    render(){
         this.app.context.drawImage(this.sprite,this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w, this.h);
     }
 }

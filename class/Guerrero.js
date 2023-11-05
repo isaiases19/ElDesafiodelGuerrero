@@ -10,48 +10,35 @@ class Guerrero extends Personaje {
     this.vida = vidaGuerrero;
     this.fuerza = fuerzaGuerrero;
     this.velocidad = velocidadGuerrero;
+
+    this.ataques = [
+      this.ataqueBasico,
+      this.ataqueEspecial,
+      this.ataqueDefinitivo
+    ]
   }
 
-  ataqueBasico(enemigo) {
-    this.playSound("/sounds/punch-estocada.mp3")
-  
-    enemigo.recibirAtaque(this.fuerza);
-    return `${this.nombre.toUpperCase()} realiza un ataque básico a ${enemigo.nombre.toUpperCase()} con una fuerza de ${this.fuerza}!`;
+  ataqueBasico(me,enemigo) {
+    enemigo.recibirAtaque(me.fuerza);
+    me.playSound("/sounds/punch-estocada.mp3")
+    return `${me.nombre.toUpperCase()} realiza un ataque básico a \n ${enemigo.nombre.toUpperCase()} con una fuerza de ${me.fuerza}!`;
   }
 
-  ataqueEspecial(enemigo) {
-    this.playSound("/sounds/punch-corte-feroz.mp3")
-    const danioEspecial = this.fuerza * 2;
+  ataqueEspecial(me,enemigo) {
+    const danioEspecial = me.fuerza * 2;
+    me.playSound("/sounds/punch-corte-feroz.mp3")
     enemigo.recibirAtaque(danioEspecial);
-    return `${this.nombre.toUpperCase()} realiza un ataque especial a ${enemigo.nombre.toUpperCase()} con una fuerza aumentada de ${danioEspecial}!`;
+    return `${me.nombre.toUpperCase()} realiza un ataque especial a \n${enemigo.nombre.toUpperCase()} con una fuerza aumentada de ${danioEspecial}!`;
   }
 
-  ataqueDefinitivo(enemigo) {
-    this.playSound("/sounds/punch-tajo-desgarrador.mp3")
-
-    const danioDefinitivo = this.fuerza * 3;
+  ataqueDefinitivo(me,enemigo) {
+    
+    const danioDefinitivo = me.fuerza * 3;
     enemigo.recibirAtaque(danioDefinitivo);
-    return `${this.nombre.toUpperCase()} realiza un ataque definitivo a ${enemigo.nombre.toUpperCase()} con una fuerza poderosa de ${danioDefinitivo}!`;
+    me.playSound("/sounds/punch-tajo-desgarrador.mp3")
+    return `${me.nombre.toUpperCase()} realiza un ataque definitivo a \n${enemigo.nombre.toUpperCase()} con una fuerza poderosa de ${danioDefinitivo}!`;
   }
 
-  realizarAtaque(opcion, enemigo) {
-    switch (opcion) {
-      case 1:
-        return this.ataqueBasico(enemigo);
-
-
-      case 2:
-        return this.ataqueEspecial(enemigo);
-
-
-      case 3:
-        return this.ataqueDefinitivo(enemigo);
-
-
-      default:
-        return 'Opción no válida. Por favor, elige un ataque válido.';
-    }
-  }
 
 }
 
