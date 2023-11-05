@@ -71,7 +71,7 @@ async function update(MSG, color) {
     }
 
     drawVida(enemigo, guerrero);
-    drawText(MSG, app, { color, x: app.width * .5, y: app.height * .7, fontSize: 30 }).render();
+    drawText(MSG, app, { color, x: app.width * .5, y: app.height * .7, fontSize: 30,fontFamily:"Comic Sans" }).render();
 
     app.turno++;
     await delay(3000);
@@ -88,8 +88,10 @@ function ejecutarTurno() {
 
 
 function drawVida(enemigo, guerrero) {
-    drawText(` ${guerrero.nombre} ${guerrero.vida}💖 `, app, { x: app.width * .2, y: app.height * .50, fontSize: 30 }).render();
-    drawText(`${enemigo.nombre} ${enemigo.vida}💖`, app, { x: app.width * .80, y: app.height * .50, fontSize: 30 }).render();
+    const {fontFamily,fontSize} = {fontFamily:"Impact",fontSize: 30};
+  
+    drawText(` ${guerrero.nombre} ${guerrero.vida}💖`, app, { x: app.width * .2, y: app.height * .50, fontSize,fontFamily }).render();
+    drawText(`${enemigo.nombre} ${enemigo.vida}💖`, app, { x: app.width * .80, y: app.height * .50, fontSize,fontFamily}).render();
 }
 
 async function delay(ms) {
