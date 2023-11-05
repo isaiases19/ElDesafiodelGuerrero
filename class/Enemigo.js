@@ -24,6 +24,41 @@ class Enemigo extends Personaje{
     return`${this.nombre} realiza un ataque definitivo a ${enemigo.nombre} con una fuerza poderosa de ${danioDefinitivo}!`;
   }
 
+   numeroAtaqueAleatorio() {
+    // Genera un número decimal aleatorio entre 0 y 1
+    const numeroDecimalAleatorio = Math.random();
+  
+    // Escala el número decimal al rango 1 a 3
+    const numeroAleatorio = 1 + numeroDecimalAleatorio * 2;
+  
+    return Math.floor(numeroAleatorio); // Redondea hacia abajo para obtener un número entero.
+  }
+  
+ 
+  
+
+  realizarAtaque(enemigo) {
+    let opcion=this.numeroAtaqueAleatorio;
+    
+    switch (opcion) {
+      case 1:
+        this.ataqueBasico(enemigo);
+        break;
+
+        case 2:
+        this.ataqueEspecial(enemigo);
+        break;
+
+        case 3:
+        this.ataqueDefinitivo(enemigo);
+        break;
+
+      default:
+        console.log('Opción no válida. Por favor, elige un ataque válido.');
+    }
+  }
+
+
 }
 
 export {Enemigo};
