@@ -38,7 +38,7 @@ function setUp(){
 }
 function turnoEnemigo(){
     app.clearCanvas();
-    update(enemigo.realizarAtaque(guerrero),"brown");
+    update(enemigo.realizarAtaque(guerrero),"#e33030");
 }
 
 function turnoGuerrero(){
@@ -63,18 +63,18 @@ async function update(MSG,color){
     if(enemigo.muerto){
         app.turno = 0;
         guerrero.playSound("/sounds/success.mp3");
-        drawText(`🎉${guerrero.nombre} ah vencido!!🎉`,app,{color:"#64f177",x:130, fontSize:50}).render()
+        drawText(`🎉${guerrero.nombre.toUpperCase()} ah vencido!!🎉`,app,{color:"#64f177",x:130, fontSize:50}).render()
         return
     }if(guerrero.muerto){
         app.turno = 0;
         guerrero.playSound("/sounds/failure.mp3");
-        drawText(`Hazido vencido por ${enemigo.nombre.toUpperCase()}!!`,app,{color:"#ee0909",x:100, fontSize:50}).render()
+        drawText(`Hazido vencido por ${enemigo.nombre.toUpperCase()}!!`,app,{color:"#e33030",x:100, fontSize:50}).render()
         return
     }
 
     drawVida(enemigo,guerrero);
     drawText(MSG,app,{color,x:app.width*.1,y:app.height*.70,fontSize:22}).render()
-    
+    drawSprite("/img/warrior01.png",app,70,56,{}).render(); 
     app.turno = app.turno === 1 ? 2:1;
     await delay(3000);
     ejecutarTurno()

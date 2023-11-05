@@ -16,14 +16,14 @@ class Guerrero extends Personaje {
     this.playSound("/sounds/punch-estocada.mp3")
   
     enemigo.recibirAtaque(this.fuerza);
-    return `${this.nombre} realiza un ataque básico a ${enemigo.nombre} con una fuerza de ${this.fuerza}!`;
+    return `${this.nombre.toUpperCase()} realiza un ataque básico a ${enemigo.nombre.toUpperCase()} con una fuerza de ${this.fuerza}!`;
   }
 
   ataqueEspecial(enemigo) {
     this.playSound("/sounds/punch-corte-feroz.mp3")
     const danioEspecial = this.fuerza * 2;
     enemigo.recibirAtaque(danioEspecial);
-    return `${this.nombre} realiza un ataque especial a ${enemigo.nombre} con una fuerza aumentada de ${danioEspecial}!`;
+    return `${this.nombre.toUpperCase()} realiza un ataque especial a ${enemigo.nombre.toUpperCase()} con una fuerza aumentada de ${danioEspecial}!`;
   }
 
   ataqueDefinitivo(enemigo) {
@@ -31,7 +31,7 @@ class Guerrero extends Personaje {
 
     const danioDefinitivo = this.fuerza * 3;
     enemigo.recibirAtaque(danioDefinitivo);
-    return `${this.nombre} realiza un ataque definitivo a ${enemigo.nombre} con una fuerza poderosa de ${danioDefinitivo}!`;
+    return `${this.nombre.toUpperCase()} realiza un ataque definitivo a ${enemigo.nombre.toUpperCase()} con una fuerza poderosa de ${danioDefinitivo}!`;
   }
 
   realizarAtaque(opcion, enemigo) {
