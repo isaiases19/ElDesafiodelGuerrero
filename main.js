@@ -41,7 +41,7 @@ async function setUp() {
 }
 function turnoEnemigo() {
     app.clearCanvas();
-    let opcion = randomMinMax(1,3);
+    let opcion = randomMinMax(1,enemigo.ataques.length);
     update(enemigo.realizarAtaque(opcion, guerrero), "#e33030");
 }
 

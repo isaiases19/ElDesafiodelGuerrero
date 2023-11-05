@@ -27,7 +27,10 @@ class Personaje{
 
       realizarAtaque(opcion, enemigo) {
         if(opcion > 0 && opcion  <= this.ataques.length){
-          return this.ataques[opcion - 1](this,enemigo);
+          let tipoAtaque = this.ataques[opcion - 1];
+          this.playSound(tipoAtaque.audio);
+          enemigo.recibirAtaque(tipoAtaque.fuerza);
+          return `${this.nombre} atca a ${enemigo.nombre} \n Con ${tipoAtaque.name} con una fuerza de ${tipoAtaque.fuerza}!`;
         }else{
           return 'Opción no válida. Por favor, elige un ataque válido.';
         }

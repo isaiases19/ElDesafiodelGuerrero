@@ -12,33 +12,11 @@ class Guerrero extends Personaje {
     this.velocidad = velocidadGuerrero;
 
     this.ataques = [
-      this.ataqueBasico,
-      this.ataqueEspecial,
-      this.ataqueDefinitivo
+      {name:"Ataque Basico",fuerza,audio:"/sounds/punch-estocada.mp3"},
+      {name:"Ataque Especial",fuerza:(fuerza * 2),audio:"/sounds/punch-corte-feroz.mp3"},
+      {name:"Ataque Definitivo",fuerza:(fuerza * 3),audio:"/sounds/punch-tajo-desgarrador.mp3"},
     ]
   }
-
-  ataqueBasico(me,enemigo) {
-    enemigo.recibirAtaque(me.fuerza);
-    me.playSound("/sounds/punch-estocada.mp3")
-    return `${me.nombre} realiza un ataque básico a \n ${enemigo.nombre} con una fuerza de ${me.fuerza}!`;
-  }
-
-  ataqueEspecial(me,enemigo) {
-    const danioEspecial = me.fuerza * 2;
-    me.playSound("/sounds/punch-corte-feroz.mp3")
-    enemigo.recibirAtaque(danioEspecial);
-    return `${me.nombre} realiza un ataque especial a \n${enemigo.nombre} con una fuerza aumentada de ${danioEspecial}!`;
-  }
-
-  ataqueDefinitivo(me,enemigo) {
-    
-    const danioDefinitivo = me.fuerza * 3;
-    enemigo.recibirAtaque(danioDefinitivo);
-    me.playSound("/sounds/punch-tajo-desgarrador.mp3")
-    return `${me.nombre} realiza un ataque definitivo a \n${enemigo.nombre} con una fuerza poderosa de ${danioDefinitivo}!`;
-  }
-
 
 }
 
