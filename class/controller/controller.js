@@ -1,5 +1,6 @@
 import { drawText } from "../views/Text.js";
 import { update } from "../../main.js";
+import { drawVida } from "../../utility/utility.js";
 
 class Controller{
     constructor(){
@@ -18,8 +19,8 @@ class Controller{
             }
         
         }).join(" \n ");
-        
-        drawText(inventario,app,{color:"orange",x:app.width*.25,y:app.height*.3}).render()
+        drawVida(app,enemigo,guerrero);
+        drawText("Inventario \n"+inventario,app,{color:"orange",x:app.width*.5,y:app.height*.3}).render()
         drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .878, fontSize: 35 }).render()
         //linten for key
         addEventListener("keyup", (e) => {

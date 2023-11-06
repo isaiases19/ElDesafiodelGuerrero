@@ -57,11 +57,11 @@ async function update(MSG, color) {
         app.turno = 0;
         const url = guerrero.muerto ? "/sounds/failure.mp3": "/sounds/success.mp3"
         guerrero.playSound(url);
-        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 \n 🤩`, app, { color: "#64f177", fontSize: 50 }).render() : drawText(` Has sido vencido por ${enemigo.nombre.toUpperCase()}!! \n 😭`, app, { color: "#e33030", fontSize: 50 }).render();
+        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 `, app, { color: "#64f177", fontSize: 50 ,roundBk:true}).render() : drawText(` Has sido vencido por ${enemigo.nombre}!! `, app, { color: "#e33030", fontSize: 50,roundBk:true }).render();
         return
     }else{
         drawVida(app,enemigo, guerrero);
-        drawText(MSG, app, { color, x: app.width * .5, y: app.height * .75, fontSize: 40,fontFamily:"Comic Sans" }).render();
+        drawText(MSG, app, { color, x: app.width * .5, y: app.height * .07, fontSize: 40,fontFamily:"Comic Sans" }).render();
         
        
         await delay(app,3000);
