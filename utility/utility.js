@@ -27,7 +27,7 @@ function ejecutarTurno(app,turno,guerrero,enemigo) {
 }
 
 function drawVida(app,enemigo, guerrero) {
-    const {fontFamily,fontSize} = {fontFamily:"Impact",fontSize: 30};
+    const {fontFamily,fontSize} = {fontFamily:"PatrickHand",fontSize: 30};
     drawText(` ${guerrero.nombre} ${guerrero.vida}❤️`, app, { x: app.width * .15, y: app.height * .52, fontSize,fontFamily,roundBk:true }).render();
     drawText(` ${enemigo.nombre} ${enemigo.vida}💚`, app, { x: app.width * .85, y: app.height * .50, fontSize,fontFamily,roundBk:true}).render();
 }

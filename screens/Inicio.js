@@ -4,7 +4,7 @@ class Inicio extends Screens {
     constructor(app){
         super(app)
         this.content =[
-            drawText("Press Space To Start",app,{fontSize:50,fontFamily:"Impact",roundBk:true})
+            drawText("Press Space To Start",app,{fontSize:50,fontFamily:"PatrickHand",roundBk:true})
         ];
     }
 }

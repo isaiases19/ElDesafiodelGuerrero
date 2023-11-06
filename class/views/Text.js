@@ -1,9 +1,11 @@
+var f = await new FontFace('PatrickHand', 'url(../../../styles/PatrickHand.ttf)').load();
+document.fonts.add(f);
 class Text{
     constructor(text,app,{color,fontSize,fontFamily,x,y,roundBk}){
         this.text = text;
         this.color = color||"white";
         this.fontSize = fontSize || 20;
-        this.fontFamily =fontFamily || "Arial";
+        this.fontFamily =fontFamily || "PatrickHand";
         this.ctx = app.context; 
         
         this.textlength = (this.fontSize) * this.text.length ;
@@ -19,11 +21,14 @@ class Text{
         this.ctx.textAlign = "center";
         this.ctx.font = `${this.fontSize}pt ${this.fontFamily}`;
 
-        this.text.split('\n').forEach((line)=> {
+        let lines = this.text.split('\n')
+        let lineLn = lines.reduce((anterio,actual)=> anterio > actual ? anterio:actual,"");
+        this.textlength = (this.fontSize) * lineLn.length 
+        lines.forEach((line)=> {
             this.roundBk? this.drawRoundRect():this.drawRect();
             this.ctx.fillStyle = this.color;
-            this.ctx.fillText(line, this.x, this.y);
-            this.y += this.fontSize*1.793;
+            this.ctx.fillText(line.trim(), this.x, this.y);
+            this.y += this.fontSize*1.49;
             
         });
 
@@ -31,14 +36,14 @@ class Text{
     }
 
     drawRect(){
-        this.ctx.fillStyle = "#000000c9";
-        this.ctx.fillRect(this.x - this.textlength*.33,this.y - this.fontSize + this.fontSize*0.1,this.textlength/1.5,this.fontSize*1.8,20);
+        this.ctx.fillStyle = "#000000ff";
+        this.ctx.fillRect((this.x - this.textlength/1.8),(this.y - this.fontSize*0.8),this.textlength*1.1 ,(this.fontSize*1.5));
     }
 
     drawRoundRect(){
-        this.ctx.fillStyle = "#000000c9";
+        this.ctx.fillStyle = "#000000ff";
         this.ctx.beginPath();
-        this.ctx.roundRect(this.x - this.textlength*.33,this.y - this.fontSize + this.fontSize*0.1,this.textlength/1.5,this.fontSize*1.8,20);
+        this.ctx.roundRect((this.x - this.textlength/1.8),(this.y - this.fontSize*0.8),this.textlength*1.1 ,(this.fontSize*1.5),this.fontSize);
         this.ctx.fill();
     }
 
