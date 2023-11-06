@@ -28,17 +28,17 @@ class Personaje{
       }
 
       elegirArma(armaName){
-        const arama = this.inventario.find({armaName});
+        const arama = this.inventario.find(items=> items.name === armaName);
         this.armas = arama;
       }
 
-      realizarAtaque(opcion, enemigo) {
+      realizarAtaque(opcion, enemigo,powerUp = null) {
         if(opcion > 0 && opcion  <= this.ataques.length){
           let tipoAtaque = this.ataques[opcion - 1];
           this.playSound(tipoAtaque.audio);
-          let totalDamge = tipoAtaque.fuerza + (this.armas ? this.armas.usar(): 0);
+          let totalDamge = tipoAtaque.fuerza + (this.armas.item ? this.armas.item.usar(powerUp?.name): 0);
           enemigo.recibirAtaque(totalDamge);
-          return `${this.nombre} atca a ${enemigo.nombre} \n Con ${tipoAtaque.name} con daño de ${totalDamge}!`;
+          return `${this.nombre} atca a ${enemigo.nombre} \n Con ${tipoAtaque.name} con daño de ${totalDamge}! ${(powerUp? `\n mas ${powerUp.name} +${powerUp.power} `:'')}`;
         }else{
           return 'Opción no válida. Por favor, elige un ataque válido.';
         }

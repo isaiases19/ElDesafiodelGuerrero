@@ -11,19 +11,7 @@ function turnoEnemigo(app,enemigo,guerrero) {
 }
 
 function turnoGuerrero(app,guerrero,enemigo) {
-    let opcion = 0;
-    let ataque = { "KeyZ": 1, "KeyX": 2, "KeyC": 3 };
-    
-    drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .878, fontSize: 35 }).render()
-    //linten for key
-    addEventListener("keyup", (e) => {
-        opcion = ataque[e.code];
-        if ((app.turno  % 2) === 1 && opcion > 0) {
-            update(guerrero.realizarAtaque(opcion, enemigo), "#64f177");
-        }
-    });
-
-
+    guerrero.use(app,enemigo);
 }
 //delay funcion
 async function delay(app,ms) {
