@@ -9,6 +9,22 @@ class Guerrero extends Personaje {
     this.vida = vida;
     this.fuerza = fuerza;
     this.velocidad = velocidad;
+    this.sprite.src = "/img/warrior01.png";
+    
+    this.x = 330;
+    this.y = 900;
+
+    this.animaciones = {
+      parado:{sx:0,sy:455,sw:64,sh:64,step:64,len:1,scale:.66},
+      golpear:{sx:0,sy:970,sw:64,sh:64,step:64,len:6,scale:.66 },
+      resibe:{sx:0,sy:200,sw:64,sh:64,step:64,len:7,scale:.66 },
+      espada2:{sx:0,sy:1927,sw:193,sh:193,step:193,len:6,scale:2 },
+      espada1:{sx:0,sy:3463,sw:193,sh:193,step:193,len:6,scale:2 },
+      tajo:{sx:0,sy:1223,sw:64,sh:64,step:64,len:13,scale:.66 },
+      morir:{sx:0,sy:1287,sw:64,sh:64,step:64,len:10,scale:.66 },
+      muerto:{sx:323,sy:1290,sw:64,sh:64,step:64,len:1,scale:.66 },
+    }
+    this.animacion = this.animaciones["parado"];
 
     this.armas = {name:"Espada Normal",item:espadaNormal()};
     this.controller = getcontroller();
@@ -18,9 +34,9 @@ class Guerrero extends Personaje {
     ]
 
     this.ataques = [
-      {name:"Ataque Basico",fuerza,audio:"/sounds/punch-estocada.mp3"},
-      {name:"Ataque Especial",fuerza:(fuerza * 2),audio:"/sounds/punch-corte-feroz.mp3"},
-      {name:"Ataque Definitivo",fuerza:(fuerza * 3),audio:"/sounds/punch-tajo-desgarrador.mp3"},
+      {name:"Ataque Basico",fuerza,audio:"/sounds/punch-estocada.mp3",animacion:"espada1"},
+      {name:"Ataque Especial",fuerza:(fuerza * 2),audio:"/sounds/punch-corte-feroz.mp3",animacion:"espada2"},
+      {name:"Ataque Definitivo",fuerza:(fuerza * 3),audio:"/sounds/punch-tajo-desgarrador.mp3",animacion:"tajo"},
     ]
 
   }

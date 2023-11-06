@@ -2,7 +2,7 @@ import { drawInicio } from "./screens/Inicio.js";
 import { Guerrero } from "./class/Guerrero.js";
 import { Enemigo } from "./class/Enemigo.js";
 import { drawText } from "./class/views/Text.js";
-import { randomMinMax, drawVida,delay,ejecutarTurno} from "./utility/utility.js";
+import { randomMinMax, drawVida,delay,ejecutarTurno, drawInvetarios,speakText} from "./utility/utility.js";
 
 const canvas = document.querySelector("canvas");
 const backGroundMuisc = new Audio("/sounds/background.mp3");
@@ -15,10 +15,14 @@ const app = {
     turno: 0,
     appStart: false,
     timeOut: 5,
+    timeOutTurno: 3,
+    gameOver: false,
+    message:"",
+    messageColor:"white",
     clearCanvas: () => {
         canvas.width = app.width;
         canvas.height = app.height;
-        clearTimeout(app.timeOut);
+        
     }
 };
 const guerrero = new Guerrero("Conan", "player", 100,3, 6);
@@ -30,7 +34,7 @@ async function main() {
     addEventListener("keyup", (e) => {
         let accions = {
             "Space": () => {
-                app.clearCanvas()
+                app.clearCanvas();
                 satrt.play()
                 setup();
                 app.appStart = true;
@@ -47,28 +51,74 @@ async function setup() {
     backGroundMuisc.volume = 0.3;
 
     await delay(app,1000);
-    drawVida(app,enemigo, guerrero);
     ejecutarTurno(app,guerrero.velocidad > enemigo.velocidad ? 1 : 2,guerrero,enemigo);
+    draw()
 }
 
-async function update(MSG, color) {
-    app.clearCanvas()
+async function update() {
+    
     if (enemigo.muerto || guerrero.muerto) {
+        app.gameOver = true;
         app.turno = 0;
-        const url = guerrero.muerto ? "/sounds/failure.mp3": "/sounds/success.mp3"
+        const url = enemigo.vida < guerrero.vida ?  "/sounds/success.mp3":"/sounds/failure.mp3";
         guerrero.playSound(url);
-        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 `, app, { color: "#64f177", fontSize: 50,fontFamily:"PatrickHand" ,roundBk:true}).render() : drawText(` Has sido vencido por ${enemigo.nombre}!! `, app, { color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
-        return
     }else{
-        drawVida(app,enemigo, guerrero);
-        drawText(MSG, app, { color, x: app.width * .5, y: app.height *.03, fontSize: 40,fontFamily:"PatrickHand" }).render();
+        if(document.querySelector("#voz").checked){
+            speakText(app.message);
+        }
+        app.timeOutTurno = setTimeout(()=> {ejecutarTurno(app,app.turno + 1,guerrero,enemigo)},5000);
         
-       
-        await delay(app,4000);
-        ejecutarTurno(app,app.turno + 1,guerrero,enemigo);
-        return
     }
 }
 
+async function draw(){
+    app.clearCanvas(); 
+   
+    guerrero.render(app);
+    enemigo.render(app);
+    drawUI()
+    await delay(app,90)
+    clearTimeout(app.timeOut);
+    
+    window.requestAnimationFrame(draw);
+}
+
+function drawUI(){
+    drawInvetarios(app,enemigo,guerrero);
+    drawVida(app,enemigo, guerrero);
+    drawText(app.message, app, { color:app.messageColor, x: app.width * .5, y: app.height *.03, fontSize: 40,fontFamily:"PatrickHand" }).render();
+
+    if((app.turno  % 2) === 1){
+        drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width *.5, y: app.height *.93, fontSize: 35 }).render()
+    }
+    if (enemigo.muerto || guerrero.muerto) {
+        enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 `, app, { color: "#64f177", fontSize: 50,fontFamily:"PatrickHand" ,roundBk:true}).render() : drawText(` Has sido vencido por ${enemigo.nombre}!! `, app, { color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
+    }
+
+}
+
 main();
-export {update}
+
+ // Rellenar el menú desplegable con las voces disponibles
+ function populateVoiceList() {
+    const voiceSelect = document.querySelector("#voiceSelect");
+    const voices = speechSynthesis.getVoices();
+    voiceSelect.innerHTML = '';
+
+    voices.forEach(voice => {
+      if (["es-ES","es-MX","es-DO"].includes(voice.lang)) {
+        const option = document.createElement("option");
+        option.textContent = voice.name;
+        option.setAttribute('data-voice', voice.name);
+        option.value = voice.name;
+        voiceSelect.appendChild(option);
+      }
+    });
+
+  }
+
+  if ('speechSynthesis' in window) {
+    speechSynthesis.onvoiceschanged = (!app.appStart ? populateVoiceList:(e)=>{});
+  }
+
+export {update,drawUI}

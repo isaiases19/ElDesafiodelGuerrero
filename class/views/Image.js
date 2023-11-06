@@ -1,8 +1,7 @@
 class Sprite{
-    constructor(src,app,w,h,{x,y,sx,sy,sw,sh}){
-        this.sprite = new Image();
-        this.sprite.src =src;
-        
+    constructor(img,app,w,h,{x,y,sx,sy,sw,sh}){
+        this.sprite =img;
+    
         this.x = x || (app.width/2 - w/2);
         this.y = y || (app.height/2 - h/2);
         
@@ -23,8 +22,8 @@ class Sprite{
 }
 
 
-function drawSprite(src,app,w,h,{x,y,sx,sy,sw,sh}){
-    return new Sprite(src,app,w,h,{x,y,sx,sy,sw,sh});
+function drawSprite(img,app,w,h,{x,y,sx,sy,sw,sh}){
+    return new Sprite(img,app,w,h,{x,y,sx,sy,sw,sh});
 }
 
 export {drawSprite};

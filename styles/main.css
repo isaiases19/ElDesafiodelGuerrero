@@ -9,17 +9,51 @@ body {
 }
 main {
   width: fit-content;
-  height: 99vh;
+  height: fit-content;
   margin: 0 auto;
 }
 canvas {
   width: 95vh;
   height: 95vh;
   margin-top: 2vh;
-  /* background-color: rgb(11, 10, 10); */
-  background-image: url("/img/bg.jpeg");
+ 
+  background-image: url("/img/fondo.png");
+  background-repeat: no-repeat;
   background-size: contain;
+  
 
   border: #0b0e13 solid 5px;
   border-radius: 0.5rem;
+
+  image-resolution: 1080;
+  image-rendering: optimizeQuality;
+}
+
+label{
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: .5rem;
+}
+
+select{
+  max-width: 300px;
+  border-radius: 1rem;
+  background-color: #0b0e13;
+  color: #fff;
+  border: 0;
+  padding: .3rem;
+}
+
+select option{
+  padding: .5rem;
+}
+
+select :focus{
+  border: 0;
+}
+
+#voz{
+  width: 1rem;
+  height: 1rem;
 }
