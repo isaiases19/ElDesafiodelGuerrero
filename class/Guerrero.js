@@ -1,4 +1,4 @@
-import { Personaje } from "./personaje.js";
+import { Personaje } from "./Personaje.js";
 import { espadaNormal,espadaFilosa } from "./Armas.js";
 import { getcontroller } from "./controller/controller.js";
 

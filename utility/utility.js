@@ -7,7 +7,8 @@ function randomMinMax(min,max){
 function turnoEnemigo(app,enemigo,guerrero) {
     app.clearCanvas();
     let opcion = randomMinMax(1,enemigo.ataques.length);
-    update(enemigo.realizarAtaque(opcion, guerrero), "#e33030");
+    let powerUp = enemigo.armas.item.powerUps[0];
+    update(enemigo.realizarAtaque(opcion, guerrero,powerUp), "#e33030");
 }
 
 function turnoGuerrero(app,guerrero,enemigo) {

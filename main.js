@@ -22,7 +22,7 @@ const app = {
     }
 };
 const guerrero = new Guerrero("Conan", "player", 100,3, 6);
-const enemigo = new Enemigo("Troll", "enemy",randomMinMax(20,80) ,randomMinMax(3,7) ,randomMinMax(3,7));
+const enemigo = new Enemigo("Troll", "enemy",randomMinMax(50,90) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
 async function main() {
     drawInicio(app).render()
