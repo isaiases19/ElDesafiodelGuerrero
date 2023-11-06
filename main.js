@@ -61,7 +61,7 @@ async function update(MSG, color) {
         return
     }else{
         drawVida(app,enemigo, guerrero);
-        drawText(MSG, app, { color, x: app.width * .5, y: app.height * .07, fontSize: 40,fontFamily:"PatrickHand" }).render();
+        drawText(MSG, app, { color, x: app.width * .5, y: app.height *.03, fontSize: 40,fontFamily:"PatrickHand" }).render();
         
        
         await delay(app,4000);

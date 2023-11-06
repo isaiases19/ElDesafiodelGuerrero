@@ -1,6 +1,6 @@
 import { drawText } from "../views/Text.js";
 import { update } from "../../main.js";
-import { drawVida } from "../../utility/utility.js";
+import { drawInvetarios, drawVida } from "../../utility/utility.js";
 
 class Controller{
     constructor(){
@@ -10,18 +10,11 @@ class Controller{
     use(app,guerrero,enemigo){
         let opcion = 0;
         const ataques = { "KeyZ": 1, "KeyX": 2, "KeyC": 3,"KeyA":4,"KeyS":5,"KeyD":6};
-        const espdasTeclas = ["A","S","D"];
-        const inventario = guerrero.inventario.map((items,i)=>{
-            if(guerrero.armas.name === items.name && i <3)
-                return` [${espdasTeclas[i]}] ${items.name} ✅ ` 
-            else if(i<3){ 
-                return` [${espdasTeclas[i]}] ${items.name} `
-            }
         
-        }).join(" \n ");
+        
         drawVida(app,enemigo,guerrero);
-        drawText(inventario,app,{color:"orange",x:app.width*.18,y:app.height*.3,fontSize:30,roundBk:true}).render()
-        drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width * .5, y: app.height * .878, fontSize: 35 }).render()
+        drawInvetarios(app,enemigo,guerrero);
+        drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width *.5, y: app.height *.93, fontSize: 35 }).render()
         //linten for key
         addEventListener("keyup", (e) => {
             opcion = ataques[e.code];

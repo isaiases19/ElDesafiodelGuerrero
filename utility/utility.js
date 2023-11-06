@@ -32,4 +32,26 @@ function drawVida(app,enemigo, guerrero) {
     drawText(` ${enemigo.nombre} ${enemigo.vida}💚`, app, { x: app.width * .85, y: app.height * .50, fontSize,fontFamily,roundBk:true}).render();
 }
 
-export {randomMinMax,drawVida,delay,ejecutarTurno}
+function drawInvetarios(app,enemigo, guerrero){
+    const espdasTeclas = ["A","S","D"];
+    const inventarioGuerro = guerrero.inventario.map((items,i)=>{
+        if(guerrero.armas.name === items.name && i <3)
+            return` [${espdasTeclas[i]}] ${items.name} ✅ ` 
+        else if(i<3){ 
+            return` [${espdasTeclas[i]}] ${items.name} `
+        }
+    }).join("\n");
+    drawText(inventarioGuerro,app,{color:"orange",x:app.width*.18,y:app.height*.35,fontSize:30,roundBk:true}).render()
+
+    ///eENEMIGO
+    const inventarioEnemigo = enemigo.inventario.map((items,i)=>{
+        if(enemigo.armas.name === items.name && i <3)
+            return`${items.name} ✅ ` 
+        else if(i<3){ 
+            return`${items.name} `
+        }
+    }).join("\n");
+    drawText(inventarioEnemigo,app,{color:"#d6ba72",x:app.width*.85 ,y:app.height*.35,fontSize:30,roundBk:true}).render()
+}
+
+export {randomMinMax,drawVida,delay,ejecutarTurno,drawInvetarios}
