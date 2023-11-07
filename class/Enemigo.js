@@ -18,7 +18,9 @@ class Enemigo extends Personaje {
       morir:{sx:0,sy:1287,sw:64,sh:64,step:64,len:6,scale:.66 },
       muerto:{sx:323,sy:1290,sw:64,sh:64,step:64,len:1,scale:.66 },
   }
-  this.animacion = this.animaciones["parado"];
+    this.animacion = this.animaciones["parado"]
+    this.animacionDefault = this.animaciones["parado"];
+    
     this.x = 750;
     this.y = 900;
     this.ataques = [

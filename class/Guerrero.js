@@ -26,10 +26,10 @@ class Guerrero extends Personaje {
       caminarR:{sx:0,sy:712,sw:64,sh:64,step:64,len:9,scale:.66 },
       caminarL:{sx:0,sy:583,sw:64,sh:64,step:64,len:9,scale:.66},
       paradoL:{sx:513,sy:584,sw:64,sh:64,step:64,len:1,scale:.66},
-
-      
     }
-    this.animacion = this.animaciones["parado"];
+    this.animacion = this.animaciones["parado"]
+    this.animacionDefault = this.animaciones["parado"];
+
 
     this.armas = {name:"Espada Normal",item:espadaNormal()};
     this.controller = getcontroller();

@@ -22,7 +22,7 @@ class Controller{
                 guerrero.elegirArma(newArma);
                 this.use(app,guerrero,enemigo);
             }
-            guerrero.animacion = guerrero.animaciones["parado"]
+           
         });
 
         addEventListener("keypress",(e)=>{

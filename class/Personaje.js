@@ -73,9 +73,11 @@ class Personaje{
       render(app){
         this.frame++;
         let i = this.frame % this.animacion.len;
+
         this.animacionDefault = this.muerto? this.animaciones["muerto"]: this.animacionDefault;
-        this.animacion = i === 0 ?this.animacionDefault :this.animacion;
-        let {w,h,x,y} = {w:500*this.animacion.scale,h:400*this.animacion.scale,x:this.x,y:this.y};
+        this.animacion = (i === 0) ? this.animacionDefault : this.animacion;
+        
+        const {w,h,x,y} = {w:500*this.animacion.scale,h:400*this.animacion.scale,x:this.x,y:this.y};
         this.h = h;
     
         drawSprite(this.sprite,app,w,h,{sx:this.animacion.sx + (this.animacion.step * i),sy:this.animacion.sy,sw:this.animacion.sw,sh:this.animacion.sh,x:(x - w/2),y:(y - h/2)}).render()
