@@ -24,7 +24,9 @@ class Guerrero extends Personaje {
       morir:{sx:0,sy:1287,sw:64,sh:64,step:64,len:10,scale:.66 },
       muerto:{sx:323,sy:1290,sw:64,sh:64,step:64,len:1,scale:.66},
       caminarR:{sx:0,sy:712,sw:64,sh:64,step:64,len:9,scale:.66 },
-      caminarL:{sx:0,sy:583,sw:64,sh:64,step:64,len:9,scale:.66}
+      caminarL:{sx:0,sy:583,sw:64,sh:64,step:64,len:9,scale:.66},
+      paradoL:{sx:513,sy:584,sw:64,sh:64,step:64,len:1,scale:.66},
+
       
     }
     this.animacion = this.animaciones["parado"];
