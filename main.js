@@ -2,7 +2,7 @@ import { drawInicio } from "./screens/Inicio.js";
 import { Guerrero } from "./class/Guerrero.js";
 import { Enemigo } from "./class/Enemigo.js";
 import { drawText } from "./class/views/Text.js";
-import { randomMinMax, drawVida,delay,ejecutarTurno, drawInvetarios,speakText} from "./utility/utility.js";
+import { randomMinMax, drawVida,delay,ejecutarTurno, drawInvetarios,speakText, generadorEnemigo} from "./utility/utility.js";
 
 const canvas = document.querySelector("canvas");
 const backGroundMuisc = new Audio("/sounds/background.mp3");
@@ -25,8 +25,8 @@ const app = {
         
     }
 };
-const guerrero = new Guerrero("Conan", "player", 100,3, 6);
-const enemigo = new Enemigo("Troll", "enemy",randomMinMax(50,90) ,randomMinMax(3,7) ,randomMinMax(3,7));
+const guerrero = new Guerrero("Conan", "player", 100,40, 6);
+let enemigo = new Enemigo("Troll", "enemy",randomMinMax(50,90) ,randomMinMax(3,7) ,randomMinMax(3,7));
 
 async function main() {
     drawInicio(app).render()
@@ -76,11 +76,10 @@ async function draw(){
    
     guerrero.render(app);
     enemigo.render(app);
-   
     drawUI()
     await delay(app,90)
-
     clearTimeout(app.timeOut);
+    
     window.requestAnimationFrame(draw);
 }
 
@@ -94,6 +93,8 @@ function drawUI(){
     }
     if (enemigo.muerto || guerrero.muerto) {
         enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 `, app, { color: "#64f177", fontSize: 50,fontFamily:"PatrickHand" ,roundBk:true}).render() : drawText(` Has sido vencido por ${enemigo.nombre}!! `, app, { color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
+  
+ 
     }
 
 }

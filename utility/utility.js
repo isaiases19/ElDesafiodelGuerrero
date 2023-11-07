@@ -1,5 +1,6 @@
 import { drawText } from "../class/views/Text.js";
 import {update} from "../main.js";
+import { Enemigo } from "../class/Enemigo.js";
 function randomMinMax(min,max){
     return Math.floor(Math.random() * max) + min;
 }
@@ -73,4 +74,9 @@ function speakText(text) {
     }
   }
 
-export {randomMinMax,drawVida,delay,ejecutarTurno,drawInvetarios,speakText}
+  function generadorEnemigo(){
+    
+    return new Enemigo("Troll", "e",randomMinMax(50,90) ,randomMinMax(3,7) ,randomMinMax(3,7));
+  }
+
+export {randomMinMax,drawVida,delay,ejecutarTurno,drawInvetarios,speakText, generadorEnemigo}
