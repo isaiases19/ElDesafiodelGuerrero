@@ -9,7 +9,7 @@ class Guerrero extends Personaje {
     this.vida = vida;
     this.fuerza = fuerza;
     this.velocidad = velocidad;
-    this.sprite.src = "/img/warrior01.png";
+    this.sprite.src = "/img/Base.png";
     
     this.x = 330;
     this.y = 900;
