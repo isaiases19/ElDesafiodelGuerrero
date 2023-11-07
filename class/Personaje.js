@@ -50,7 +50,7 @@ class Personaje{
           this.playSound(tipoAtaque.audio);
           let totalDamge = tipoAtaque.fuerza + (this.armas.item ? this.armas.item.usar(powerUp?.name): 0);
           enemigo.recibirAtaque(totalDamge);
-          return `${this.nombre} ataca a ${enemigo.nombre} \n Con ${tipoAtaque.name} con daño de ${totalDamge} ${(powerUp? `\n mas ${powerUp.name} ${powerUp.power} `:'')}`;
+          return `${totalDamge} ${(powerUp? ` + ${powerUp.name} ${powerUp.power} `:'')}`;
         }else{
           return 'Opción no válida. Por favor, elige un ataque válido.';
         }

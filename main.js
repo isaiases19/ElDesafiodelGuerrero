@@ -66,7 +66,7 @@ async function update() {
         if(document.querySelector("#voz").checked){
             speakText(app.message);
         }
-        app.timeOutTurno = setTimeout(()=> {ejecutarTurno(app,app.turno + 1,guerrero,enemigo)},5000);
+        app.timeOutTurno = setTimeout(()=> {ejecutarTurno(app,app.turno + 1,guerrero,enemigo)},2000);
         
     }
 }
@@ -86,10 +86,10 @@ async function draw(){
 function drawUI(){
     drawInvetarios(app,enemigo,guerrero);
     drawVida(app,enemigo, guerrero);
-    drawText(app.message, app, { color:app.messageColor, x: app.width * .5, y: app.height *.03, fontSize: 40,fontFamily:"PatrickHand" }).render();
+    drawText(app.message, app, { color:app.messageColor, x: app.width * .5, y: app.height *.03, fontSize: 40,fontFamily:"PatrickHand",roundBk:true }).render();
 
     if((app.turno  % 2) === 1){
-        drawText(" [ Z ] [ X ] [ C ] \n Estocada | Corte Feroz | Tajo Desgarrador ", app, { color: "#ffffff", x: app.width *.5, y: app.height *.93, fontSize: 35 }).render()
+        drawText(" [ Z ] [ X ] \n Ataque basico | Ataque Especial |", app, { color: "#ffffff", x: app.width *.5, y: app.height *.93, fontSize: 35 }).render()
     }
     if (enemigo.muerto || guerrero.muerto) {
         enemigo.vida < guerrero.vida ? drawText(` 🎉${guerrero.nombre} a vencido!!🎉 `, app, { color: "#64f177", fontSize: 50,fontFamily:"PatrickHand" ,roundBk:true}).render() : drawText(` Has sido vencido por ${enemigo.nombre}!! `, app, { color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
