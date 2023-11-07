@@ -27,8 +27,16 @@ class Controller{
 
         addEventListener("keypress",(e)=>{
             const keys = {
-                "KeyD": ()=>{guerrero.x = guerrero.x +guerrero.velocidad;guerrero.animacion= guerrero.animaciones["caminarR"] },
-                "KeyA":()=>{guerrero.x =guerrero.x - guerrero.velocidad; guerrero.animacion = guerrero.animaciones["caminarL"]}
+                "KeyD": ()=>{
+                    guerrero.x = guerrero.x +guerrero.velocidad;
+                    guerrero.animacion= guerrero.animaciones["caminarR"];
+                    guerrero.animacionDefault = guerrero.animaciones["parado"];
+                 },
+                "KeyA":()=>{
+                    guerrero.x =guerrero.x - guerrero.velocidad;
+                    guerrero.animacion = guerrero.animaciones["caminarL"]
+                    guerrero.animacionDefault = guerrero.animaciones["paradoL"];
+                }
             }
             keys[e.code]();
         })
