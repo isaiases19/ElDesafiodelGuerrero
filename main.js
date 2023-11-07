@@ -76,10 +76,11 @@ async function draw(){
    
     guerrero.render(app);
     enemigo.render(app);
+   
     drawUI()
     await delay(app,90)
+
     clearTimeout(app.timeOut);
-    
     window.requestAnimationFrame(draw);
 }
 

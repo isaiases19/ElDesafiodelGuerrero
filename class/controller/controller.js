@@ -5,7 +5,7 @@ class Controller{
     use(app,guerrero,enemigo){
         let opcion = 0;
         let press = 0;
-        const ataques = { "KeyZ": 1, "KeyX": 2, "KeyC": 3,"KeyA":4,"KeyS":5,"KeyD":6};
+        const ataques = { "KeyZ": 1, "KeyX": 2, "KeyC": 3,"KeyQ":4,"KeyE":5,"KeyR":6};
         
         //linten for key
         addEventListener("keyup", (e) => {
@@ -23,6 +23,15 @@ class Controller{
                 this.use(app,guerrero,enemigo);
             }
         });
+
+        addEventListener("keydown",(e)=>{
+            const keys = {
+                "KeyD": ()=>{guerrero.x += guerrero.velocidad },
+                "KeyA":()=>{guerrero.x -= guerrero.velocidad}
+            }
+            keys[e.code]();
+        })
+
     }
     
 }
