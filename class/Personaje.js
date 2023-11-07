@@ -55,7 +55,7 @@ class Personaje{
           return 'Opción no válida. Por favor, elige un ataque válido.';
         }
       }
-    
+      
 
       playSound(src,volume = 1){
         this.sound.src = src;
@@ -72,8 +72,6 @@ class Personaje{
       render(app){
         this.frame++;
         let i = this.frame % this.animacion.len;
-        let defultAnimation = this.muerto? this.animaciones["muerto"]:this.animaciones["parado"]
-        this.animacion = i == 0 ? defultAnimation: this.animacion;
         let {w,h,x,y} = {w:500*this.animacion.scale,h:400*this.animacion.scale,x:this.x,y:this.y};
         this.h = h;
     
