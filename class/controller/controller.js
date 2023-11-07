@@ -27,7 +27,7 @@ class Controller{
         addEventListener("keydown",(e)=>{
             const keys = {
                 "KeyD": ()=>{guerrero.x = guerrero.x +guerrero.velocidad;guerrero.animacion= guerrero.animaciones["caminarR"] },
-                "KeyA":()=>{guerrero.x =guerrero.x - guerrero.velocidad}
+                "KeyA":()=>{guerrero.x =guerrero.x - guerrero.velocidad; guerrero.animacion = guerrero.animaciones["caminarL"]}
             }
             keys[e.code]();
         })
