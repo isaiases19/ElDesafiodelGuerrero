@@ -25,7 +25,7 @@ class Controller{
             guerrero.animacion = guerrero.animaciones["parado"]
         });
 
-        addEventListener("keydown",(e)=>{
+        addEventListener("keypress",(e)=>{
             const keys = {
                 "KeyD": ()=>{guerrero.x = guerrero.x +guerrero.velocidad;guerrero.animacion= guerrero.animaciones["caminarR"] },
                 "KeyA":()=>{guerrero.x =guerrero.x - guerrero.velocidad; guerrero.animacion = guerrero.animaciones["caminarL"]}

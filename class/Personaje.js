@@ -72,6 +72,7 @@ class Personaje{
       render(app){
         this.frame++;
         let i = this.frame % this.animacion.len;
+        this.animacion = i === 0 ? this.animaciones["parado"]:this.animacion;
         let {w,h,x,y} = {w:500*this.animacion.scale,h:400*this.animacion.scale,x:this.x,y:this.y};
         this.h = h;
     
