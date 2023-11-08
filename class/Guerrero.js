@@ -33,7 +33,7 @@ class Guerrero extends Personaje {
     
     //Transfrom
     this.x = 330;
-    this.y = 950;
+    this.y = 830;
     this.w = 500;
     this.h = 400;
     

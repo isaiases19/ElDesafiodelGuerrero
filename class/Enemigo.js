@@ -32,7 +32,7 @@ class Enemigo extends Personaje {
     
     //Transform -- posicion
     this.x = x || 750;
-    this.y = 950;
+    this.y = 830;
     this.w = 500;
     this.h = 400;
     
