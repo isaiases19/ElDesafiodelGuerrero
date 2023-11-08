@@ -1,5 +1,7 @@
+import{app} from"../../main.js"
+
 class Sprite{
-    constructor(img,app,w,h,{x,y,sx,sy,sw,sh}){
+    constructor(img,w,h,{x,y,sx,sy,sw,sh}){
         this.sprite =img;
     
         this.x = x || (app.width/2 - w/2);
@@ -13,17 +15,17 @@ class Sprite{
         this.sw = sw || w;
         this.sh = sh || h;
 
-        this.app = app;
+       
     }
 
     render(){
-        this.app.context.drawImage(this.sprite,this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w, this.h);
+        app.context.drawImage(this.sprite,this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w, this.h);
     }
 }
 
 
-function drawSprite(img,app,w,h,{x,y,sx,sy,sw,sh}){
-    return new Sprite(img,app,w,h,{x,y,sx,sy,sw,sh});
+function drawSprite(img,w,h,{x,y,sx,sy,sw,sh}){
+    return new Sprite(img,w,h,{x,y,sx,sy,sw,sh});
 }
 
 export {drawSprite};

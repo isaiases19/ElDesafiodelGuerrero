@@ -1,7 +1,8 @@
 var f = await new FontFace('PatrickHand', 'url(../../../styles/PatrickHand.ttf)').load();
 document.fonts.add(f);
+import { app } from "../../main.js";
 class Text{
-    constructor(text,app,{color,fontSize,fontFamily,x,y,roundBk}){
+    constructor(text,{x,y,color,fontSize,fontFamily,roundBk}){
         this.text = text;
         this.color = color||"white";
         this.fontSize = fontSize || 20;
@@ -50,8 +51,8 @@ class Text{
     
 }
 
-function drawText(text,app,{color,fontSize,fontFamily,x,y,roundBk}){
-    return new Text(text,app,{color,fontSize,fontFamily,x,y,roundBk});
+function drawText(text,{color,fontSize,fontFamily,x,y,roundBk}){
+    return new Text(text,{color,fontSize,fontFamily,x,y,roundBk});
 }
 
 export {drawText};

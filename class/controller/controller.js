@@ -1,48 +1,53 @@
+import { app } from "../../main.js";
 
-import { update} from "../../main.js";
 class Controller{
- 
-    use(app,guerrero,enemigo){
-        let opcion = 0;
-        let press = 0;
-        const ataques = { "KeyZ": 1, "KeyX": 2, "KeyC": 3,"KeyQ":4,"KeyE":5,"KeyR":6};
+    use(){
+        let poweUpIndex;
+        //Teclas * Aciones
+        const acciones = [
+            {key:"KeyQ",name:"Ataque Basico",accion:()=>{
+                    app.player.realizarAtaque("Ataque Basico");
+            }},
+            {key:"KeyE",name:"Ataque Especial",accion:()=>{
+                    app.player.realizarAtaque("Ataque Especial");
+                }
+            },
+            {key:"KeyF", name:"Otra Arma",accion:()=>{
+                    const newArma = app.player.inventario[(app.player.armas.id + 1)% app.player.inventario.length];
+                    app.player.elegirArma(newArma.name);
+                }
+            },
+            {key:"KeyR", name:"Cambio de PowerUp",accion:()=>{
+                    app.player.armas.item.powerUps[poweUpIndex].enUso = false;
+                    app.player.armas.item.powerUps[((poweUpIndex + 1) % app.player.armas.item.powerUps.length)].enUso = true;
+                }
+            },
+            {key:"KeyD",name:"Derecha",accion:async ()=>{
+                    app.player.x = app.player.x +app.player.velocidad;
+                    app.player.animacion= app.player.animaciones["caminarR"];
+                    app.player.animacionDefault = app.player.animaciones["parado"];
+                }
+            },
+            {key:"KeyA",name:"Izquierda",accion:async()=>{
+                    app.player.x =app.player.x - app.player.velocidad;
+                    app.player.animacion = app.player.animaciones["caminarL"]
+                    app.player.animacionDefault = app.player.animaciones["paradoL"];
+                }
+            },
+        ];
         
         //linten for key
-        addEventListener("keyup", (e) => {
-            opcion = ataques[e.code];
-            if ((app.turno  % 2) === 1 && opcion > 0 &&  (opcion <= guerrero.ataques.length) && press ===0) {
-                press = 1;
-                let powerUp = guerrero.armas.item.powerUps[0];
-                app.messageColor = '#64f177';
-                app.message = guerrero.realizarAtaque(opcion, enemigo,powerUp);
-                update();
-            }
-            if(((app.turno  % 2) === 1) && (opcion >= guerrero.ataques.length) && (opcion <= (guerrero.ataques.length + guerrero.inventario.length))&& press === 0){
-                let newArma =guerrero.inventario[(opcion - guerrero.ataques.length) - 1].name
-                guerrero.elegirArma(newArma);
-                this.use(app,guerrero,enemigo);
-            }
-           
+        addEventListener("keydown", (e) => {
+            poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
+            if (app.appStart && !app.player.muerto)
+                acciones.find(accion=> accion.key === e.code)?.accion(); 
         });
 
-        addEventListener("keypress",(e)=>{
-            const keys = {
-                "KeyD": ()=>{
-                    guerrero.x = guerrero.x +guerrero.velocidad;
-                    guerrero.animacion= guerrero.animaciones["caminarR"];
-                    guerrero.animacionDefault = guerrero.animaciones["parado"];
-                 },
-                "KeyA":()=>{
-                    guerrero.x =guerrero.x - guerrero.velocidad;
-                    guerrero.animacion = guerrero.animaciones["caminarL"]
-                    guerrero.animacionDefault = guerrero.animaciones["paradoL"];
-                }
-            }
-            keys[e.code]();
+        addEventListener("keyup",async(e)=>{
+            if(e.code === "KeyD" || e.code === "KeyA")
+                app.player.animacion = app.player.animacionDefault;
         })
-
     }
-    
 }
 
 function getcontroller(){

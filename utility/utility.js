@@ -1,82 +1,27 @@
-import { drawText } from "../class/views/Text.js";
-import {update} from "../main.js";
+import { app } from "../main.js";
 import { Enemigo } from "../class/Enemigo.js";
 function randomMinMax(min,max){
-    return Math.floor(Math.random() * max) + min;
-}
-
-function turnoEnemigo(app,enemigo,guerrero) {
-    let opcion = randomMinMax(1,enemigo.ataques.length);
-    let powerUp = enemigo.armas.item.powerUps[0];
-    app.messageColor = "#e33030";
-    app.message = enemigo.realizarAtaque(opcion, guerrero,powerUp);
-    update()
-}
-
-function turnoGuerrero(app,guerrero,enemigo) {
-    guerrero.use(app,enemigo);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 //delay funcion
-async function delay(app,ms) {
+async function delay(ms) {
     return new Promise(resolve => {
        app.timeOut = setTimeout(resolve, ms);
     });
 }
 
-function ejecutarTurno(app,turno,guerrero,enemigo) {
-    clearTimeout(app.timeOutTurno);
-    app.turno = turno;
-    console.log("Cambio de turno");
-    (turno % 2) === 1 ? turnoGuerrero(app,guerrero,enemigo) : turnoEnemigo(app,enemigo,guerrero);
-}
-
-function drawVida(app,enemigo, guerrero) {
-    const {fontFamily,fontSize} = {fontFamily:"PatrickHand",fontSize: 30};
-    drawText(` ${guerrero.nombre} ${guerrero.vida}❤️`, app, { x: guerrero.x, y:guerrero.y - guerrero.h/2, fontSize,fontFamily,roundBk:true }).render();
-    drawText(` ${enemigo.nombre} ${enemigo.vida}💚`, app, { x: enemigo.x, y: enemigo.y - enemigo.h/2, fontSize,fontFamily,roundBk:true}).render();
-}
-
-function drawInvetarios(app,enemigo, guerrero){
-    const espdasTeclas = ["A","S","D"];
-    const inventarioGuerro = guerrero.inventario.map((items,i)=>{
-        if(guerrero.armas.name === items.name && i <3)
-            return` [${espdasTeclas[i]}] ${items.name} 👈 ` 
-        else if(i<3){ 
-            return` [${espdasTeclas[i]}] ${items.name} `
-        }
-    }).join("\n");
-    drawText(inventarioGuerro,app,{color:"orange",x:app.width*.18,y:app.height*.35,fontSize:30,roundBk:true}).render()
-
-    ///eENEMIGO
-    const inventarioEnemigo = enemigo.inventario.map((items,i)=>{
-        if(enemigo.armas.name === items.name && i <3)
-            return`${items.name} 👈 ` 
-        else if(i<3){ 
-            return`${items.name} `
-        }
-    }).join("\n");
-    drawText(inventarioEnemigo,app,{color:"#d6ba72",x:app.width*.85 ,y:app.height*.35,fontSize:30,roundBk:true}).render()
-}
-
-function speakText(text) {
-    var selectedVoice = document.querySelector("#voiceSelect").value;
+function generadorEnemigo(x = 750){
+    const names = ["Troll","Juan","Paco"];
+    const name = names[(randomMinMax(1,names.length) - 1)% names.length];
+    app.enemigos.push(new Enemigo(name, "enemy",randomMinMax(50,120) ,randomMinMax(3,7) ,randomMinMax(3,7),{x}));
     
-
-    if ('speechSynthesis' in window && selectedVoice) {
-      const synthesis = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(text);
-      const voces = synthesis.getVoices().find(voice => voice.name === selectedVoice);
-      utterance.voice =voces;
-      synthesis.speak(utterance);
-      utterance.voice =voces;
-    } else {
-      alert("Tu navegador no es compatible con la síntesis de voz.");
-    }
   }
 
-  function generadorEnemigo(){
-    
-    return new Enemigo("Troll", "e",randomMinMax(50,90) ,randomMinMax(3,7) ,randomMinMax(3,7));
+  function calcularDistancia(x1, y1, x2, y2) {
+    return Math.hypot(x2 - x1, y2 - y1);
+  }
+  function calcularDistancia1D(x1, x2,) {
+    return Math.hypot(x2,x1);
   }
 
-export {randomMinMax,drawVida,delay,ejecutarTurno,drawInvetarios,speakText, generadorEnemigo}
+export {randomMinMax,delay,generadorEnemigo,calcularDistancia,calcularDistancia1D}
