@@ -24,14 +24,14 @@ class Controller{
             },
             {key:"KeyD",name:"Derecha",accion:async ()=>{
                     app.player.x = app.player.x +app.player.velocidad;
-                    app.player.animacion= app.player.animaciones["caminarR"];
-                    app.player.animacionDefault = app.player.animaciones["parado"];
+                    app.player.animacion = app.player.animaciones["caminarR"];
+                    app.player.animacionDefault = "parado";
                 }
             },
             {key:"KeyA",name:"Izquierda",accion:async()=>{
                     app.player.x =app.player.x - app.player.velocidad;
-                    app.player.animacion = app.player.animaciones["caminarL"]
-                    app.player.animacionDefault = app.player.animaciones["paradoL"];
+                    app.player.animacion = app.player.animaciones["caminarL"];
+                    app.player.animacionDefault = "paradoL";
                 }
             },
         ];
@@ -40,12 +40,13 @@ class Controller{
         addEventListener("keydown", (e) => {
             poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
             if (app.appStart && !app.player.muerto)
-                acciones.find(accion=> accion.key === e.code)?.accion(); 
+                acciones.find(accion=> accion.key === e.code)?.accion();
+               
         });
 
         addEventListener("keyup",async(e)=>{
             if(e.code === "KeyD" || e.code === "KeyA")
-                app.player.animacion = app.player.animacionDefault;
+                app.player.animacion = app.player.animaciones[app.player.animacionDefault];
         })
     }
 }

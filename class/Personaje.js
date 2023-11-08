@@ -26,12 +26,13 @@ class Personaje {
     
     //Esdado
     this.muerto = false;
-    
+
     //Transform -- posicion
     this.x = 0;
     this.y = 0;
     this.w = 0;
     this.h = 0;
+    this.flip = false;
 
     //Audios
     this.sound = new Audio();
@@ -41,8 +42,9 @@ class Personaje {
     this.frame = 0;
     this.animaciones = [];
     this.sprite = new Image();
-    this.animacion = this.animaciones["parado"];
-    this.animacionDefault = this.animaciones["parado"];
+   
+    this.animacionDefault = "parado";
+    this.animacion = this.animaciones[this.animacionDefault];
   }
 
   atacar(enemigo) {
@@ -69,7 +71,7 @@ class Personaje {
     const ataque = this.elegirAtaque(ataqueName);
     const powerUp = this.armas.item.powerUps.find(up=> up.enUso === true);
     //Ejecuta Una Animacion
-    this.animacion = this.animaciones[ataque.animacion];
+    this.animacion= this.animaciones[ataque.animacion];
 
     for(const enemy of this.enemys){
       if(calcularDistancia(enemy.x,enemy.y,this.x,this.y) <= this.rangoAtaque && !enemy.muerto){
@@ -81,8 +83,9 @@ class Personaje {
         //hacer dano a enemigo
         enemy.recibirAtaque(totalDamge);
         //imprimir dano
-        drawText(`${totalDamge} ${(powerUp ? ` + ${powerUp.name} ${powerUp.power} ` : '')}`,{ color:app.messageColor, x: enemy.x, y: enemy.y - enemy.h/1.5, fontSize: 40,fontFamily:"PatrickHand",roundBk:true }).render();
-        await delay(340);
+
+        drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`,{color:"#bc1e1e",x:enemy.x,y:(enemy.y - enemy.h/1.5),fontSize:30,roundBk:true}).render()
+        
         update();
       }
     }
@@ -98,7 +101,7 @@ class Personaje {
 
   morir() {
     this.muerto = true;
-    this.animacion = this.animaciones["morir"];
+    this.animacion =  this.animaciones["morir"];
     if(this.tipo === "enemy"){
       generadorEnemigo(app.width);
     }
@@ -113,11 +116,10 @@ class Personaje {
     let i = this.frame % this.animacion.len;
 
     //Si Esta Muerto usa la animacion de muerto pordefecto 
-    this.animacionDefault = this.muerto ? this.animaciones["muerto"] : this.animacionDefault;
+    this.animacionDefault = this.muerto ? "muerto" : this.animacionDefault;
     
     //Si se termino la anicmacion selecciona una por defecto
-    this.animacion = (i === 0) ? this.animacionDefault : this.animacion;
-
+    this.animacion = (i === 0) ?this.animaciones[this.animacionDefault]: this.animacion;
     //Ajusta el tamnono a la escala se la animacion
     const scaleX = this.w * this.animacion.scale;
     const scaleY = this.h * this.animacion.scale;
@@ -127,10 +129,12 @@ class Personaje {
     this.acciones();
    
     //Dibuja Vida
-    const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 50, fontFamily: "PatrickHand", roundBk: true },enemy: { x: this.x, y: this.y - scaleY / 2, fontSize: 30, fontFamily: "PatrickHand", roundBk: true }}
+    const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 50, fontFamily: "PatrickHand", roundBk: true },enemy: { x: this.x, y: this.y - this.h / 3, fontSize: 30, fontFamily: "PatrickHand", roundBk: true }}
     drawText(`${this.nombre} ${this.vida}❤️`, style[this.tipo]).render();
     //Dibuja Inventario
     this.drawInevtario();
+    
+    
   }
 
   drawInevtario() {
@@ -152,11 +156,13 @@ class Personaje {
       }).join("\n");
 
       //Dibuja Inventario
-      drawText("  F  |  R  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundBk: true }).render()
+      drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundBk: true }).render()
       //Dibuja Opciones de ataques
       drawText("[ Q ] Ataque basico\n[ E ] Ataque Especial", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 35, roundBk: true }).render()
     }
   }
+
+  
 }
 
 export { Personaje };

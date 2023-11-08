@@ -55,8 +55,8 @@ class Guerrero extends Personaje {
       caminarL:{sx:0,sy:583,sw:64,sh:64,step:64,len:9,scale:.66},
       paradoL:{sx:513,sy:584,sw:64,sh:64,step:64,len:1,scale:.66},
     }
-    this.animacion = this.animaciones["parado"]
-    this.animacionDefault = this.animaciones["parado"];
+    this.animacionDefault = "parado";
+    this.animacion = this.animaciones[this.animacionDefault];
 
     //Controller
     this.controller = getcontroller();

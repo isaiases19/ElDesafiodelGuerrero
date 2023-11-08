@@ -53,8 +53,8 @@ class Enemigo extends Personaje {
       paradoR:{sx:0,sy:712,sw:64,sh:64,step:64,len:1,scale:.66},
     }
     this.sprite.src = "/img/troll.png";
-    this.animacion = this.animaciones["parado"]
-    this.animacionDefault = this.animaciones["parado"];
+    this.animacionDefault = "parado";
+    this.animacion = this.animaciones[this.animacionDefault];
   }
 
 
@@ -74,12 +74,13 @@ class Enemigo extends Personaje {
            //Elige una posicion Random para caminar
            if(this.x >= this.path){
             this.x = this.x - this.velocidad;
+           
             this.animacion = this.animaciones["caminarL"];
-            this.animacionDefault = this.animaciones["parado"];
+            this.animacionDefault = "parado";
           }else{
             this.x = this.x + this.velocidad;
             this.animacion = this.animaciones["caminarR"];
-            this.animacionDefault = this.animaciones["paradoR"];
+            this.animacionDefault = "paradoR";
           }
           //Si se termina coje otra
           if(calcularDistancia(this.x,this.y,this.path,this.y) <= this.rango ){

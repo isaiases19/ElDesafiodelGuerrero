@@ -49,6 +49,7 @@ async function update() {
         app.player.playSound(url);
         drawText(` Has sido vencido!! `,{ color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
     }
+    
 }
 
 async function draw(){
