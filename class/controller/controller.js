@@ -1,4 +1,5 @@
 import { app } from "../../main.js";
+import { delay } from "../../utility/utility.js";
 
 class Controller{
     use(){
@@ -34,19 +35,28 @@ class Controller{
                     app.player.animacionDefault = "paradoL";
                 }
             },
+            {key:"Escape",name:"Pause",accion:()=>{
+                app.pause? app.pause = false : app.pause = true;
+            }}
         ];
         
         //linten for key
         addEventListener("keydown", (e) => {
             poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
-            if (app.appStart && !app.player.muerto)
+            if (app.appStart && !app.player.muerto && !app.pause){
                 acciones.find(accion=> accion.key === e.code)?.accion();
+            }
+            if(app.pause){
+                
+            }
                
         });
 
         addEventListener("keyup",async(e)=>{
-            if(e.code === "KeyD" || e.code === "KeyA")
+            if(e.code === "KeyD" || e.code === "KeyA"){
                 app.player.animacion = app.player.animaciones[app.player.animacionDefault];
+            }
+           
         })
     }
 }

@@ -13,6 +13,7 @@ const app = {
     timeOut: 5,
     gameOver: false,
     appStart: false,
+    pause:false,
     setup,
     clearCanvas: () => {
         canvas.width = app.width;
@@ -43,16 +44,18 @@ async function setup() {
 
 //Bucle que llama el renderizado de los objetos
 async function draw(){
-    //delay 
-    await delay(90);
-    clearTimeout(app.timeOut);
-    //limpia el lienzo
-    app.clearCanvas();
-    //Renderiza cada enemigo 
-    for(const enemy of app.enemigos){enemy.render()}
-    //Renderiza El Jugadar
-    app.player.render();
-    //LLama al siguiente frame
+    if(!app.pause){
+        //delay 
+        await delay(90);
+        clearTimeout(app.timeOut);
+        //limpia el lienzo
+        app.clearCanvas();
+        //Renderiza cada enemigo 
+        for(const enemy of app.enemigos){enemy.render()}
+        //Renderiza El Jugadar
+        app.player.render();
+        //LLama al siguiente frame
+    }
     window.requestAnimationFrame(draw);
 }
 
