@@ -13,7 +13,7 @@ async function delay(ms) {
 function generadorEnemigo(x = 750){
     const names = ["Troll","Juan","Paco"];
     const name = names[(randomMinMax(1,names.length) - 1)% names.length];
-    app.enemigos.push(new Enemigo(name, "enemy",randomMinMax(50,120) ,randomMinMax(3,7) ,randomMinMax(3,7),{x}));
+    app.enemigos.push(new Enemigo(name, "enemy",randomMinMax(50,120) ,randomMinMax(3,7) ,randomMinMax(3,7),{x},1));
     
   }
 
