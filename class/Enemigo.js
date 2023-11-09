@@ -1,8 +1,7 @@
 import { Personaje } from "./Personaje.js";
-import { espadaNormal,espadaFilosa } from "./Armas.js";
-import { calcularDistancia, randomMinMax,calcularDistancia1D } from "../utility/utility.js";
-import { app,update } from "../main.js";
-import { drawText } from "./views/Text.js";
+import { espadaFilosa } from "./Armas.js";
+import { calcularDistancia, randomMinMax } from "../utility/utility.js";
+import { app } from "../main.js";
 
 class Enemigo extends Personaje {
   constructor(nombre, tipo, vida, fuerza, velocidad,{x}) {

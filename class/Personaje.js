@@ -1,9 +1,8 @@
 import { drawSprite } from "./views/Image.js";
-import { calcularDistancia, generadorEnemigo} from "../utility/utility.js";
+import { calcularDistancia, generadorEnemigo } from "../utility/utility.js";
 import { espadaNormal } from "./Armas.js";
 import { drawText } from "./views/Text.js";
-import { delay } from "../utility/utility.js";
-import { app,update } from "../main.js";
+import { app, update } from "../main.js";
 class Personaje {
 
   constructor(nombre, tipo, vida, fuerza, velocidad) {
@@ -68,6 +67,7 @@ class Personaje {
   }
 
   async realizarAtaque(ataqueName) {
+    if(this.frame % this.animacion.len === 0){
     const ataque = this.elegirAtaque(ataqueName);
     const powerUp = this.armas.item.powerUps.find(up=> up.enUso === true);
     //Ejecuta Una Animacion
@@ -87,6 +87,7 @@ class Personaje {
         drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`,{color:"#bc1e1e",x:enemy.x,y:(enemy.y - enemy.h/1.5),fontSize:30,roundBk:true}).render()
         
         update();
+        }
       }
     }
   }
