@@ -71,7 +71,8 @@ class Personaje {
     const ataque = this.elegirAtaque(ataqueName);
     const powerUp = this.armas.item.powerUps.find(up=> up.enUso === true);
     //Ejecuta Una Animacion
-    this.animacion= this.animaciones[ataque.animacion];
+    const elegirAnimacion=this.animacionDefault=== "parado"? ataque.animacionR: ataque.animacionL;
+    this.animacion= this.animaciones[elegirAnimacion];
 
     for(const enemy of this.enemys){
       if(calcularDistancia(enemy.x,enemy.y,this.x,this.y) <= this.rangoAtaque && !enemy.muerto){
