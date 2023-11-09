@@ -53,7 +53,9 @@ class Personaje {
   recibirAtaque(ataqueDano) {
       this.playSound(this.recibirAudio);
       this.vida -= ataqueDano;
-      this.animacion = this.animaciones["resibe"];
+      const elegirAnimacion=this.animacionDefault=== "parado"? "recibirR": "recibirL";
+    this.animacion= this.animaciones[elegirAnimacion];
+      
       if (this.vida <= 0)
           this.morir();
   }
@@ -136,7 +138,8 @@ class Personaje {
    
     //Dibuja Vida
     const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 50, fontFamily: "PatrickHand", roundBk: true },enemy: { x: this.x, y: this.y - this.h / 3, fontSize: 30, fontFamily: "PatrickHand", roundBk: true }}
-    drawText(`${this.nombre} ${this.vida}❤️`, style[this.tipo]).render();
+    if(!this.muerto){
+      drawText(`${this.nombre} ${this.vida}❤️`, style[this.tipo]).render();}
     //Dibuja Inventario
     this.drawInevtario();
     

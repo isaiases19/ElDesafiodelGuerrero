@@ -45,7 +45,8 @@ class Guerrero extends Personaje {
     this.animaciones = {
       parado:{sx:0,sy:455,sw:64,sh:64,step:64,len:1,scale:.66},
       golpear:{sx:0,sy:970,sw:64,sh:64,step:64,len:6,scale:.66 },
-      resibe:{sx:0,sy:200,sw:64,sh:64,step:64,len:7,scale:.66 },
+      recibirR:{sx:0,sy:200,sw:64,sh:64,step:64,len:7,scale:.66 },
+      recibirL:{sx:0,sy:72,sw:64,sh:64,step:64,len:7,scale:.66 },
       espada2R:{sx:0,sy:968,sw:64,sh:64,step:64,len:6,scale:.66 },
       espada1R:{sx:0,sy:457,sw:64,sh:64,step:64,len:8,scale:.66 },
       tajo:{sx:0,sy:1223,sw:64,sh:64,step:64,len:13,scale:.66 },

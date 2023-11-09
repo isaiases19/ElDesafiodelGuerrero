@@ -40,17 +40,17 @@ class Enemigo extends Personaje {
     //Animacion
     this.animaciones = {
       parado:{sx:0,sy:328,sw:64,sh:64,step:64,len:1,scale:.66},
-      golpear:{sx:0,sy:838,sw:64,sh:64,step:64,len:6,scale:.66 },
-      resibe:{sx:0,sy:72,sw:64,sh:64,step:64,len:5,scale:.66 },
-      espada2R:{sx:0,sy:1542,sw:193,sh:193,step:193,len:6,scale:2 },
-      espada1R:{sx:0,sy:3077,sw:193,sh:193,step:193,len:6,scale:2 },
+      recibirL:{sx:0,sy:72,sw:64,sh:64,step:64,len:5,scale:.66 },
+      recibirR:{sx:0,sy:199,sw:64,sh:64,step:64,len:5,scale:.66 },
+      espada2L:{sx:0,sy:1928,sw:193,sh:193,step:193,len:6,scale:2 },
+      espada1L:{sx:0,sy:968,sw:64,sh:64,step:64,len:6,scale:.66 },
       morir:{sx:0,sy:1287,sw:64,sh:64,step:64,len:6,scale:.66 },
       muerto:{sx:323,sy:1290,sw:64,sh:64,step:64,len:1,scale:.66 },
       caminarR:{sx:0,sy:712,sw:64,sh:64,step:64,len:9,scale:.66 },
       caminarL:{sx:0,sy:583,sw:64,sh:64,step:64,len:9,scale:.66},
       paradoR:{sx:0,sy:712,sw:64,sh:64,step:64,len:1,scale:.66},
-      espada1L:{sx:0,sy:328,sw:64,sh:64,step:64,len:8,scale:.66 },
-      espada2L:{sx:0,sy:840,sw:64,sh:64,step:64,len:6,scale:.66 },
+      espada1R:{sx:0,sy:326,sw:64,sh:64,step:64,len:8,scale:.66 },
+      espada2R:{sx:0,sy:1543,sw:193,sh:193,step:193,len:6,scale:2 },
     }
     this.sprite.src = "/img/troll.png";
     this.animacionDefault = "parado";
