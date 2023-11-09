@@ -138,8 +138,13 @@ class Personaje {
    
     //Dibuja Vida
     const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 50, fontFamily: "PatrickHand", roundBk: true },enemy: { x: this.x, y: this.y - this.h / 3, fontSize: 30, fontFamily: "PatrickHand", roundBk: true }}
+<<<<<<< HEAD
     if(!this.muerto){
       drawText(`${this.nombre} ${this.vida}❤️`, style[this.tipo]).render();}
+=======
+    drawText(`${this.nombre} ${this.vida}❤️`, style[this.tipo]).render();
+    
+>>>>>>> 9dfba6b3191ca58c0270d6bcd70442166f0f5591
     //Dibuja Inventario
     this.drawInevtario();
     
