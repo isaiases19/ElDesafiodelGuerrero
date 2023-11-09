@@ -1,4 +1,4 @@
-import { delay, generadorEnemigo } from "./utility/utility.js";
+import { delay, generadorEnemigo, randomMinMax } from "./utility/utility.js";
 import { drawInicio } from "./screens/Inicio.js";
 import { Guerrero } from "./class/Guerrero.js";
 
@@ -31,6 +31,8 @@ async function main() {
 async function setup() {
     backGroundMuisc.loop = true;
     backGroundMuisc.play()
+    const song = [0.16,1.55,3.19,3.45,4.51,5.50];
+    backGroundMuisc.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
     backGroundMuisc.volume = 0.3;
     generadorEnemigo();
     app.player = new Guerrero("Conan","player",120,10,7);
