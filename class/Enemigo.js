@@ -4,8 +4,8 @@ import { calcularDistancia, randomMinMax } from "../utility/utility.js";
 import { app } from "../main.js";
 
 class Enemigo extends Personaje {
-  constructor(nombre, tipo, vida, fuerza, velocidad,{x}) {
-    super(nombre, tipo,vida, fuerza, velocidad);
+  constructor(nombre, tipo, vida, fuerza, velocidad,nivel,{x}) {
+    super(nombre, tipo,vida, fuerza, velocidad,nivel);
     //carcteristicas
     this.vida = vida;
     this.tipo = tipo;
@@ -14,7 +14,7 @@ class Enemigo extends Personaje {
     this.velocidad = velocidad;
     this.rango = 150;
     this.enemys = [app.player];
-    
+    this.nivel=nivel;
     //Acciones
     this.path = randomMinMax(80,app.width*.7);
     

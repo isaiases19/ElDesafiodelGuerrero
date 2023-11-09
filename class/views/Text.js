@@ -42,7 +42,7 @@ class Text{
     }
 
     drawRoundRect(){
-        this.ctx.fillStyle = "#000000ff";
+        this.ctx.fillStyle = "#00000061";
         this.ctx.beginPath();
         this.ctx.roundRect((this.x - this.textlength/3),(this.y - this.fontSize*0.8),this.textlength*.65 ,(this.fontSize*1.5),this.fontSize*.5);
         this.ctx.fill();
