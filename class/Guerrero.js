@@ -4,14 +4,15 @@ import { getcontroller } from "./controller/controller.js";
 import { app } from "../main.js";
 class Guerrero extends Personaje {
 
-  constructor(nombre, tipo, vida, fuerza, velocidad) {
-    super(nombre, tipo, vida, fuerza, velocidad);
+  constructor(nombre, tipo, vida, fuerza, velocidad,nivel) {
+    super(nombre, tipo, vida, fuerza, velocidad,nivel);
     //carcteristicas
     this.vida = vida;
     this.tipo = tipo;
     this.nombre = nombre;
     this.fuerza = fuerza;
     this.velocidad = velocidad;
+    this.nivel=nivel;
 
     this.rango = 150;
     this.enemys = app.enemigos;

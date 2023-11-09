@@ -35,7 +35,7 @@ async function setup() {
     backGroundMuisc.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
     backGroundMuisc.volume = 0.3;
     generadorEnemigo();
-    app.player = new Guerrero("Conan","player",120,10,7);
+    app.player = new Guerrero("Conan","player",120,10,7,1);
     app.player.use();
     await delay(1000);
     draw()

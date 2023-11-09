@@ -5,7 +5,7 @@ import { drawText } from "./views/Text.js";
 import { app} from "../main.js";
 class Personaje {
 
-  constructor(nombre, tipo, vida, fuerza, velocidad) {
+  constructor(nombre, tipo, vida, fuerza, velocidad,nivel) {
     //carcteristicas
     this.nombre = nombre.toUpperCase();
     this.vida = vida;
@@ -14,6 +14,7 @@ class Personaje {
     this.velocidad = velocidad;
     this.rangoAtaque = 150;
     this.enemys = [];
+    this.nivel=nivel;
     
     //Habilidades
     this.ataques = [];
@@ -137,11 +138,14 @@ class Personaje {
     this.acciones();
    
     //Dibuja Vida
-    const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 50, fontFamily: "PatrickHand", roundBk: true },enemy: { x: this.x, y: this.y - this.h / 3, fontSize: 30, fontFamily: "PatrickHand", roundBk: true }}
+    const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 25, fontFamily: "PatrickHand", roundBk: true },
+    enemy: { x: this.x, y: this.y - this.h / 3, fontSize: 20, fontFamily: "PatrickHand", roundBk: true }}
 
     if(!this.muerto){
-      drawText(`${this.nombre} ${this.vida}❤️`, style[this.tipo]).render();}
-    
+
+      drawText(`${this.nombre} ❤️${this.vida}  Lv ${this.nivel} `, style[this.tipo]).render();
+      }
+      
     
 
     //Dibuja Inventario
