@@ -40,8 +40,8 @@ class Enemigo extends Personaje {
     //Animacion
     this.animaciones = {
       parado:{sx:0,sy:328,sw:64,sh:64,step:64,len:1,scale:.66},
-      recibirL:{sx:0,sy:72,sw:64,sh:64,step:64,len:5,scale:.66 },
-      recibirR:{sx:0,sy:199,sw:64,sh:64,step:64,len:5,scale:.66 },
+      recibirR:{sx:0,sy:72,sw:64,sh:64,step:64,len:5,scale:.66 },
+      recibirL:{sx:0,sy:199,sw:64,sh:64,step:64,len:5,scale:.66 },
       espada2L:{sx:0,sy:1928,sw:193,sh:193,step:193,len:6,scale:2 },
       espada1L:{sx:0,sy:968,sw:64,sh:64,step:64,len:6,scale:.66 },
       morir:{sx:0,sy:1287,sw:64,sh:64,step:64,len:6,scale:.66 },
