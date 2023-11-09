@@ -1,7 +1,6 @@
-import {delay,generadorEnemigo} from "./utility/utility.js";
+import { delay, generadorEnemigo } from "./utility/utility.js";
 import { drawInicio } from "./screens/Inicio.js";
 import { Guerrero } from "./class/Guerrero.js";
-import { drawText } from "./class/views/Text.js";
 
 const canvas = document.querySelector("canvas");
 const backGroundMuisc = new Audio("/sounds/background.mp3");
@@ -40,27 +39,22 @@ async function setup() {
     draw()
 }
 
-async function update() {
-    
-    if (app.player.muerto) {
-        app.gameOver = true;
-        app.turno = 0;
-        const url = "/sounds/failure.mp3";
-        app.player.playSound(url);
-        drawText(` Has sido vencido!! `,{ color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
-    }
-    
-}
-
+//Bucle que llama el renderizado de los objetos
 async function draw(){
-    await delay(100);
+    //delay 
+    await delay(90);
     clearTimeout(app.timeOut);
-    app.clearCanvas(); 
+    //limpia el lienzo
+    app.clearCanvas();
+    //Renderiza cada enemigo 
     for(const enemy of app.enemigos){enemy.render()}
+    //Renderiza El Jugadar
     app.player.render();
-
+    //LLama al siguiente frame
     window.requestAnimationFrame(draw);
 }
 
+//inica el programa
 main();
-export {update,app}
+
+export {app}

@@ -21,7 +21,7 @@ class Inicio extends Screens {
                 }
             }
             if (!this.app.appStart)
-            accions[e.code]()
+                accions[e.code]()
         })
     }
 }

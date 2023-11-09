@@ -2,7 +2,7 @@ import { drawSprite } from "./views/Image.js";
 import { calcularDistancia, generadorEnemigo } from "../utility/utility.js";
 import { espadaNormal } from "./Armas.js";
 import { drawText } from "./views/Text.js";
-import { app, update } from "../main.js";
+import { app} from "../main.js";
 class Personaje {
 
   constructor(nombre, tipo, vida, fuerza, velocidad) {
@@ -83,10 +83,7 @@ class Personaje {
         //hacer dano a enemigo
         enemy.recibirAtaque(totalDamge);
         //imprimir dano
-
         drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`,{color:"#bc1e1e",x:enemy.x,y:(enemy.y - enemy.h/1.5),fontSize:30,roundBk:true}).render()
-        
-        update();
         }
       }
     }
@@ -105,6 +102,13 @@ class Personaje {
     this.animacion =  this.animaciones["morir"];
     if(this.tipo === "enemy"){
       generadorEnemigo(app.width);
+    }
+    if(this.tipo ==="player" && this.muerto){
+      app.gameOver = true;
+      app.turno = 0;
+      const url = "/sounds/failure.mp3";
+      app.player.playSound(url);
+      
     }
   }
 
@@ -160,6 +164,10 @@ class Personaje {
       drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundBk: true }).render()
       //Dibuja Opciones de ataques
       drawText("[ Q ] Ataque basico\n[ E ] Ataque Especial", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 35, roundBk: true }).render()
+      //has muerto MSG
+      if(this.tipo === "player" && this.muerto){
+        drawText(` Has Muerto!! `,{ color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
+      }
     }
   }
 
