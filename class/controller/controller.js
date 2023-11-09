@@ -45,10 +45,10 @@ class Controller{
             poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
             if (app.appStart && !app.player.muerto && !app.pause){
                 acciones.find(accion=> accion.key === e.code)?.accion();
+            }else if(app.appStart && !app.player.muerto && app.pause && e.code === "Escape"){
+                app.pause = false;
             }
-            if(app.pause){
-                
-            }
+     
                
         });
 
