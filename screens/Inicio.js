@@ -1,33 +1,40 @@
-import { Screens } from "../class/views/Screens.js";
+import { app } from "../main.js";
 import { drawText } from "../class/views/Text.js";
+import { drawRect } from "../class/views/Rect.js";
+import { Screens } from "../class/views/Screens.js";
 class Inicio extends Screens {
-    constructor(app){
-        super(app)
-        this.app =app;
+    constructor(){
+        super()
         this.content =[
-            drawText("Press Space To Start",{fontSize:50,fontFamily:"PatrickHand",roundBk:true})
+            drawRect(0,0,app.width,app.height,{color:"#000000b5"}),
+            drawText("Press Space To Start ",{fontSize:50,fontFamily:"PatrickHand",roundRadius:25, bgColor:"black"})
         ];
-        this.actilizar()
+        this.bucle = setInterval(this.lisien,340);
     }
-    actilizar(){
-        const satrt = new Audio("/sounds/click.mp3");
-        addEventListener("keyup", (e) => {
-            let accions = {
-                "Space": () => {
-                    this.app.clearCanvas();
-                    satrt.play()
-                    this.app.setup();
-                    this.app.appStart = true;
+    lisien(){
+        
+        if (!app.appStart){
+       
+
+            let accions = [
+                {key:"Space",name:"Start", accion:()=>{
+                        const satrt = new Audio("/sounds/click.mp3");
+                        satrt.play()
+                        app.setup();
+                        app.appStart = true;
+                        clearInterval(this.bucle);
+                    }
                 }
-            }
-            if (!this.app.appStart)
-                accions[e.code]()
-        })
+            ]
+               
+            accions.find(ops=> ops.key === app.keys[0])?.accion()
+      
+        }
     }
 }
 
-function drawInicio(app){
-    return new Inicio(app);
+function drawInicio(){
+    return new Inicio();
 }
 
 export {drawInicio};

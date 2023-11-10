@@ -1,8 +1,9 @@
 import { drawSprite } from "./views/Image.js";
-import { calcularDistancia, generadorEnemigo } from "../utility/utility.js";
+import { calcularDistancia, delay, generadorEnemigo } from "../utility/utility.js";
 import { espadaNormal } from "./Armas.js";
 import { drawText } from "./views/Text.js";
 import { app} from "../main.js";
+import { drawMuerte } from "../screens/muerte.js";
 class Personaje {
 
   constructor(nombre, tipo, vida, fuerza, velocidad,nivel) {
@@ -86,8 +87,9 @@ class Personaje {
         let totalDamge = (this.fuerza + ataque.fuerza) + (this.armas.item ? this.armas.item.usar(powerUp?.name) : 0);
         //hacer dano a enemigo
         enemy.recibirAtaque(totalDamge);
+        
         //imprimir dano
-        drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`,{color:"#bc1e1e",x:enemy.x,y:(enemy.y - enemy.h/1.5),fontSize:30,roundBk:true}).render()
+        drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`,{color:"#bc1e1e",x:enemy.x,y:(enemy.y - enemy.h/1.5),fontSize:30,roundRadius:20}).render()
         }
       }
     }
@@ -138,12 +140,11 @@ class Personaje {
     this.acciones();
    
     //Dibuja Vida
-    const style = {player: {x: app.width*.18, y: app.height*.955, fontSize: 25, fontFamily: "PatrickHand", roundBk: true },
-    enemy: { x: this.x, y: this.y - this.h / 3, fontSize: 20, fontFamily: "PatrickHand", roundBk: true }}
+    const style = {player: {color:"white",x: app.width*.11, y: app.height*.91, fontSize: 30, fontFamily: "PatrickHand", roundRadius:12,bgColor:'#0a0e1a' },
+    enemy: {color:"#161616", x: this.x, y: this.y - this.h /2.5,style:"bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius:10}}
 
     if(!this.muerto){
-
-      drawText(`${this.nombre} ❤️${this.vida}  Lv ${this.nivel} `, style[this.tipo]).render();
+        drawText(`${this.nombre}\n❤️${this.vida}  Lv.${this.nivel}`, style[this.tipo]).render();
       }
       
     
@@ -173,12 +174,12 @@ class Personaje {
       }).join("\n");
 
       //Dibuja Inventario
-      drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundBk: true }).render()
+      drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundRadius:0 }).render()
       //Dibuja Opciones de ataques
-      drawText("[ Q ] Ataque basico\n[ E ] Ataque Especial", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 35, roundBk: true }).render()
+      drawText(" [ Q ] Ataque basico \n [ E ] Ataque Especial ", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 35, roundRadius:0}).render()
       //has muerto MSG
       if(this.tipo === "player" && this.muerto){
-        drawText(` Has Muerto!! `,{ color: "#e33030", fontSize: 50,fontFamily:"PatrickHand",roundBk:true }).render();
+       drawMuerte().render()
       }
     }
   }

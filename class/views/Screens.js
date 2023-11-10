@@ -1,14 +1,14 @@
 class Screens{
-    constructor(app){
-        this.app = app;
-        this.ctx = app.context;
+    constructor(){
         this.content= [];
     }
+    actilizar(){
 
+    }
     render(){
-        this.app.clearCanvas();
+        this.actilizar()
         for(let c of this.content){
-            c.render(this.ctx);
+            c.render();
         }
     }
 }

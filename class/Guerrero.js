@@ -66,8 +66,8 @@ class Guerrero extends Personaje {
     this.controller = getcontroller();
   }
   
-  use(enemigo){
-    this.controller.use(this,enemigo)  
+  use(){
+    this.controller.use()  
   }
 
 }

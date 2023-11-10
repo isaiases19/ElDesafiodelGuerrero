@@ -1,4 +1,5 @@
 import { app } from "../../main.js";
+import { drawPausa } from "../../screens/pausa.js";
 import { delay } from "../../utility/utility.js";
 
 class Controller{
@@ -24,42 +25,33 @@ class Controller{
                 }
             },
             {key:"KeyD",name:"Derecha",accion:async ()=>{
-                    app.player.x = app.player.x +app.player.velocidad;
+                    app.player.x = app.player.x + app.player.velocidad;
+                    await delay(35)
                     app.player.animacion = app.player.animaciones["caminarR"];
                     app.player.animacionDefault = "parado";
                 }
             },
             {key:"KeyA",name:"Izquierda",accion:async()=>{
                     app.player.x =app.player.x - app.player.velocidad;
+                    await delay(35)
                     app.player.animacion = app.player.animaciones["caminarL"];
                     app.player.animacionDefault = "paradoL";
                 }
             },
             {key:"Escape",name:"Pause",accion:()=>{
                 app.pause? app.pause = false : app.pause = true;
+               
             }}
         ];
-        
-        //linten for key
-        addEventListener("keydown", (e) => {
-            poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
-            if (app.appStart && !app.player.muerto && !app.pause){
-                acciones.find(accion=> accion.key === e.code)?.accion();
-            }else if(app.appStart && !app.player.muerto && app.pause && e.code === "Escape"){
-                app.pause = false;
+    
+            if(!app.pause && app.appStart && !app.player.muerto){
+                poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
+                acciones.find(accion=> accion.key === app.keys[0])?.accion();
             }
-     
-               
-        });
-
-        addEventListener("keyup",async(e)=>{
-            if(e.code === "KeyD" || e.code === "KeyA"){
-                app.player.animacion = app.player.animaciones[app.player.animacionDefault];
-            }
-           
-        })
     }
 }
+
+
 
 function getcontroller(){
     return new Controller();
