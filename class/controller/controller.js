@@ -26,14 +26,12 @@ class Controller{
             },
             {key:"KeyD",name:"Derecha",accion:async ()=>{
                     app.player.x = app.player.x + app.player.velocidad;
-                    await delay(35)
                     app.player.animacion = app.player.animaciones["caminarR"];
                     app.player.animacionDefault = "parado";
                 }
             },
             {key:"KeyA",name:"Izquierda",accion:async()=>{
                     app.player.x =app.player.x - app.player.velocidad;
-                    await delay(35)
                     app.player.animacion = app.player.animaciones["caminarL"];
                     app.player.animacionDefault = "paradoL";
                 }

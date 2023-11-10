@@ -174,9 +174,9 @@ class Personaje {
       }).join("\n");
 
       //Dibuja Inventario
-      drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundRadius:0 }).render()
+      drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundRadius:15, bgColor:"#0a0e1aa0" }).render()
       //Dibuja Opciones de ataques
-      drawText(" [ Q ] Ataque basico \n [ E ] Ataque Especial ", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 35, roundRadius:0}).render()
+      drawText(" [ Q ] Ataque basico \n [ E ] Ataque Especial ", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 30, roundRadius:15,bgColor:"#0a0e1a" }).render()
       //has muerto MSG
       if(this.tipo === "player" && this.muerto){
        drawMuerte().render()

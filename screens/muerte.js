@@ -9,8 +9,8 @@ class Muerte extends Screens {
         super()
   
         this.content =[
-            drawRect(0,0,app.width,app.height,{color:"#000000b5"}),
-            drawText("Has Muerto",{color:"brown",fontSize:70,fontFamily:"PatrickHand",roundRadius:25,})
+            drawRect(0,0,app.width,app.height,{color:"#0a0e1ab5"}),
+            drawText("Has Muerto",{color:"brown",fontSize:90,fontFamily:"PatrickHand",roundRadius:25,})
         ];
      
     }
