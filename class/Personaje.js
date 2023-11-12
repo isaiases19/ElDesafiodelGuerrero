@@ -46,6 +46,9 @@ class Personaje {
    
     this.animacionDefault = "parado";
     this.animacion = this.animaciones[this.animacionDefault];
+
+    //nivel 
+    this.bajasCont=0;
   }
 
   atacar(enemigo) {
@@ -107,6 +110,12 @@ class Personaje {
     this.muerto = true;
     this.animacion =  this.animaciones["morir"];
     if(this.tipo === "enemy"){
+      app.player.bajasCont++;
+      
+      if((app.player.bajasCont)== Math.round(app.player.nivel*1.8) ){
+        app.player.nivel++;
+       
+      }
       generadorEnemigo(app.width);
     }
     if(this.tipo ==="player" && this.muerto){
