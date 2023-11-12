@@ -21,7 +21,6 @@ const app = {
     clearCanvas: () => {
         canvas.width = app.width;
         canvas.height = app.height;
-        
     },
     player:{},
     enemigos:[],

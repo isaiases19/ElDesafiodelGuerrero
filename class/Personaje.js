@@ -56,7 +56,7 @@ class Personaje {
       this.playSound(this.recibirAudio);
       this.vida -= ataqueDano;
       const elegirAnimacion=this.animacionDefault=== "parado"? "recibirR": "recibirL";
-    this.animacion= this.animaciones[elegirAnimacion];
+      this.animacion= this.animaciones[elegirAnimacion];
       
       if (this.vida <= 0)
           this.morir();
@@ -118,7 +118,6 @@ class Personaje {
     }
   }
 
-
   render() {
     //Cambio de Frame
     this.frame++;
@@ -136,23 +135,19 @@ class Personaje {
     const scaleY = this.h * this.animacion.scale;
 
     //Dibuja El Sprite
-    drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.step * i), sy: this.animacion.sy, sw: this.animacion.sw, sh: this.animacion.sh, x: (this.x - scaleX/ 2), y: (this.y -scaleY / 2) }).render()
+    drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.size * i), sy: this.animacion.sy, sw: this.animacion.size, sh: this.animacion.size, x: (this.x - scaleX/ 2), y: (this.y -scaleY / 2) }).render()
     this.acciones();
    
     //Dibuja Vida
     const style = {player: {color:"white",x: app.width*.11, y: app.height*.91, fontSize: 30, fontFamily: "PatrickHand", roundRadius:12,bgColor:'#0a0e1a' },
-    enemy: {color:"#161616", x: this.x, y: this.y - this.h /2.5,style:"bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius:10}}
+                  enemy: {color:"#161616", x: this.x, y: this.y - this.h /2.5,style:"bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius:10}}
 
     if(!this.muerto){
         drawText(`${this.nombre}\n❤️${this.vida}  Lv.${this.nivel}`, style[this.tipo]).render();
-      }
+    }
       
-    
-
     //Dibuja Inventario
     this.drawInevtario();
-    
-    
   }
 
   drawInevtario() {
@@ -179,12 +174,9 @@ class Personaje {
       drawText(" [ Q ] Ataque basico \n [ E ] Ataque Especial ", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 30, roundRadius:15,bgColor:"#0a0e1a" }).render()
       //has muerto MSG
       if(this.tipo === "player" && this.muerto){
-       drawMuerte().render()
+        drawMuerte().render()
       }
     }
   }
-
-  
 }
-
 export { Personaje };
