@@ -15,14 +15,15 @@ class Enemigo extends Personaje {
     this.rango = 150;
     this.enemys = [app.player];
     this.nivel = nivel;
+    this.destroyed = false;
     //Acciones
     this.path = randomMinMax(80, app.width * .7);
     this.target = false;
 
     //Habilidades
     this.ataques = [
-      { name: "Ataque Basico", fuerza, audio: "/sounds/punch-estocada.mp3", animacionR: "espada1R", animacionL: "espada1L" },
-      { name: "Ataque Especial", fuerza: (fuerza * 2), audio: "/sounds/punch-corte-feroz.mp3", animacionR: "espada2R", animacionL: "espada2L" },
+      { name: "Ataque Basico", fuerza,usable: true,counDown:.5, audio: "/sounds/punch-estocada.mp3", animacionR: "espada1R", animacionL: "espada1L" },
+      { name: "Ataque Especial", fuerza: (fuerza * 2),usable:true,counDown:3, audio: "/sounds/punch-corte-feroz.mp3", animacionR: "espada2R", animacionL: "espada2L" },
     ]
 
     //Items
@@ -66,11 +67,13 @@ class Enemigo extends Personaje {
         this.enemys = [app.player]
         //Elige un Ataque Random
         let ataque = this.ataques[randomMinMax(1, this.ataques.length) - 1];
-        //Realiza el ataque
-        this.realizarAtaque(ataque.name);
-
+        if(!ataque.usable){
+          return
+        }else{   
+          //Realiza el ataque
+          this.realizarAtaque(ataque.name);
+        }
         this.target = true;
-        
       }
 
     }

@@ -2,11 +2,12 @@ import { drawSprite } from "./views/Image.js";
 import { calcularDistancia, delay, generadorEnemigo } from "../utility/utility.js";
 import { espadaNormal } from "./Armas.js";
 import { drawText } from "./views/Text.js";
-import { app} from "../main.js";
+import { app } from "../main.js";
 import { drawMuerte } from "../screens/muerte.js";
+import { vidaItem } from "./Items.js";
 class Personaje {
 
-  constructor(nombre, tipo, vida, fuerza, velocidad,nivel) {
+  constructor(nombre, tipo, vida, fuerza, velocidad, nivel) {
     //carcteristicas
     this.nombre = nombre.toUpperCase();
     this.vida = vida;
@@ -15,16 +16,16 @@ class Personaje {
     this.velocidad = velocidad;
     this.rangoAtaque = 150;
     this.enemys = [];
-    this.nivel=nivel;
-    
+    this.nivel = nivel;
+
     //Habilidades
     this.ataques = [];
-    
+
     //Items
     this.inventario = [];
-    this.armas = {id:0,name:"Espada Normal",item:espadaNormal()};;
+    this.armas = { id: 0, name: "Espada Normal", item: espadaNormal() };;
     this.inventarioLen = 3;
-    
+
     //Esdado
     this.muerto = false;
 
@@ -43,23 +44,23 @@ class Personaje {
     this.frame = 0;
     this.animaciones = [];
     this.sprite = new Image();
-   
+
     this.animacionDefault = "parado";
     this.animacion = this.animaciones[this.animacionDefault];
 
     //nivel 
-    this.bajasCont=0;
-    this.vidabase=vida;
+    this.bajasCont = 0;
+    this.vidabase = vida;
   }
 
 
-  levelUp(){
+  levelUp() {
 
-   
+
     app.player.nivel++;
-    app.player.vida= app.player.vidabase+10;
-    app.player.vidabase=app.player.vida;
-    app.player.fuerza+=2;
+    app.player.vida = app.player.vidabase + 10;
+    app.player.vidabase = app.player.vida;
+    app.player.fuerza += 2;
   }
 
   atacar(enemigo) {
@@ -67,49 +68,58 @@ class Personaje {
   }
 
   recibirAtaque(ataqueDano) {
-      this.playSound(this.recibirAudio);
-      this.vida -= ataqueDano;
-      const elegirAnimacion=this.animacionDefault=== "parado"? "recibirR": "recibirL";
-      this.animacion= this.animaciones[elegirAnimacion];
-      
-      if (this.vida <= 0)
-          this.morir();
+    this.playSound(this.recibirAudio);
+    this.vida -= ataqueDano;
+    const elegirAnimacion = this.animacionDefault === "parado" ? "recibirR" : "recibirL";
+    this.animacion = this.animaciones[elegirAnimacion];
+
+    if (this.vida <= 0)
+      this.morir();
   }
 
   elegirArma(armaName) {
     this.armas = this.inventario.find(items => items.name === armaName);
   }
 
-  elegirAtaque(ataqueName){
+  elegirAtaque(ataqueName) {
     return this.ataques.find(items => items.name === ataqueName);
   }
 
   async realizarAtaque(ataqueName) {
-    if(this.frame % this.animacion.len === 0){
-    const ataque = this.elegirAtaque(ataqueName);
-    const powerUp = this.armas.item.powerUps.find(up=> up.enUso === true);
-    //Ejecuta Una Animacion
-    const elegirAnimacion=this.animacionDefault=== "parado"? ataque.animacionR: ataque.animacionL;
-    this.animacion= this.animaciones[elegirAnimacion];
+    if (this.frame % this.animacion.len === 0) {
+      const ataque = this.elegirAtaque(ataqueName);
+      if (ataque.usable) {
+        const powerUp = this.armas.item.powerUps.find(up => up.enUso === true);
+        //Ejecuta Una Animacion
+        const elegirAnimacion = this.animacionDefault === "parado" ? ataque.animacionR : ataque.animacionL;
+        this.animacion = this.animaciones[elegirAnimacion];
 
-    for(const enemy of this.enemys){
-      if(calcularDistancia(enemy.x,enemy.y,this.x,this.y) <= this.rangoAtaque && !enemy.muerto){
-        //Ejecuta un sonido
-        this.playSound(ataque.audio);
-        
-        //Calcula Dano
-        let totalDamge = (this.fuerza + ataque.fuerza) + (this.armas.item ? this.armas.item.usar(powerUp?.name) : 0);
-        //hacer dano a enemigo
-        enemy.recibirAtaque(totalDamge);
-        
-        //imprimir dano
-        drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`,{color:"#bc1e1e",x:enemy.x,y:(enemy.y - enemy.h/1.5),fontSize:30,roundRadius:20}).render()
+        for (const enemy of this.enemys) {
+          if (calcularDistancia(enemy.x, enemy.y, this.x, this.y) <= this.rangoAtaque && !enemy.muerto) {
+            //Ejecuta un sonido
+            this.playSound(ataque.audio);
+
+            //Calcula Dano
+            let totalDamge = (this.fuerza + ataque.fuerza) + (this.armas.item ? this.armas.item.usar(powerUp?.name) : 0);
+            //hacer dano a enemigo
+            enemy.recibirAtaque(totalDamge);
+
+            //imprimir dano
+            drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`, { color: "#bc1e1e", x: enemy.x, y: (enemy.y - enemy.h / 1.5), fontSize: 30, roundRadius: 20 }).render()
+          }
         }
       }
+      const atackIdex = this.ataques.findIndex(a=> a.name === ataque.name);
+      this.ataques[atackIdex].usable = false;
+      const atCD = setTimeout(() => {
+        this.ataques[atackIdex].usable = true;
+        clearTimeout(atCD);
+      },ataque.counDown * 1000);
     }
+
   }
 
-  acciones(){};
+  acciones() { };
 
   playSound(src, volume = 1) {
     this.sound.src = src;
@@ -119,22 +129,26 @@ class Personaje {
 
   morir() {
     this.muerto = true;
-    this.animacion =  this.animaciones["morir"];
-    if(this.tipo === "enemy"){
+    this.animacion = this.animaciones["morir"];
+    if (this.tipo === "enemy") {
       app.player.bajasCont++;
-      
-      if((app.player.bajasCont)== Math.round(app.player.nivel*2.2) ){
-       this.levelUp();
-       
+
+      if ((app.player.bajasCont) == Math.round(app.player.nivel * 2.2)) {
+        this.levelUp();
+
       }
       generadorEnemigo(app.width);
+      app.items.push(vidaItem(this.x, this.y));
+      if (!this.destroyed) {
+        const d = setTimeout(() => { this.destroyed = true; clearTimeout(d) }, 5000);
+      }
     }
-    if(this.tipo ==="player" && this.muerto){
+    if (this.tipo === "player" && this.muerto) {
       app.gameOver = true;
       app.turno = 0;
       const url = "/sounds/failure.mp3";
       app.player.playSound(url);
-      
+
     }
   }
 
@@ -147,25 +161,27 @@ class Personaje {
 
     //Si Esta Muerto usa la animacion de muerto pordefecto 
     this.animacionDefault = this.muerto ? "muerto" : this.animacionDefault;
-    
+
     //Si se termino la anicmacion selecciona una por defecto
-    this.animacion = (i === 0) ?this.animaciones[this.animacionDefault]: this.animacion;
+    this.animacion = (i === 0) ? this.animaciones[this.animacionDefault] : this.animacion;
     //Ajusta el tamnono a la escala se la animacion
     const scaleX = this.w * this.animacion.scale;
     const scaleY = this.h * this.animacion.scale;
 
     //Dibuja El Sprite
-    drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.size * i), sy: this.animacion.sy, sw: this.animacion.size, sh: this.animacion.size, x: (this.x - scaleX/ 2), y: (this.y -scaleY / 2) }).render()
+    drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.size * i), sy: this.animacion.sy, sw: this.animacion.size, sh: this.animacion.size, x: (this.x - scaleX / 2), y: (this.y - scaleY / 2) }).render()
     this.acciones();
-   
-    //Dibuja Vida
-    const style = {player: {color:"white",x: app.width*.11, y: app.height*.91, fontSize: 30, fontFamily: "PatrickHand", roundRadius:12,bgColor:'#0a0e1a' },
-                  enemy: {color:"#161616", x: this.x, y: this.y - this.h /2.5,style:"bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius:10}}
 
-    if(!this.muerto){
-        drawText(`${this.nombre}\n❤️${this.vida}  Lv.${this.nivel}`, style[this.tipo]).render();
+    //Dibuja Vida
+    const style = {
+      player: { color: "white", x: app.width * .11, y: app.height * .91, fontSize: 30, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
+      enemy: { color: "#161616", x: this.x, y: this.y - this.h / 2.5, style: "bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius: 10 }
     }
-      
+
+    if (!this.muerto) {
+      drawText(`${this.nombre}\n❤️${this.vida}  Lv.${this.nivel}`, style[this.tipo]).render();
+    }
+
     //Dibuja Inventario
     this.drawInevtario();
   }
@@ -175,25 +191,25 @@ class Personaje {
     if (this.tipo == "player") {
       //Recore todo el Inventario Y devuerve los Items
       const inventario = this.inventario.map((items, index) => {
-       
+
         //separa items selocionado de lo que no
-          if (this.armas.name === items.name && index < this.inventarioLen){
-              //que Powerup el arama tinen en uso
-              let PowerUP = items.item.powerUps?.find(powerUp=> powerUp.enUso === true).name;
-              return `${items.name} + ${PowerUP} 👈 `
-          }else {
-               //que Powerup el arama tinen en uso
-              let PowerUP = items.item.powerUps?.find(powerUp=> powerUp.enUso === true).name;
-              return `${items.name} + ${PowerUP}  `
-          }
+        if (this.armas.name === items.name && index < this.inventarioLen) {
+          //que Powerup el arama tinen en uso
+          let PowerUP = items.item.powerUps?.find(powerUp => powerUp.enUso === true).name;
+          return `${items.name} + ${PowerUP} 👈 `
+        } else {
+          //que Powerup el arama tinen en uso
+          let PowerUP = items.item.powerUps?.find(powerUp => powerUp.enUso === true).name;
+          return `${items.name} + ${PowerUP}  `
+        }
       }).join("\n");
 
       //Dibuja Inventario
-      drawText(" [ F ] Armas | [ R ] PowerUps  \n "+inventario, { color: "#d6ba72", x: app.width *.78, y: app.height *.05, fontSize: 30, roundRadius:15, bgColor:"#0a0e1aa0" }).render()
+      drawText(" [ F ] Armas | [ R ] PowerUps  \n " + inventario, { color: "#d6ba72", x: app.width * .78, y: app.height * .05, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1aa0" }).render()
       //Dibuja Opciones de ataques
-      drawText(" [ Q ] Ataque basico \n [ E ] Ataque Especial ", { color: "#ffffff", x: app.width *.83, y: app.height *.90, fontSize: 30, roundRadius:15,bgColor:"#0a0e1a" }).render()
+      drawText(" [ Q ] Ataque basico 500ms \n [ E ] Ataque Especial  2s ", { color: "#ffffff", x: app.width * .82, y: app.height * .90, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1a" }).render()
       //has muerto MSG
-      if(this.tipo === "player" && this.muerto){
+      if (this.tipo === "player" && this.muerto) {
         drawMuerte().render()
       }
     }

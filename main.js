@@ -24,6 +24,7 @@ const app = {
     },
     player:{},
     enemigos:[],
+    items:[]
 };
 
 
@@ -59,9 +60,21 @@ async function draw(){
         //limpia el lienzo
         app.clearCanvas();
         //Renderiza cada enemigo 
-        for(const enemy of app.enemigos){enemy.render()}
+        for(const enemy of app.enemigos){
+            if(!enemy.destroyed){
+                enemy.render()
+            }
+            
+        }
         //Renderiza El Jugadar
         app.player.render();
+
+        //render Items
+        for(const item of app.items){
+            if(!item.isDone)
+                item.render();
+        }
+
         //LLama al siguiente frame
         window.requestAnimationFrame(draw);
     }else{
