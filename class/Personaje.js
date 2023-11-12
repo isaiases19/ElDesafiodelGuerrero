@@ -49,6 +49,17 @@ class Personaje {
 
     //nivel 
     this.bajasCont=0;
+    this.vidabase=vida;
+  }
+
+
+  levelUp(){
+
+   
+    app.player.nivel++;
+    app.player.vida= app.player.vidabase+10;
+    app.player.vidabase=app.player.vida;
+    app.player.fuerza+=2;
   }
 
   atacar(enemigo) {
@@ -112,8 +123,8 @@ class Personaje {
     if(this.tipo === "enemy"){
       app.player.bajasCont++;
       
-      if((app.player.bajasCont)== Math.round(app.player.nivel*1.8) ){
-        app.player.nivel++;
+      if((app.player.bajasCont)== Math.round(app.player.nivel*2.2) ){
+       this.levelUp();
        
       }
       generadorEnemigo(app.width);
