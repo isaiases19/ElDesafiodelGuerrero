@@ -22,8 +22,8 @@ class Enemigo extends Personaje {
 
     //Habilidades
     this.ataques = [
-      { name: "Ataque Basico", fuerza,usable: true,counDown:.5, audio: "/sounds/punch-estocada.mp3", animacionR: "espada1R", animacionL: "espada1L" },
-      { name: "Ataque Especial", fuerza: (fuerza * 2),usable:true,counDown:3, audio: "/sounds/punch-corte-feroz.mp3", animacionR: "espada2R", animacionL: "espada2L" },
+      { name: "Ataque Basico", fuerza,usable: true,counDown:.1,count:.1, audio: "/sounds/punch-estocada.mp3", animacionR: "espada1R", animacionL: "espada1L" },
+      { name: "Ataque Especial", fuerza: (fuerza * 2),usable:true,counDown:2,count:2, audio: "/sounds/punch-corte-feroz.mp3", animacionR: "espada2R", animacionL: "espada2L" },
     ]
 
     //Items

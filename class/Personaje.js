@@ -110,11 +110,18 @@ class Personaje {
         }
       }
       const atackIdex = this.ataques.findIndex(a=> a.name === ataque.name);
+      if(ataque.usable){
+        const atCD = setInterval(() => {
+          this.ataques[atackIdex].count -=(1/1000);
+          if(ataque.count <= 0){
+            this.ataques[atackIdex].usable = true;
+            this.ataques[atackIdex].count = ataque.counDown;
+            clearInterval(atCD);
+          }
+        },1);
+      }
       this.ataques[atackIdex].usable = false;
-      const atCD = setTimeout(() => {
-        this.ataques[atackIdex].usable = true;
-        clearTimeout(atCD);
-      },ataque.counDown * 1000);
+      
     }
 
   }
@@ -207,7 +214,8 @@ class Personaje {
       //Dibuja Inventario
       drawText(" [ F ] Armas | [ R ] PowerUps  \n " + inventario, { color: "#d6ba72", x: app.width * .78, y: app.height * .05, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1aa0" }).render()
       //Dibuja Opciones de ataques
-      drawText(" [ Q ] Ataque basico 500ms \n [ E ] Ataque Especial  2s ", { color: "#ffffff", x: app.width * .82, y: app.height * .90, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1a" }).render()
+      const {c1,c2} = {c1:this.ataques[0].count,c2:this.ataques[1].count}
+      drawText(`[ Q ] Ataque basico ${c1 < 1 ? Math.floor(c1*1000)+"ms ":c1.toFixed(2)+"s "}\n[ E ] Ataque Especial ${c2 < 1 ? Math.floor(c2*1000)+"ms ":c2.toFixed(2)+"s "} `, { color: "#ffffff", x: app.width * .80, y: app.height * .90, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1a" }).render()
       //has muerto MSG
       if (this.tipo === "player" && this.muerto) {
         drawMuerte().render()
