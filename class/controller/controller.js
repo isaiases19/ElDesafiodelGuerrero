@@ -1,7 +1,4 @@
 import { app } from "../../main.js";
-import { drawPausa } from "../../screens/pausa.js";
-import { delay } from "../../utility/utility.js";
-
 class Controller{
     use(){
         let poweUpIndex;
