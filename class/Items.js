@@ -46,13 +46,18 @@ class Vida extends Items{
         super(x,y,32,16,16,64,"../img/tilemap_packed.png");
         this.name = "Vida";
         this.isDone = false;
-        this.give = Math.round(Math.random() + .3)
-        this.sy = this.give > .7 ? 32:16;
+        this.give = randomMinMax(3,10)/10;
+        this.sy = this.give < .5 ? 32:16;
     }
 
     action(){
-        app.player.vida +=  app.player.vidabase*this.give;
+        //calcula el total
+        const totalGive = app.player.vida + (app.player.vidabase*this.give);
+        ///Si se pasa de la vidaBase restale la diferencia 
+        app.player.vida =  totalGive <= app.player.vidabase ? totalGive: (totalGive - parseInt(-(app.player.vidabase -  totalGive)));
+        //avisa de que no se deve renderizar mas
         this.isDone =true;
+        //termana el siclo de vida de item
         this.done()
     }
 }
