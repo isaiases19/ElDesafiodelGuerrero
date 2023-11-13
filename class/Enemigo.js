@@ -10,7 +10,7 @@ class Enemigo extends Personaje {
     this.vida = vida;
     this.tipo = tipo;
     this.nombre = nombre;
-    this.fuerza = fuerza;
+    this.fuerza = fuerza * nivel;
     this.velocidad = velocidad;
     this.rango = 150;
     this.enemys = [app.player];
