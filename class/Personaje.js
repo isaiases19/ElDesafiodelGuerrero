@@ -55,7 +55,7 @@ class Personaje {
 
 
   levelUp() {
-
+    this.playSound("../sounds/leverup.mp3");
 
     app.player.nivel++;
     app.player.vida = app.player.vidabase + 10;

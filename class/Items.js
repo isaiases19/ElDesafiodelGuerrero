@@ -48,6 +48,7 @@ class Vida extends Items{
         this.isDone = false;
         this.give = randomMinMax(3,10)/10;
         this.sy = this.give < .5 ? 32:16;
+        this.sound = new Audio("../sounds/getVida.mp3");
     }
 
     action(){
@@ -55,6 +56,7 @@ class Vida extends Items{
         const totalGive = app.player.vida + (app.player.vidabase*this.give);
         ///Si se pasa de la vidaBase restale la diferencia 
         app.player.vida =  totalGive <= app.player.vidabase ? totalGive: (totalGive - parseInt(-(app.player.vidabase -  totalGive)));
+        this.sound.play();
         //avisa de que no se deve renderizar mas
         this.isDone =true;
         //termana el siclo de vida de item
