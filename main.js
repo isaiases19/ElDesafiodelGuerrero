@@ -7,29 +7,29 @@ const canvas = document.querySelector("canvas");
 const backGroundMuisc = new Audio("/sounds/background.mp3");
 
 const app = {
+    context: canvas.getContext("2d"),
     width: 1080,
     height: 1080,
-    context: canvas.getContext("2d"),
     turno: 0,
     timeOut: 5,
     gameOver: false,
     appStart: false,
     pause:false,
-    setup,
     keys: [],
     pantalla: {},
+    player:{},
+    enemigos:[],
+    items:[],
+    setup,
     clearCanvas: () => {
         canvas.width = app.width;
         canvas.height = app.height;
     },
-    player:{},
-    enemigos:[],
-    items:[]
 };
 
 
 async function main() {
-    const bgs = ["./img/backColi.jpg","./img/fondo.png","./img/arenaPx.jpg","./img/bulkhead.png "];
+    const bgs = ["./img/backColi.jpg","./img/fondo.png","./img/arenaPx.jpg","./img/bulkhead.png"];
     canvas.style.backgroundImage =`Url(${bgs[randomMinMax(1,bgs.length)-1]})`;
 
     app.clearCanvas();

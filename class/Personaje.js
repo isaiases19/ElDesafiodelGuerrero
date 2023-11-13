@@ -182,11 +182,11 @@ class Personaje {
     //Dibuja Vida
     const style = {
       player: { color: "white", x: app.width * .11, y: app.height * .91, fontSize: 30, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
-      enemy: { color: "#161616", x: this.x, y: this.y - this.h / 2.5, style: "bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius: 10 }
+      enemy: { color: "#ececec", x: this.x, y: this.y - this.h / 2.5, style: "bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius: 10 }
     }
 
     if (!this.muerto) {
-      drawText(`${this.nombre}\n❤️${this.vida}  Lv.${this.nivel}`, style[this.tipo]).render();
+      drawText(`${this.nombre}\n❤️${this.vida} Lv.${this.nivel}`, style[this.tipo]).render();
     }
 
     //Dibuja Inventario
