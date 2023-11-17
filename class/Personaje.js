@@ -5,6 +5,7 @@ import { drawText } from "./views/Text.js";
 import { app } from "../main.js";
 import { drawMuerte } from "../screens/muerte.js";
 import { vidaItem } from "./Items.js";
+import { drawRect } from "./views/Rect.js";
 class Personaje {
 
   constructor(nombre, tipo, vida, fuerza, velocidad, nivel) {
@@ -197,22 +198,18 @@ class Personaje {
     //Solo dibuja el Inventario del Jugador
     if (this.tipo == "player") {
       //Recore todo el Inventario Y devuerve los Items
-      const inventario = this.inventario.map((items, index) => {
+        const {x,y,sz,mg} = {x:300,y:app.height*.9,sz:64,mg:5}
+        this.inventario.forEach((item,index)=>{
+        const color = this.armas.name === item.name? "#3b7a3b":"#3a3a3a";
+        const PowerUP = item.item.powerUps?.find(powerUp => powerUp.enUso === true); 
+        const {sx,sy} = PowerUP.icon;
 
-        //separa items selocionado de lo que no
-        if (this.armas.name === items.name && index < this.inventarioLen) {
-          //que Powerup el arama tinen en uso
-          let PowerUP = items.item.powerUps?.find(powerUp => powerUp.enUso === true).name;
-          return `${items.name} + ${PowerUP} 👈 `
-        } else {
-          //que Powerup el arama tinen en uso
-          let PowerUP = items.item.powerUps?.find(powerUp => powerUp.enUso === true).name;
-          return `${items.name} + ${PowerUP}  `
-        }
-      }).join("\n");
+        drawRect(x + ((sz * index)+mg),y,sz - mg,sz + mg,{color,roundRadius:sz/8}).render();
+        drawSprite(item.item.icon,sz*.9,sz*.9,{x:(x + (sz * index))+ mg, y: y + mg,sx,sy,sh:16,sw:16}).render()
+     });   
 
       //Dibuja Inventario
-      drawText(" [ F ] Armas | [ R ] PowerUps  \n " + inventario, { color: "#d6ba72", x: app.width * .78, y: app.height * .05, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1aa0" }).render()
+      drawText(" [ F ] Armas | [ R ] PowerUps", { color: "#d6ba72", x: app.width * .78, y: app.height * .05, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1aa0" }).render()
       //Dibuja Opciones de ataques
       const {c1,c2} = {c1:this.ataques[0].count,c2:this.ataques[1].count}
       drawText(`[ Q ] Ataque basico ${c1 < 1 ? Math.floor(c1*1000)+"ms ":c1.toFixed(2)+"s "}\n[ E ] Ataque Especial ${c2 < 1 ? Math.floor(c2*1000)+"ms ":c2.toFixed(2)+"s "} `, { color: "#ffffff", x: app.width * .80, y: app.height * .90, fontSize: 30, roundRadius: 15, bgColor: "#0a0e1a" }).render()

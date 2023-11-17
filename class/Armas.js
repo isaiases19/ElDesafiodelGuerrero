@@ -2,7 +2,8 @@ class Espada{
     constructor(dano){
         this.dano = dano;
         this.powerUps = [];
-       
+        this.icon = new Image();
+        this.icon.src = "/img/tilemap_packed.png";
     }
 
     usar(powerUp = "none"){
@@ -19,14 +20,14 @@ class Espada{
 class EspadaFilosa extends Espada{
     constructor(){
         super(5)
-        this.powerUps = [{name:"filo",power:5,enUso:true},{name:"sinfilo",power:0,enUso:false}];
+        this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:64,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:48,sy:0}}];
     }
 }
 
 class EspadaNormal extends Espada{
     constructor(){
         super(5)
-        this.powerUps = [{name:"sinFilo",power:0,enUso:true}]
+        this.powerUps = [{name:"sinFilo",power:0,enUso:true,icon:{sx:48,sy:0}}]
     }
 }
 
