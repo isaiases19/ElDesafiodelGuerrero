@@ -28,7 +28,6 @@ class Guerrero extends Personaje {
     //Items
     this.inventario = [
       { id: 0, name: "Espada Normal", item: espadaNormal() },
-      { id: 1, name: "Espada Filosa", item: espadaFilosa() }
     ]
     this.armas = { id: 0, name: "Espada Normal", item: espadaNormal() };
 

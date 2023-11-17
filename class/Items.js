@@ -1,5 +1,6 @@
 import { app } from "../main.js";
 import { calcularDistancia, randomMinMax } from "../utility/utility.js";
+import { espadaFilosa } from "./Armas.js";
 
 class Items{
     constructor(x,y,sx,sy,size,scale,img){
@@ -64,10 +65,30 @@ class Vida extends Items{
     }
 }
 
+class EspadaItem extends Items{
+    constructor(x,y){
+        super(x,y,48,0,16,64,"../img/tilemap_packed.png");
+        this.sound = new Audio("../sounds/getVida.mp3");
+    }
+
+    action(){
+        app.player.inventario?.push({id:app.player.inventario.length,name:"Espada Filosa",item:espadaFilosa()});
+
+        this.sound.play();
+        //avisa de que no se deve renderizar mas
+        this.isDone =true;
+        //termana el siclo de vida de item
+        this.done()
+    }
+}
+
 
 function vidaItem(x,y){
     return new Vida(x,y)
 }
 
+function espadaItem(x,y){
+    return new EspadaItem(x,y);
+}
 
-export { vidaItem}
+export { vidaItem, espadaItem}

@@ -4,7 +4,7 @@ import { espadaNormal } from "./Armas.js";
 import { drawText } from "./views/Text.js";
 import { app } from "../main.js";
 import { drawMuerte } from "../screens/muerte.js";
-import { vidaItem } from "./Items.js";
+import { espadaItem, vidaItem } from "./Items.js";
 import { drawRect } from "./views/Rect.js";
 class Personaje {
 
@@ -147,6 +147,7 @@ class Personaje {
       }
       generadorEnemigo(app.width);
       app.items.push(vidaItem(this.x, this.y));
+      app.items.push(espadaItem(this.x + 20,this.y)) 
       if (!this.destroyed) {
         const d = setTimeout(() => { this.destroyed = true; clearTimeout(d) }, 5000);
       }
