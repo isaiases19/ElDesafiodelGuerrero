@@ -14,6 +14,7 @@ class Controller{
             {key:"KeyF", name:"Otra Arma",accion:()=>{
                     const newArma = app.player.inventario[(app.player.armas.id + 1)% app.player.inventario.length];
                     app.player.elegirArma(newArma.name);
+                    app.player.sprite.src=newArma.item.sprite
                 }
             },
             {key:"KeyR", name:"Cambio de PowerUp",accion:()=>{
