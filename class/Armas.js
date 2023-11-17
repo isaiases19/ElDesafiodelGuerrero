@@ -27,7 +27,7 @@ class EspadaFilosa extends Espada{
 class EspadaNormal extends Espada{
     constructor(){
         super(5)
-        this.powerUps = [{name:"sinFilo",power:0,enUso:true,icon:{sx:48,sy:0}}]
+        this.powerUps = [{name:"sinFilo",power:0,enUso:true,icon:{sx:96,sy:0}}]
     }
 }
 
