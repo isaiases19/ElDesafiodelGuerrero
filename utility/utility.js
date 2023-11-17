@@ -11,7 +11,10 @@ async function delay(ms) {
 }
 
 function generadorEnemigo(x = 750){
-    app.enemigos.push(new Enemigo("Troll", "enemy",randomMinMax(50,120) ,randomMinMax(3,7) ,randomMinMax(3,7),randomMinMax(3,10),{x}));
+
+  let level=randomMinMax(1,5);
+  
+    app.enemigos.push(new Enemigo("Troll", "enemy",level*30 ,level+2 ,level+2,level,{x}));
   }
 
   function calcularDistancia(x1, y1, x2, y2) {
