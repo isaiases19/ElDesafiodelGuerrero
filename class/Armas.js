@@ -20,7 +20,7 @@ class Espada{
 class EspadaFilosa extends Espada{
     constructor(){
         super(5)
-        this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:64,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:48,sy:0}}];
+        this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:48,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:64,sy:0}}];
     }
 }
 
