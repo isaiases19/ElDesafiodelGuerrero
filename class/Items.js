@@ -84,13 +84,15 @@ class EspadaItem extends Items{
     }
 
     action(){
-        app.player.inventario?.push({id:app.player.inventario.length,name:"Espada Filosa",item:espadaFilosa()});
+        const accion = app.player.inventario.length <= app.player.inventarioLen ?app.player.inventario?.push({id:app.player.inventario.length,name:"Espada Filosa",item:espadaFilosa()}):null;
 
-        this.sound.play();
-        //avisa de que no se deve renderizar mas
-        this.isDone =true;
-        //termana el siclo de vida de item
-        this.done()
+        if(accion !== null){
+            this.sound.play();
+            //avisa de que no se deve renderizar mas
+            this.isDone =true;
+            //termana el siclo de vida de item
+            this.done()
+        }
     }
 }
 
