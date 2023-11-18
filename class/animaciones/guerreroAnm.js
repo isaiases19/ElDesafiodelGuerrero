@@ -16,23 +16,21 @@ const animacionArma1 = {
 }
 
 const baseLongSword = {
-    golpear: { sx: 0, sy: 970, size: 64, len: 6, scale: .66 },
-    tajo: { sx: 0, sy: 1223, size: 64, len: 13, scale: .66 },
-    
+   
     
     recibirL:{sx:64,sy:67,size:64,margin:0,len:4,scale:.66},
     recibirR:{sx:64,sy:195,size:64,margin:0,len:4,scale:.66},
-    espada1L: { sx: 0, sy: 835, size: 64, margin: 0, len: 6, scale: .66 },
-    espada1R: { sx: 0, sy: 963, size: 64, margin: 0, len: 6, scale: .66 },
-    espada2R: { sx: 0, sy: 1921, size: 193, margin: 0, len: 6, scale: 2 },
+    espada1L: { sx: 0, sy: 3077, size: 193, margin: 0, len: 6, scale: 2 },
+    espada1R: { sx: 0, sy: 3461, size: 193, margin: 0, len: 6, scale: 2 },
+    espada2R: { sx: 0, sy: 1927, size: 193, margin: 0, len: 6, scale: 2 },
     espada2L: { sx: 0, sy: 1542, size: 193, margin: 0, len: 6, scale: 2 },
 
     muerto: { sx: 320, sy: 1280, size: 64, margin: 0, len: 1, scale: .66 },
     morir: { sx: 0, sy: 1280, size: 64, margin: 0, len: 6, scale: .66 },
-    caminarR: { sx: 0, sy: 704, size: 64, margin: 0, len: 8, scale: .66 },
-    caminarL: { sx: 0, sy: 576, size: 64, margin: 0, len: 8, scale: .66 },
-    parado: { sx: 0, sy: 704, size: 64, margin: 0, len: 1, scale: .66 },
-    paradoL: { sx: 0, sy: 576, size: 64, margin: 0, len: 1, scale: .66 }
+    caminarR: { sx: 0, sy: 710, size: 64, margin: 0, len: 8, scale: .66 },
+    caminarL: { sx: 0, sy: 582, size: 64, margin: 0, len: 8, scale: .66 },
+    parado: { sx: 0, sy: 710, size: 64, margin: 0, len: 1, scale: .66 },
+    paradoL: { sx: 0, sy: 582, size: 64, margin: 0, len: 1, scale: .66 }
 }
 
 export { animacionArma1, baseLongSword }
