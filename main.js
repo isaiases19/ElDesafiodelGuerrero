@@ -4,7 +4,6 @@ import { drawPausa } from "./screens/pausa.js";
 import { Guerrero } from "./class/Guerrero.js";
 
 const canvas = document.querySelector("canvas");
-const backGroundMuisc = new Audio("/sounds/background.mp3");
 
 const app = {
     context: canvas.getContext("2d"),
@@ -20,6 +19,7 @@ const app = {
     player:{},
     enemigos:[],
     items:[],
+    music:new Audio("/sounds/background.mp3"),
     setup,
     clearCanvas: () => {
         canvas.width = app.width;
@@ -38,16 +38,15 @@ async function main() {
 
 async function setup() {
     //configura musica
-    backGroundMuisc.loop = true;
-    backGroundMuisc.play()
+    app.music.loop = true;
+    app.music.play()
     const song = [0.16,1.55,3.19,3.45,4.51,5.50];
-    backGroundMuisc.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
-    backGroundMuisc.volume = 0.3;
+    app.music.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
+    app.music.volume = 0.3;
     //genera enemigo
     generadorEnemigo();
     //crea player
     app.player = new Guerrero("Conan","player",120,10,7,1);
-    app.player.use();
     
     await delay(1000);
     draw()
@@ -91,7 +90,9 @@ async function draw(){
 addEventListener("keydown", (key) => {
     app.keys.unshift(key.code);
     if(!app.pause){
-        app.player?.use()
+        app.player.controller?.use(key)
+    }else{
+        app.pantalla.lisien(key)
     }
 });
 

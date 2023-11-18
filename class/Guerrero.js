@@ -1,6 +1,6 @@
 import { Personaje } from "./Personaje.js";
-import { espadaNormal, espadaFilosa } from "./Armas.js";
-import { getcontroller } from "./controller/controller.js";
+import { espadaNormal } from "./Armas.js";
+import { Controller } from "./controller/controller.js";
 import { app } from "../main.js";
 import { animacionArma1 } from "./animaciones/guerreroAnm.js";
 class Guerrero extends Personaje {
@@ -48,11 +48,7 @@ class Guerrero extends Personaje {
     this.animacion = this.animaciones[this.animacionDefault];
 
     //Controller
-    this.controller = getcontroller();
-  }
-
-  use() {
-    this.controller.use()
+    this.controller = new Controller();
   }
 
 }

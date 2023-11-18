@@ -210,8 +210,8 @@ class Personaje {
 
     //Dibuja Inventario
     if (this.tipo === "player") {
-      this.drawInevtario(app.width * .2, app.height * .89, 80, 5);
-      this.drawPosiones(app.width * .5, app.height * .89, 80, 5);
+      this.drawInevtario(app.width * .2, app.height * .88, 70, 5);
+      this.drawPosiones(app.width * .65, app.height * .88, 70, 5);
     }
   }
 
@@ -229,7 +229,7 @@ class Personaje {
     });
 
     drawRect(x, y + (sz + mg * 2), (sz + mg * 2) * 3, 20, { color: "black", roundRadius: 3 }).render()
-    drawText(" ⚔️Armas", { fontSize: 12, x: x + sz / 3, y: y + (sz + mg * 4) }).render()
+    drawText("  ⚔️Armas", { fontSize: 12, x: x + sz / 3, y: y + (sz + mg * 4) }).render()
 
     //Dibuja Opciones de ataques
     const { c1, c2 } = { c1: this.ataques[0].count, c2: this.ataques[1].count };
@@ -248,11 +248,10 @@ class Personaje {
 
       drawRect(x + ((sz + mg * 2) * index), y, sz + (mg * 2), sz + mg, { color: "#0e1016e5", roundRadius: sz / 8 }).render();
       drawSprite(posion.sprite, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
-
     })
 
     drawRect(x, y + (sz + mg * 2), (sz + mg) * 2, 20, { color: "black", roundRadius: 3 }).render()
-    drawText(" 🧪Possiones", { fontSize: 12, x: x + sz / 2, y: y + (sz + mg * 4) }).render()
+    drawText(" 🧪Posiones", { fontSize: 12, x: x + sz / 2, y: y + (sz + mg * 4) }).render()
   }
 
 }

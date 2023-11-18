@@ -32,7 +32,7 @@ class Text{
         lines.forEach((line)=> {
             drawRect((this.x - this.textlength/3),(this.y - this.fontSize),this.textlength*.65 ,(this.fontSize*2),{color:this.bgColor,roundRadius:this.roundRadius}).render();
             this.ctx.fillStyle = this.color;
-            this.ctx.fillText(line.trim(), this.x, this.y);
+            this.ctx.fillText(line, this.x, this.y);
             this.y += this.fontSize*2.2;
             
         });

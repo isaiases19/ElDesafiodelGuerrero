@@ -10,15 +10,15 @@ class Pausa extends Screens {
   
         this.content =[
             drawRect(0,0,app.width,app.height,{color:"#0a0e1ab5"}),
-            drawText("PAUSED",{fontSize:50,fontFamily:"PatrickHand",roundRadius:25})
+            drawText("PAUSED",{fontSize:50,fontFamily:"PatrickHand",roundRadius:25}),
+            drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"})
         ];
         app.keys.unshift("");
-        this.bucle = setInterval(this.lisien,340);
+        
     }
 
-    lisien(){
-      
-        if(app.pause){
+    lisien(e){
+    
             let accions = [
                 {key:"Escape",name:"Start", accion:()=>{
                         app.pause = false;
@@ -26,14 +26,19 @@ class Pausa extends Screens {
                         draw()
                         clearInterval(this.bucle);
                     }
-                }
+                },
+                {key:"KeyM",name:"Music Mute",accion:()=>{
+                    app.music.muted = app.music.muted? false:true;
+                    app.keys.unshift("")
+                    app.context.clearRect(app.width/1.95,app.height/1.86,50,35);
+                    drawRect(app.width/1.95,app.height/1.86,50,35,{color:"#0a0e1ab5"})
+                    drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"}).render()
+                   
+                }}
             ]
-               
-            accions.find(ops=> ops.key === app.keys[0])?.accion()
-           
+       
+            accions.find(ops=> ops.key === e.code)?.accion(this)
         }
-    }
-   
 }
 
 function drawPausa(){

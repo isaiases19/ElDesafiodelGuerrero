@@ -10,24 +10,32 @@ async function delay(ms) {
   });
 }
 
-function generadorEnemigo(x = 750) {
+function calcularVelocidadPorNivel(nivel) {
+  return Math.max(3,nivel);
+}
+function calcularVidaPorNivel(nivel){
+  return Math.max(50,nivel * 20);
+}
 
-
-
+function generadorEnemigo(x = 0) {
   let level = 0;
   let etiqueta="";
+  //decide que nivel usar
   app.player.nivel > 10 ? level = randomMinMax(8, 11) : level = randomMinMax(1, 5);
   app.player.nivel > 10 ? etiqueta="Orc" : etiqueta="Troll";
-
-  x = randomMinMax(1,10) <= 5 ? app.width: -100; 
-  app.enemigos.push(new Enemigo(etiqueta, "enemy", level * 20, level + 0.5, level+0.5, level, { x }));
+  //Posicion al spawnear
+  x = x === 0 ? (randomMinMax(1,10) <= 5 ? app.width: -100): x;
+  //Caracteristicas
+  const {nombre, tipo, vida, fuerza, velocidad, nivel} = {
+    nombre:etiqueta, tipo: "enemy", vida: calcularVidaPorNivel(level), fuerza: level, velocidad: calcularVelocidadPorNivel(level), nivel: level
+  } 
+  //Crear Enemigo
+  app.enemigos.push(new Enemigo(nombre, tipo, vida, fuerza, velocidad, nivel, { x }));
 }
 
 function calcularDistancia(x1, y1, x2, y2) {
   return Math.hypot(x2 - x1, y2 - y1);
 }
-function calcularDistancia1D(x1, x2,) {
-  return Math.hypot(x2, x1);
-}
 
-export { randomMinMax, delay, generadorEnemigo, calcularDistancia, calcularDistancia1D }
+
+export { randomMinMax, delay, generadorEnemigo, calcularDistancia }

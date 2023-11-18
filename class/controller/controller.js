@@ -1,6 +1,6 @@
 import { app } from "../../main.js";
 class Controller{
-    use(){
+    use(key){
         let poweUpIndex;
         //Teclas * Aciones
         const acciones = [
@@ -51,15 +51,13 @@ class Controller{
     
             if(!app.pause && app.appStart && !app.player.muerto){
                 poweUpIndex = app.player.armas.item.powerUps.findIndex((powerUp)=> powerUp.enUso === true);
-                acciones.find(accion=> accion.key === app.keys[0])?.accion();
+                acciones.find(accion=> accion.key === key.code)?.accion();
             }
     }
 }
 
 
 
-function getcontroller(){
-    return new Controller();
-}
 
-export {getcontroller}
+
+export {Controller}
