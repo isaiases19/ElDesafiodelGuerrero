@@ -97,8 +97,8 @@ class Personaje {
 
         for (const enemy of this.enemys) {
           if (calcularDistancia(enemy.x, enemy.y, this.x, this.y) <= this.rangoAtaque && !enemy.muerto) {
-            //Ejecuta un sonido
-            this.playSound(ataque.audio);
+            // //Ejecuta un sonido
+            // this.playSound(ataque.audio);
 
             //Calcula Dano
             let totalDamge = (this.fuerza + ataque.fuerza) + (this.armas.item ? this.armas.item.usar(powerUp?.name) : 0);

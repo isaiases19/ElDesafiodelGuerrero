@@ -37,7 +37,7 @@ class Enemigo extends Personaje {
     this.h = 400;
 
     //Audio
-    this.recibirAudio = "/sounds/recibirTroll.mp3";
+    this.recibirAudio = "/sounds/recibe1.mp3";
 
     //Animacion
     this.animaciones = {
