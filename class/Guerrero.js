@@ -2,6 +2,7 @@ import { Personaje } from "./Personaje.js";
 import { espadaNormal, espadaFilosa } from "./Armas.js";
 import { getcontroller } from "./controller/controller.js";
 import { app } from "../main.js";
+import { animacionArma1 } from "./animaciones/guerreroAnm.js";
 class Guerrero extends Personaje {
 
   constructor(nombre, tipo, vida, fuerza, velocidad, nivel) {
@@ -42,22 +43,7 @@ class Guerrero extends Personaje {
     this.recibirAudio = "/sounds/recibirPlayer.mp3";
 
     //Animacion
-    this.animaciones = {
-      parado: { sx: 0, sy: 455, size: 64, len: 1, scale: .66 },
-      golpear: { sx: 0, sy: 970, size: 64, len: 6, scale: .66 },
-      recibirR: { sx: 0, sy: 200, size: 64, len: 7, scale: .66 },
-      recibirL: { sx: 0, sy: 72, size: 64, len: 7, scale: .66 },
-      espada2R: { sx: 0, sy: 968, size: 64, len: 6, scale: .66 },
-      espada1R: { sx: 0, sy: 457, size: 64, len: 8, scale: .66 },
-      tajo: { sx: 0, sy: 1223, size: 64, len: 13, scale: .66 },
-      morir: { sx: 0, sy: 1287, size: 64, len: 10, scale: .66 },
-      muerto: { sx: 323, sy: 1290, size: 64, len: 1, scale: .66 },
-      caminarR: { sx: 0, sy: 712, size: 64, len: 8, scale: .66 },
-      caminarL: { sx: 0, sy: 583, size: 64, len: 8, scale: .66 },
-      paradoL: { sx: 513, sy: 584, size: 64, len: 1, scale: .66 },
-      espada1L: { sx: 0, sy: 328, size: 64, len: 8, scale: .66 },
-      espada2L: { sx: 0, sy: 840, size: 64, len: 6, scale: .66 },
-    }
+    this.animaciones = animacionArma1;
     this.animacionDefault = "parado";
     this.animacion = this.animaciones[this.animacionDefault];
 

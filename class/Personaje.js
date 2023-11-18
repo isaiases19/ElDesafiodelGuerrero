@@ -213,7 +213,6 @@ class Personaje {
 
       //Dibuja Opciones de ataques
       const {c1,c2} = {c1:this.ataques[0].count,c2:this.ataques[1].count};
-      
       drawText(`[ Q ][ E ]`, { color: "#eba417", x: app.width * .91, y: app.height * .91, fontSize: 25, roundRadius: 15, bgColor: "#0a0e1a" }).render()
       drawText(`⌚${c1 < 1 ? Math.floor(c1*1000)+"ms ":c1.toFixed(2)+"s "} ${c2 < 1 ? Math.floor(c2*1000)+"ms ":c2.toFixed(2)+"s "} `, { color: "#ffffff", x: app.width * .91, y: app.height * .96, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
       //has muerto MSG

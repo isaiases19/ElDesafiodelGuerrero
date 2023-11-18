@@ -1,3 +1,5 @@
+import { animacionArma1, baseLongSword } from "./animaciones/guerreroAnm.js";
+
 class Espada{
     constructor(dano){
         this.dano = dano;
@@ -5,6 +7,7 @@ class Espada{
         this.icon = new Image();
         this.icon.src = "/img/tilemap_packed.png";
         this.sprite="";
+        this.animacion = animacionArma1;
 
     }
 
@@ -23,6 +26,7 @@ class EspadaFilosa extends Espada{
     constructor(){
         super(5)
         this.sprite="/img/baseLongSword.png";
+        this.animacion = baseLongSword;
         this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:48,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:64,sy:0}}];
     }
 }
