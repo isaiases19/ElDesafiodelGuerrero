@@ -40,7 +40,13 @@ class Controller{
             {key:"Escape",name:"Pause",accion:()=>{
                 app.pause? app.pause = false : app.pause = true;
                
-            }}
+            }},
+            {key:"Digit1",name:"posion1",accion:()=>{
+                app.player.posiones[0]?.use(0);
+            }},
+            {key:"Digit2",name:"posion2",accion:()=>{
+                app.player.posiones[1]?.use(1);
+            }},
         ];
     
             if(!app.pause && app.appStart && !app.player.muerto){

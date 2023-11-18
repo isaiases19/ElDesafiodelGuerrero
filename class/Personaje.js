@@ -24,7 +24,8 @@ class Personaje {
 
     //Items
     this.inventario = [];
-    this.armas = { id: 0, name: "Espada Normal", item: espadaNormal() };;
+    this.armas = { id: 0, name: "Espada Normal", item: espadaNormal() };
+    this.posiones = [];
     this.inventarioLen = 3;
 
     //Esdado
@@ -230,7 +231,16 @@ class Personaje {
         const color = this.armas.name === item.name? "#3b7a3bff":"#0a0e1aff";
         drawRect(x + ((sz+mg*2) * index),y+(sz+mg),sz + mg,mg,{color,roundRadius:sz/8}).render();
         drawSprite(item.item.icon,sz*.9,sz*.9,{x:(x + ((sz+mg*2) * index))+ mg, y: y + mg,sx,sy,sh:16,sw:16}).render()
-     });   
+     }); 
+     
+     this.posiones.forEach((posion,index)=>{
+        const {x,y,sz,mg} = {x:app.width*.5,y:app.height*.89,sz:80,mg:5};
+        const {sx,sy} = posion;
+
+        drawRect(x + ((sz+mg*2) * index),y,sz + mg,sz + mg,{color:"#0e1016e5",roundRadius:sz/8}).render();
+        drawSprite(posion.sprite,sz*.9,sz*.9,{x:(x + ((sz+mg*2) * index))+ mg, y: y + mg,sx,sy,sh:16,sw:16}).render()
+
+     })
 
       //Dibuja Opciones de ataques
       const {c1,c2} = {c1:this.ataques[0].count,c2:this.ataques[1].count};
