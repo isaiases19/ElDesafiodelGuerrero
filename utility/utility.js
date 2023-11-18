@@ -14,7 +14,7 @@ function generadorEnemigo(x = 750){
 
   let level=randomMinMax(1,5);
   
-    app.enemigos.push(new Enemigo("Troll", "enemy",level*30 ,level+2 ,level+2,level,{x}));
+    app.enemigos.push(new Enemigo("Troll", "enemy",level*20 ,level+1 ,level+1,level,{x}));
   }
 
   function calcularDistancia(x1, y1, x2, y2) {
