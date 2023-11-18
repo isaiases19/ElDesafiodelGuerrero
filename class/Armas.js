@@ -8,7 +8,7 @@ class Espada{
         this.icon.src = "/img/tilemap_packed.png";
         this.sprite="";
         this.animacion = animacionArma1;
-
+        this.rango = 150;
     }
 
     usar(powerUp = "none"){
@@ -27,6 +27,7 @@ class EspadaFilosa extends Espada{
         super(5)
         this.sprite="/img/baseLongSword.png";
         this.animacion = baseLongSword;
+        this.rango = 200;
         this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:48,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:64,sy:0}}];
     }
 }

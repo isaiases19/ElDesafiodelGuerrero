@@ -1,5 +1,5 @@
 import { drawSprite } from "./views/Image.js";
-import { calcularDistancia, delay, generadorEnemigo } from "../utility/utility.js";
+import { calcularDistancia, delay, generadorEnemigo, randomMinMax } from "../utility/utility.js";
 import { espadaNormal } from "./Armas.js";
 import { drawText } from "./views/Text.js";
 import { app } from "../main.js";
@@ -146,8 +146,10 @@ class Personaje {
 
       }
       generadorEnemigo(app.width);
-      app.items.push(vidaItem(this.x, this.y));
-      app.items.push(espadaItem(this.x + 20,this.y)) 
+      
+    if(randomMinMax(1,5)==2){
+     randomMinMax(1,10)<5? app.items.push(vidaItem(this.x, this.y)): app.items.push(espadaItem(this.x + 20,this.y)) }
+
       if (!this.destroyed) {
         const d = setTimeout(() => { this.destroyed = true; clearTimeout(d) }, 5000);
       }
