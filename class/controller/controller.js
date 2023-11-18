@@ -18,6 +18,15 @@ class Controller{
                     app.player.sprite.src=newArma.item.sprite
                     app.player.animaciones = newArma.item.animacion;
                     app.player.rangoAtaque= newArma.item.rango;
+
+                    //arama velocidad
+                    let [Pataque1,Pataque2] = app.player.ataques;
+                    let {ataque1,ataque2} = newArma.item.velicidad;
+                        Pataque1.counDown = ataque1;
+                        Pataque1.count = ataque1;
+                        Pataque2.counDown = ataque2;
+                        Pataque2.count = ataque2;
+                        
                 }
             },
             {key:"KeyR", name:"Cambio de PowerUp",accion:()=>{

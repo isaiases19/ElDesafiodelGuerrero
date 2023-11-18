@@ -9,6 +9,7 @@ class Espada{
         this.sprite="";
         this.animacion = animacionArma1;
         this.rango = 150;
+        this.velicidad = {ataque1:.1/*100ms*/,ataque2:5};
     }
 
     usar(powerUp = "none"){
@@ -26,7 +27,7 @@ class EspadaFilosa extends Espada{
     constructor(){
         super(5)
 
-        
+        this.velicidad = {ataque1:.6/*100ms*/,ataque2:8.5};
         this.animacion = baseLongSword;
         this.rango = 200;
         this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:48,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:64,sy:0}}];
