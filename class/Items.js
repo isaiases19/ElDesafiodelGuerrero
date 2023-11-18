@@ -65,7 +65,8 @@ class Vida extends Items{
     }
 
     action(){
-        const accion = app.player.posiones.length < 3 ? app.player.posiones.push(new Posion(this.give,this.sx,this.sy)):null;
+        console.log(app.player.posiones.length);
+        const accion = app.player.posiones.length < 2 ? app.player.posiones.push(new Posion(this.give,this.sx,this.sy)):null;
 
         if(accion !== null){
             this.sound.play();
@@ -84,14 +85,19 @@ class EspadaItem extends Items{
     }
 
     action(){
-        const accion = app.player.inventario.length <= app.player.inventarioLen ?app.player.inventario?.push({id:app.player.inventario.length,name:"Espada Filosa",item:espadaFilosa()}):null;
-
-        if(accion !== null){
-            this.sound.play();
-            //avisa de que no se deve renderizar mas
-            this.isDone =true;
-            //termana el siclo de vida de item
-            this.done()
+        const espada = {id:app.player.inventario.length,name:"Espada Filosa",item:espadaFilosa()};
+        
+        const haved = app.player.inventario.filter(items=> items.name === espada.name);
+        if(haved.length === 0){   
+          const accion = app.player.inventario.length < app.player.inventarioLen ? app.player.inventario.push(espada):null;
+        
+            if(accion !== null){
+                this.sound.play();
+                //avisa de que no se deve renderizar mas
+                this.isDone =true;
+                //termana el siclo de vida de item
+                this.done()
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ class Posion{
            //calcula el total
            const totalGive = app.player.vida + (app.player.vidabase*this.give);
            ///Si se pasa de la vidaBase restale la diferencia 
-           app.player.vida =  totalGive <= app.player.vidabase ? totalGive: (totalGive - parseInt(-(app.player.vidabase -  totalGive)));
+           app.player.vida =  totalGive <= app.player.vidabase ? totalGive: (totalGive - (totalGive % app.player.vidabase));
         //delete cuando se use
            app.player.posiones.splice(id,1);
     }

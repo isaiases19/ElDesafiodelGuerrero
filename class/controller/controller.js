@@ -41,10 +41,10 @@ class Controller{
                 app.pause? app.pause = false : app.pause = true;
                
             }},
-            {key:"Digit1",name:"posion1",accion:()=>{
+            {key:"KeyG",name:"posion1",accion:()=>{
                 app.player.posiones[0]?.use(0);
             }},
-            {key:"Digit2",name:"posion2",accion:()=>{
+            {key:"KeyH",name:"posion2",accion:()=>{
                 app.player.posiones[1]?.use(1);
             }},
         ];

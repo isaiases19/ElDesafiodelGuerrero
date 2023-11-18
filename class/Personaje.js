@@ -113,19 +113,19 @@ class Personaje {
           }
         }
       }
-      const atackIdex = this.ataques.findIndex(a=> a.name === ataque.name);
-      if(ataque.usable){
+      const atackIdex = this.ataques.findIndex(a => a.name === ataque.name);
+      if (ataque.usable) {
         const atCD = setInterval(() => {
-          this.ataques[atackIdex].count -=(10/1000);
-          if(ataque.count <= 0){
+          this.ataques[atackIdex].count -= (10 / 1000);
+          if (ataque.count <= 0) {
             this.ataques[atackIdex].usable = true;
             this.ataques[atackIdex].count = ataque.counDown;
             clearInterval(atCD);
           }
-        },1);
+        }, 1);
       }
       this.ataques[atackIdex].usable = false;
-      
+
     }
 
   }
@@ -149,9 +149,10 @@ class Personaje {
 
       }
       generadorEnemigo(app.width);
-      
-    if(randomMinMax(1,5)==2){
-     randomMinMax(1,10)<5? app.items.push(vidaItem(this.x, this.y)): app.items.push(espadaItem(this.x + 20,this.y)) }
+
+      if (randomMinMax(1, 5) == 2) {
+        randomMinMax(1, 10) < 5 ? app.items.push(vidaItem(this.x, this.y)) : app.items.push(espadaItem(this.x + 20, this.y))
+      }
 
       if (!this.destroyed) {
         const d = setTimeout(() => { this.destroyed = true; clearTimeout(d) }, 5000);
@@ -169,19 +170,13 @@ class Personaje {
   render() {
 
 
-    if(this.tipo==="player"){
-      
-      if(this.armas.name=="Espada Filosa"){
-      this.nivel>4?this.sprite.src="/img/level5sword.png": this.sprite.src="/img/baseLongSword.png";
-      }else{
+    if (this.tipo === "player") {
 
-        this.nivel>4?this.sprite.src="/img/level5Daga.png": this.sprite.src="/img/Base.png";
-
-
+      if (this.armas.name == "Espada Filosa") {
+        this.nivel > 4 ? this.sprite.src = "/img/level5sword.png" : this.sprite.src = "/img/baseLongSword.png";
+      } else {
+        this.nivel > 4 ? this.sprite.src = "/img/level5Daga.png" : this.sprite.src = "/img/Base.png";
       }
-       
-
-
     }
 
     //Cambio de Frame
@@ -214,43 +209,51 @@ class Personaje {
     }
 
     //Dibuja Inventario
-    this.drawInevtario();
-  }
-
-  drawInevtario() {
-    //Solo dibuja el Inventario del Jugador
-    if (this.tipo == "player") {
-      //Recore todo el Inventario Y devuerve los Items
-        const {x,y,sz,mg} = {x:app.width*.2,y:app.height*.89,sz:80,mg:5}
-        this.inventario.forEach((item,index)=>{
-        const PowerUP = item.item.powerUps?.find(powerUp => powerUp.enUso === true); 
-        const {sx,sy} = PowerUP.icon;
-        
-        
-        drawRect(x + ((sz+mg*2) * index),y,sz + mg,sz + mg,{color:"#0e1016e5",roundRadius:sz/8}).render();
-        const color = this.armas.name === item.name? "#3b7a3bff":"#0a0e1aff";
-        drawRect(x + ((sz+mg*2) * index),y+(sz+mg),sz + mg,mg,{color,roundRadius:sz/8}).render();
-        drawSprite(item.item.icon,sz*.9,sz*.9,{x:(x + ((sz+mg*2) * index))+ mg, y: y + mg,sx,sy,sh:16,sw:16}).render()
-     }); 
-     
-     this.posiones.forEach((posion,index)=>{
-        const {x,y,sz,mg} = {x:app.width*.5,y:app.height*.89,sz:80,mg:5};
-        const {sx,sy} = posion;
-
-        drawRect(x + ((sz+mg*2) * index),y,sz + mg,sz + mg,{color:"#0e1016e5",roundRadius:sz/8}).render();
-        drawSprite(posion.sprite,sz*.9,sz*.9,{x:(x + ((sz+mg*2) * index))+ mg, y: y + mg,sx,sy,sh:16,sw:16}).render()
-
-     })
-
-      //Dibuja Opciones de ataques
-      const {c1,c2} = {c1:this.ataques[0].count,c2:this.ataques[1].count};
-      drawText(`[ Q ][ E ]`, { color: "#eba417", x: app.width * .91, y: app.height * .91, fontSize: 25, roundRadius: 15, bgColor: "#0a0e1a" }).render()
-      drawText(`⌚${c1 < 1 ? Math.floor(c1*1000)+"ms ":c1.toFixed(2)+"s "} ${c2 < 1 ? Math.floor(c2*1000)+"ms ":c2.toFixed(2)+"s "} `, { color: "#ffffff", x: app.width * .91, y: app.height * .96, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
-      //has muerto MSG
-      if (this.tipo === "player" && this.muerto) {
-        drawMuerte().render()
-      }
+    if (this.tipo === "player") {
+      this.drawInevtario(app.width * .2, app.height * .89, 80, 5);
+      this.drawPosiones(app.width * .5, app.height * .89, 80, 5);
     }
   }
+
+  drawInevtario(x, y, sz, mg) {
+
+    this.inventario.forEach((item, index) => {
+      const PowerUP = item.item.powerUps?.find(powerUp => powerUp.enUso === true);
+      const { sx, sy } = PowerUP.icon;
+
+
+      drawRect(x + ((sz + mg * 2) * index), y, sz + mg, sz + mg, { color: "#0e1016e5", roundRadius: sz / 8 }).render();
+      const color = this.armas.name === item.name ? "#3b7a3bff" : "#0a0e1aff";
+      drawRect(x + ((sz + mg * 2) * index), y + (sz + mg), sz + mg, mg, { color, roundRadius: sz / 8 }).render();
+      drawSprite(item.item.icon, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
+    });
+
+    drawRect(x, y + (sz + mg * 2), (sz + mg * 2) * 3, 20, { color: "black", roundRadius: 3 }).render()
+    drawText(" ⚔️Armas", { fontSize: 12, x: x + sz / 3, y: y + (sz + mg * 4) }).render()
+
+    //Dibuja Opciones de ataques
+    const { c1, c2 } = { c1: this.ataques[0].count, c2: this.ataques[1].count };
+    drawText(`[ Q ][ E ]`, { color: "#eba417", x: app.width * .91, y: app.height * .91, fontSize: 25, roundRadius: 15, bgColor: "#0a0e1a" }).render()
+    drawText(`⌚${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x: app.width * .91, y: app.height * .96, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
+    //has muerto MSG
+    if (this.tipo === "player" && this.muerto) {
+      drawMuerte().render()
+    }
+
+  }
+
+  drawPosiones(x, y, sz, mg) {
+    this.posiones.forEach((posion, index) => {
+      const { sx, sy } = posion;
+
+      drawRect(x + ((sz + mg * 2) * index), y, sz + (mg * 2), sz + mg, { color: "#0e1016e5", roundRadius: sz / 8 }).render();
+      drawSprite(posion.sprite, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
+
+    })
+
+    drawRect(x, y + (sz + mg * 2), (sz + mg) * 2, 20, { color: "black", roundRadius: 3 }).render()
+    drawText(" 🧪Possiones", { fontSize: 12, x: x + sz / 2, y: y + (sz + mg * 4) }).render()
+  }
+
 }
 export { Personaje };
