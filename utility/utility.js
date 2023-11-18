@@ -15,9 +15,12 @@ function generadorEnemigo(x = 750) {
 
 
   let level = 0;
+  let etiqueta="";
   app.player.nivel > 10 ? level = randomMinMax(8, 11) : level = randomMinMax(1, 5);
+  app.player.nivel > 10 ? etiqueta="Orc" : etiqueta="Troll";
+
   x = randomMinMax(1,10) <= 5 ? app.width: -100; 
-  app.enemigos.push(new Enemigo("Troll", "enemy", level * 20, level + 0.5, level+0.5, level, { x }));
+  app.enemigos.push(new Enemigo(etiqueta, "enemy", level * 20, level + 0.5, level+0.5, level, { x }));
 }
 
 function calcularDistancia(x1, y1, x2, y2) {
