@@ -1,5 +1,5 @@
 import { animacionArma1, baseLongSword } from "./animaciones/guerreroAnm.js";
-
+import { app } from "../main.js";
 class Espada{
     constructor(dano){
         this.dano = dano;
@@ -25,7 +25,8 @@ class Espada{
 class EspadaFilosa extends Espada{
     constructor(){
         super(5)
-        this.sprite="/img/baseLongSword.png";
+
+        
         this.animacion = baseLongSword;
         this.rango = 200;
         this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:48,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:64,sy:0}}];
@@ -35,7 +36,7 @@ class EspadaFilosa extends Espada{
 class EspadaNormal extends Espada{
     constructor(){
         super(5)
-        this.sprite="/img/Base.png";
+        app.player.nivel>4?this.sprite="/img/level5daga.png": this.sprite="/img/Base.png";
         this.powerUps = [{name:"sinFilo",power:0,enUso:true,icon:{sx:96,sy:0}}]
     }
 }

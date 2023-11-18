@@ -62,6 +62,8 @@ class Personaje {
     app.player.vida = app.player.vidabase + 10;
     app.player.vidabase = app.player.vida;
     app.player.fuerza += 2;
+
+
   }
 
   atacar(enemigo) {
@@ -164,6 +166,23 @@ class Personaje {
   }
 
   render() {
+
+
+    if(this.tipo==="player"){
+      
+      if(this.armas.name=="Espada Filosa"){
+      this.nivel>4?this.armas.item.sprite="/img/level5sword.png": this.armas.item.sprite="/img/baseLongSword.png";
+      }else{
+
+        this.nivel>4?this.armas.item.sprite="/img/level5Daga.png": this.armas.item.sprite="/img/Base.png";
+
+
+      }
+       
+
+
+    }
+
     //Cambio de Frame
     this.frame++;
 
