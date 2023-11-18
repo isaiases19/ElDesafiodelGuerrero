@@ -21,8 +21,8 @@ class Guerrero extends Personaje {
 
     //Habilidades 
     this.ataques = [
-      { name: "Ataque Basico", fuerza,usable: true,counDown:.1,count:.1, audio: "/sounds/punch-estocada.mp3", animacionR: "espada1R", animacionL: "espada1L" },
-      { name: "Ataque Especial", fuerza: (fuerza * 2),usable:true,counDown:5,count:5,audio: "/sounds/punch-corte-feroz.mp3", animacionR: "espada2R", animacionL: "espada2L" },
+      { name: "Ataque Basico", fuerza,usable: true,counDown:.1,count:.1, audio: "/sounds/recibe2.mp3", animacionR: "espada1R", animacionL: "espada1L" },
+      { name: "Ataque Especial", fuerza: (fuerza * 2),usable:true,counDown:5,count:5,audio: "/sounds/resibe1.mp3", animacionR: "espada2R", animacionL: "espada2L" },
 
     ]
 
@@ -40,7 +40,7 @@ class Guerrero extends Personaje {
 
     //Audios
     //Audio
-    this.recibirAudio = "/sounds/recibirPlayer.mp3";
+    this.recibirAudio = "/sounds/recibe1.mp3";
 
     //Animacion
     this.animaciones = animacionArma1;
