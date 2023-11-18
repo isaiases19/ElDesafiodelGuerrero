@@ -57,7 +57,7 @@ class Enemigo extends Personaje {
     this.sprites=["/img/trollbase.png","/img/troll.png","/img/Orc.png"];
 
     this.sprite.src = this.nivel<=3 ? this.sprites[0]:this.sprites[1];
-    this.sprite.src = this.nivel>9 ? this.sprites[2]:this.sprites[1];
+    this.sprite.src = this.nivel>9 ? this.sprites[2]:this.sprite.src;
     this.animacionDefault = "parado";
     this.animacion = this.animaciones[this.animacionDefault];
   }
