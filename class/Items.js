@@ -12,22 +12,32 @@ class Items{
         this.sy = sy;
         this.size = size;
         this.scale =scale;
-
+        this.isDone = false;
         //Caracteristica
         this.rango = 50;
         //image
         this.sprite = new Image();
         this.sprite.src = img;
 
+        //coutn down
+        this.cout = 0;
         //bucle
-        this.bucle = setInterval(()=>{this.update()},500);
+        this.bucle = setInterval(()=>{this.update()},340);
     }
 
     action(){}
 
     update(){
+        this.cout += 340;
         if(calcularDistancia(this.x,this.y,app.player.x,app.player.y) <= this.rango){
             this.action()
+        }
+
+        if(this.cout > (340*15)){
+             //avisa de que no se deve renderizar mas
+            this.isDone =true;
+            //termana el siclo de vida de item
+            this.done()
         }
         
     }
