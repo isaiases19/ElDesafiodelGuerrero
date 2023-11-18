@@ -1,6 +1,7 @@
 import { app } from "../main.js";
 import { calcularDistancia, randomMinMax } from "../utility/utility.js";
 import { espadaFilosa } from "./Armas.js";
+import { Posion } from "./posion.js";
 
 class Items{
     constructor(x,y,sx,sy,size,scale,img){
@@ -59,19 +60,20 @@ class Vida extends Items{
         this.isDone = false;
         this.give = randomMinMax(3,10)/10;
         this.sy = this.give < .5 ? 32:16;
+        this.sx = 32;
         this.sound = new Audio("../sounds/getVida.mp3");
     }
 
     action(){
-        //calcula el total
-        const totalGive = app.player.vida + (app.player.vidabase*this.give);
-        ///Si se pasa de la vidaBase restale la diferencia 
-        app.player.vida =  totalGive <= app.player.vidabase ? totalGive: (totalGive - parseInt(-(app.player.vidabase -  totalGive)));
-        this.sound.play();
-        //avisa de que no se deve renderizar mas
-        this.isDone =true;
-        //termana el siclo de vida de item
-        this.done()
+        const accion = app.player.posiones.length < 3 ? app.player.posiones.push(new Posion(this.give,this.sx,this.sy)):null;
+
+        if(accion !== null){
+            this.sound.play();
+            //avisa de que no se deve renderizar mas
+            this.isDone =true;
+            //termana el siclo de vida de item
+            this.done()
+        }
     }
 }
 
