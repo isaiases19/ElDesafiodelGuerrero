@@ -113,7 +113,7 @@ class Personaje {
       const atackIdex = this.ataques.findIndex(a=> a.name === ataque.name);
       if(ataque.usable){
         const atCD = setInterval(() => {
-          this.ataques[atackIdex].count -=(1/1000);
+          this.ataques[atackIdex].count -=(10/1000);
           if(ataque.count <= 0){
             this.ataques[atackIdex].usable = true;
             this.ataques[atackIdex].count = ataque.counDown;
