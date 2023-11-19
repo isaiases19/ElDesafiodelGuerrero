@@ -227,7 +227,7 @@ class Personaje {
       const { sx, sy } = PowerUP.icon;
 
 
-      drawRect(x + ((sz + mg * 2) * index), y, sz + mg, sz + mg, { color: "#0e1016e5", roundRadius: sz / 8 }).render();
+      drawRect(x + ((sz + mg * 2) * index), y, sz + mg, sz + mg, { color: "#0e1016b0", roundRadius: sz / 8 }).render();
       const color = this.armas.name === item.name ? "#3b7a3bff" : "#0a0e1aff";
       drawRect(x + ((sz + mg * 2) * index), y + (sz + mg), sz + mg, mg, { color, roundRadius: sz / 8 }).render();
       drawSprite(item.item.icon, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()

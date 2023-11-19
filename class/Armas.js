@@ -27,7 +27,7 @@ class EspadaFilosa extends Espada{
     constructor(){
         super(8)
 
-        this.velicidad = {ataque1:.6/*100ms*/,ataque2:8.5};
+        this.velicidad = {ataque1:.6/*600ms*/,ataque2:8.5/*8.5s*/};
         this.animacion = baseLongSword;
         this.rango = 200;
         this.powerUps = [{name:"filo",power:5,enUso:true,icon:{sx:48,sy:0}},{name:"sinfilo",power:0,enUso:false,icon:{sx:64,sy:0}}];
