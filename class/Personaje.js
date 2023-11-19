@@ -148,7 +148,7 @@ class Personaje {
         this.levelUp();
 
       }
-      generadorEnemigo(app.width);
+      generadorEnemigo(0);
 
       if (randomMinMax(1, 5) == 2) {
         randomMinMax(1, 10) < 5 ? app.items.push(vidaItem(this.x, this.y)) : app.items.push(espadaItem(this.x + 20, this.y))
