@@ -242,7 +242,8 @@ class Personaje {
     drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x: app.width * .89, y: app.height * .975, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
     //has muerto MSG
     if (this.tipo === "player" && this.muerto) {
-      drawMuerte().render()
+      app.pantalla =  drawMuerte();
+      app.pantalla.render();
     }
 
   }
