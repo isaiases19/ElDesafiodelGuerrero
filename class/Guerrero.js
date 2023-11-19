@@ -1,8 +1,9 @@
 import { Personaje } from "./Personaje.js";
-import { espadaNormal } from "./Armas.js";
+import { espadaFilosa, espadaNormal } from "./Armas.js";
 import { Controller } from "./controller/controller.js";
 import { app } from "../main.js";
 import { animacionArma1 } from "./animaciones/guerreroAnm.js";
+import { Posion } from "./posion.js";
 class Guerrero extends Personaje {
 
   constructor(nombre, tipo, vida, fuerza, velocidad, nivel) {
@@ -29,9 +30,11 @@ class Guerrero extends Personaje {
     this.inventarioLen = 3;
     this.inventario = [
       { id: 0, name: "Espada Normal", item: espadaNormal() },
+      {id:1,name:"Espada Filosa",item: espadaFilosa()},
+      {id:1,name:"Espada Filosas",item: espadaFilosa()}
     ]
     this.armas = { id: 0, name: "Espada Normal", item: espadaNormal() };
-    this.posiones = [];
+    this.posiones = [new Posion(120,48,32),new Posion(120,48,32)];
     //Transfrom
     this.x = 330;
     this.y = 830;
