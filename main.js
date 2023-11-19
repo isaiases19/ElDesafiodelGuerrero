@@ -2,6 +2,7 @@ import { delay, generadorEnemigo, randomMinMax } from "./utility/utility.js";
 import { drawInicio } from "./screens/Inicio.js";
 import { drawPausa } from "./screens/pausa.js";
 import { Guerrero } from "./class/Guerrero.js";
+import { drawRect } from "./class/views/Rect.js";
 
 const canvas = document.querySelector("canvas");
 
@@ -79,6 +80,11 @@ async function draw(){
                 item.render();
         }
 
+        //Gradient para que todo tenga el mismo colorAmbient
+        var grd=app.context.createRadialGradient(75,50,5,90,60,100);
+        grd.addColorStop(0,"#4d0e5a25");
+        grd.addColorStop(1,"#0c0d4625");
+        drawRect(0,0,app.width,app.height,{color:grd}).render()
         //LLama al siguiente frame
         window.requestAnimationFrame(draw);
     }else{
