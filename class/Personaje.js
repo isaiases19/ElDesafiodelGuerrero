@@ -177,7 +177,7 @@ class Personaje {
         for(let lv of levels){
           
           this.sprite.src = (this.nivel >= lv) ? `/img/Level${lv}${arma}.png`: `/img/base${arma}.png`;
-          if(lv >= this.nivel){
+          if(this.nivel >= lv){
             break;
           }
         }
