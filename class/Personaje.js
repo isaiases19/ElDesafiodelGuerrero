@@ -221,7 +221,7 @@ class Personaje {
 
     //Dibuja Vida
     const style = {
-      player: { color: "white", x: app.width * .1, y: app.height * .9, fontSize: 25, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
+      player: { color: "white", x: app.width * .085, y: app.height * .92, fontSize: 25, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
       enemy: { color: "#ececec", x: this.x, y: this.y - this.h / 2.5, style: "bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius: 10 }
     }
 
@@ -231,8 +231,8 @@ class Personaje {
 
     //Dibuja Inventario
     if (this.tipo === "player") {
-      this.drawInevtario(app.width * .2, app.height * .88, 70, 5);
-      this.drawPosiones(app.width * .60, app.height * .88, 70, 5);
+      this.drawInevtario(app.width * .2, app.height * .9, 70, 5);
+      this.drawPosiones(app.width * .425, app.height * .9, 70, 5);
     }
   }
 
@@ -249,13 +249,13 @@ class Personaje {
       drawSprite(item.item.icon, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
     });
 
-    drawRect(x, y + (sz + mg * 2), (sz + mg * 2) * 3, 20, { color: "black", roundRadius: 6 }).render()
-    drawText("  ⚔️Armas", { fontSize: 12, x: x + sz / 3, y: y + (sz + mg * 4) }).render()
+    drawRect(x, y + (sz + mg * 2), (sz + mg * 1.7) * 3, 20, { color: "black", roundRadius: 3 }).render()
+    drawText("\t⚔️Armas", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
 
     //Dibuja Opciones de ataques
     const { c1, c2 } = { c1: this.ataques[0].count, c2: this.ataques[1].count };
-    drawText(`[ Q ] \t \t [ E ]`, { color: "#eba417", x: app.width * .88, y: app.height *.985, fontSize: 12, roundRadius: 6, bgColor: "#0a0e1a" }).render()
-    drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x: app.width * .88, y: app.height * .96, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
+  
+    drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x: app.width * .89, y: app.height * .975, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
     //has muerto MSG
     if (this.tipo === "player" && this.muerto) {
       drawMuerte().render()
@@ -267,12 +267,13 @@ class Personaje {
     this.posiones.forEach((posion, index) => {
       const { sx, sy } = posion;
 
-      drawRect(x + ((sz + mg * 2) * index), y, sz + (mg * 2), sz + mg, { color: "#0e1016e5", roundRadius: sz / 8 }).render();
-      drawSprite(posion.sprite, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
+      drawRect(x + ((sz + mg * 3) * index), y, sz + (mg * 2), sz + mg, { color: "#0e1016b0", roundRadius: sz/8 }).render();
+      drawRect(x + ((sz + mg * 3) * index), y + (sz + mg), sz + mg, mg, {color:"#0a0e1aff", roundRadius: sz / 8 }).render();
+      drawSprite(posion.sprite, sz, sz, { x: (x + ((sz + mg * 3) * index)) + mg, y: y + (mg/2), sx, sy, sh: 16, sw: 16 }).render()
     })
 
-    drawRect(x, y + (sz + mg * 2), (sz + mg) * 2, 20, { color: "black", roundRadius: 6 }).render()
-    drawText(" 🧪Posiones", { fontSize: 12, x: x + sz / 2, y: y + (sz + mg * 4) }).render()
+    drawRect(x, y + (sz + mg * 2), (sz + mg*2.5) * 2, 20, { color: "black", roundRadius: 3 }).render()
+    drawText("\t🧪Posiones", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
   }
 
 }
