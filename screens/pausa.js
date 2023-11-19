@@ -31,7 +31,7 @@ class Pausa extends Screens {
                     app.music.muted = app.music.muted? false:true;
                     app.keys.unshift("")
                     app.context.clearRect(app.width/1.95,app.height/1.86,50,35);
-                    drawRect(app.width/1.95,app.height/1.86,50,35,{color:"#0a0e1ab5"})
+                    drawRect(app.width/1.95,app.height/1.86,50,35,{color:"#0a0e1ab5"}).render()
                     drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"}).render()
                    
                 }}
