@@ -40,13 +40,15 @@ async function setup() {
     //configura musica
     app.music.loop = true;
     app.music.play()
-    const song = [0.16,1.55,3.19,3.45,4.51,5.50];
+    const musicMuted = localStorage.getItem("musicMuted");
+    app.music.muted = musicMuted === "false"? false: true;
+    const song = [0,1.38,3.04,4.30];
     app.music.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
     app.music.volume = 0.3;
     //genera enemigo
     generadorEnemigo();
     //crea player
-    app.player = new Guerrero("Conan","player",120,10,7,20);
+    app.player = new Guerrero("Conan","player",120,10,7,1);
     
     await delay(1000);
     draw()
@@ -91,8 +93,11 @@ addEventListener("keydown", (key) => {
     app.keys.unshift(key.code);
     if(!app.pause){
         app.player.controller?.use(key)
-    }else{
+    }else if(app.pause){
         app.pantalla.lisien(key)
+    }
+    if(app.player.muerto){
+        app.pantalla.lisien(key);
     }
 });
 

@@ -29,6 +29,7 @@ class Pausa extends Screens {
                 },
                 {key:"KeyM",name:"Music Mute",accion:()=>{
                     app.music.muted = app.music.muted? false:true;
+                    localStorage.setItem("musicMuted", app.music.muted);
                     app.keys.unshift("")
                     app.context.clearRect(app.width/1.95,app.height/1.86,50,35);
                     drawRect(app.width/1.95,app.height/1.86,50,35,{color:"#0a0e1ab5"}).render()
