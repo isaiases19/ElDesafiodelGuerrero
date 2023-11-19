@@ -6,7 +6,7 @@ class Posion{
         this.sy = sy;
         //image
         this.sprite = new Image();
-        this.sprite.src = "/img/tilemap_packed.png";
+        this.sprite.src = "/img/itemsSprite/tilemap_packed.png";
     }
 
     use(id){

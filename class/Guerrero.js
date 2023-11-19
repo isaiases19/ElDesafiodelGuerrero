@@ -18,7 +18,7 @@ class Guerrero extends Personaje {
 
     this.rango = 150;
     this.enemys = app.enemigos;
-    this.sprite.src = "/img/baseDaga.png";
+    this.sprite.src = "/img/playerSprite/baseDaga.png";
 
     //Habilidades 
     this.ataques = [

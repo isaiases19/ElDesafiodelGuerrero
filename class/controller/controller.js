@@ -38,12 +38,15 @@ class Controller{
                     app.player.x = app.player.x + app.player.velocidad;
                     app.player.animacion = app.player.animaciones["caminarR"];
                     app.player.animacionDefault = "parado";
+
+                   
                 }
             },
             {key:"KeyA",name:"Izquierda",accion:async()=>{
                     app.player.x =app.player.x - app.player.velocidad;
                     app.player.animacion = app.player.animaciones["caminarL"];
                     app.player.animacionDefault = "paradoL";
+                   
                 }
             },
             {key:"Escape",name:"Pause",accion:()=>{

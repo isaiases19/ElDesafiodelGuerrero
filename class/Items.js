@@ -16,6 +16,7 @@ class Items{
         this.isDone = false;
         //Caracteristica
         this.rango = 50;
+        this.color = "green";
         //image
         this.sprite = new Image();
         this.sprite.src = img;
@@ -44,7 +45,10 @@ class Items{
     }
 
     render(){
+        app.context.save();
+        app.context.filter = `drop-shadow(0 0 15px ${this.color})`
         app.context.drawImage(this.sprite,this.sx,this.sy,this.size,this.size,this.x,this.y,this.scale,this.scale);
+        app.context.restore()
     }
 
     done(){
@@ -55,13 +59,14 @@ class Items{
 
 class Vida extends Items{
     constructor(x,y){
-        super(x,y,32,16,16,64,"../img/tilemap_packed.png");
+        super(x,y,32,16,16,64,"../img/itemsSprite/tilemap_packed.png");
         this.name = "Vida";
         this.isDone = false;
         this.give = randomMinMax(3,10)/10;
         this.sy = this.give < .5 ? 32:16;
         this.sx = 32;
         this.sound = new Audio("../sounds/getVida.mp3");
+        this.color = "#d63737";
     }
 
     action(){
@@ -80,8 +85,9 @@ class Vida extends Items{
 
 class EspadaItem extends Items{
     constructor(x,y){
-        super(x,y,48,0,16,64,"../img/tilemap_packed.png");
+        super(x,y,48,0,16,64,"../img/itemsSprite/tilemap_packed.png");
         this.sound = new Audio("../sounds/getVida.mp3");
+        this.color = "#00b7ff";
     }
 
     action(){

@@ -4,6 +4,7 @@ import { drawPausa } from "./screens/pausa.js";
 import { Guerrero } from "./class/Guerrero.js";
 import { drawRect } from "./class/views/Rect.js";
 
+
 const canvas = document.querySelector("canvas");
 
 const app = {
@@ -31,7 +32,7 @@ const app = {
 
 async function main() {
     const bgs = ["./img/backColi.jpg","./img/fondo.png","./img/arenaPx.jpg","./img/bulkhead.png","/img/bg.jpg"];
-    canvas.style.backgroundImage =`Url(${bgs[randomMinMax(1,bgs.length)-1]})`;
+    canvas.style.backgroundImage = `Url(${bgs[randomMinMax(1,bgs.length)-1]})`;
     app.clearCanvas();
     app.pantalla = drawInicio()
     app.pantalla.render()
@@ -50,7 +51,6 @@ async function setup() {
     generadorEnemigo();
     //crea player
     app.player = new Guerrero("Conan","player",120,10,7,1);
-    
     await delay(1000);
     draw()
 }
@@ -63,6 +63,8 @@ async function draw(){
         clearTimeout(app.timeOut);
         //limpia el lienzo
         app.clearCanvas();
+        app.context.filter = ""
+         
 
         //Renderiza cada enemigo 
         for(const enemy of app.enemigos){
@@ -79,11 +81,10 @@ async function draw(){
             if(!item.isDone)
                 item.render();
         }
-
-        //Gradient para que todo tenga el mismo colorAmbient
-        var grd=app.context.createRadialGradient(75,50,5,90,60,100);
-        grd.addColorStop(0,"#4d0e5a25");
-        grd.addColorStop(1,"#0c0d4625");
+         //Gradient para que todo tenga el mismo colorAmbient
+         var grd=app.context.createLinearGradient(0,0,app.width/2,app.height);
+         grd.addColorStop(0,"#29141a55");
+         grd.addColorStop(1,"#0f0f1a55");
         drawRect(0,0,app.width,app.height,{color:grd}).render()
         //LLama al siguiente frame
         window.requestAnimationFrame(draw);

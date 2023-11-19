@@ -5,7 +5,7 @@ class Espada{
         this.dano = dano;
         this.powerUps = [];
         this.icon = new Image();
-        this.icon.src = "/img/tilemap_packed.png";
+        this.icon.src = "/img/itemsSprite/tilemap_packed.png";
         this.sprite="";
         this.animacion = animacionArma1;
         this.rango = 150;

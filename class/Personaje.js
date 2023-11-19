@@ -177,9 +177,9 @@ class Personaje {
       for(let i =0;i<levels.length;i++){
 
           if(levels[i] <= this.nivel){       
-            this.sprite.src = `/img/Level${levels[i]}${arma}.png`;
+            this.sprite.src = `/img/playerSprite/Level${levels[i]}${arma}.png`;
           }else if(this.nivel < 5){
-            this.sprite.src = `/img/base${arma}.png`;
+            this.sprite.src = `/img/playerSprite/base${arma}.png`;
           }
         }
     
@@ -228,9 +228,11 @@ class Personaje {
 
 
       drawRect(x + ((sz + mg * 2) * index), y, sz + mg, sz + mg, { color: "#0e1016b0", roundRadius: sz / 8 }).render();
-      const color = this.armas.name === item.name ? "#3b7a3bff" : "#0a0e1aff";
-      drawRect(x + ((sz + mg * 2) * index), y + (sz + mg), sz + mg, mg, { color, roundRadius: sz / 8 }).render();
+
+      app.context.save();
+      app.context.filter = this.armas.name === item.name? "drop-shadow(0 0 3px #00ff88)" : "";
       drawSprite(item.item.icon, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
+      app.context.restore();
     });
 
     drawRect(x, y + (sz + mg * 2), (sz + mg * 1.7) * 3, 20, { color: "black", roundRadius: 3 }).render()
@@ -253,7 +255,6 @@ class Personaje {
       const { sx, sy } = posion;
 
       drawRect(x + ((sz + mg * 3) * index), y, sz + (mg * 2), sz + mg, { color: "#0e1016b0", roundRadius: sz/8 }).render();
-      drawRect(x + ((sz + mg * 3) * index), y + (sz + mg), sz + mg, mg, {color:"#0a0e1aff", roundRadius: sz / 8 }).render();
       drawSprite(posion.sprite, sz, sz, { x: (x + ((sz + mg * 3) * index)) + mg, y: y + (mg/2), sx, sy, sh: 16, sw: 16 }).render()
     })
 
