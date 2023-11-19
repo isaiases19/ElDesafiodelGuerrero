@@ -21,8 +21,8 @@ function generadorEnemigo(x = 0) {
   let level = 0;
   let etiqueta="";
   //decide que nivel usar
-  app.player.nivel > 10 ? level = randomMinMax(8, 11) : level = randomMinMax(1, 5);
-  app.player.nivel > 10 ? etiqueta="Orc" : etiqueta="Troll";
+  level = app.player.nivel > 10 ? randomMinMax(8, 11) : randomMinMax(1, 5);
+  etiqueta = level > 10 ? "Orc" : "Troll";
   //Posicion al spawnear
   x = x === 0 ? ((randomMinMax(1,2) === 1) ? app.width: -100): x;
   //Caracteristicas
