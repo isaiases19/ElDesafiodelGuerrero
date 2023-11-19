@@ -173,17 +173,17 @@ class Personaje {
     if (this.tipo === "player") {
       const levels = [5,20,40,60];
       const arma =  this.armas.name === "Espada Filosa"?  "Sword": "Daga";
-     
-        for(let lv of levels){
-          
-          this.sprite.src = (this.nivel >= lv) ? `/img/Level${lv}${arma}.png`: `/img/base${arma}.png`;
-          if(this.nivel >= lv){
-            break;
+
+      for(let i =0;i<levels.length;i++){
+
+          if(levels[i] <= this.nivel){       
+            this.sprite.src = `/img/Level${levels[i]}${arma}.png`;
+          }else if(this.nivel < 5){
+            this.sprite.src = `/img/base${arma}.png`;
           }
         }
-      }
     
-
+      }
     //Cambio de Frame
     this.frame++;
 
