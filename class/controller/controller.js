@@ -15,7 +15,7 @@ class Controller{
                     const newArma = app.player.inventario[(app.player.armas.id + 1)% app.player.inventario.length];
                     app.player.elegirArma(newArma.name);
 
-                    app.player.sprite.src=newArma.item.sprite
+                    
                     app.player.animaciones = newArma.item.animacion;
                     app.player.rangoAtaque= newArma.item.rango;
 
@@ -26,7 +26,7 @@ class Controller{
                         Pataque1.count = ataque1;
                         Pataque2.counDown = ataque2;
                         Pataque2.count = ataque2;
-                        
+
                 }
             },
             {key:"KeyR", name:"Cambio de PowerUp",accion:()=>{

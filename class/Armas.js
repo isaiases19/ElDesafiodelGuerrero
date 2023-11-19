@@ -37,7 +37,7 @@ class EspadaFilosa extends Espada{
 class EspadaNormal extends Espada{
     constructor(){
         super(5)
-        app.player.nivel>4?this.sprite="/img/level5daga.png": this.sprite="/img/Base.png";
+        
         this.powerUps = [{name:"sinFilo",power:0,enUso:true,icon:{sx:96,sy:0}}]
     }
 }

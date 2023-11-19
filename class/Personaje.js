@@ -171,34 +171,18 @@ class Personaje {
 
 
     if (this.tipo === "player") {
-
-      if (this.armas.name == "Espada Filosa") {
-        this.nivel > 4 ? this.sprite.src = "/img/level5sword.png" : this.sprite.src = "/img/baseLongSword.png";
-      } else {
-        this.nivel > 4 ? this.sprite.src = "/img/level5Daga.png" : this.sprite.src = "/img/Base.png";
-      }
-
-     /* if (this.armas.name == "Espada Filosa") {
-        this.nivel > 19 ? this.sprite.src = "/img/level20Sword.png" : this.sprite.src = "/img/baseLongSword.png";
-      } else {
-        this.nivel > 19? this.sprite.src = "/img/level20Daga.png" : this.sprite.src = "/img/Base.png";
-      }
-
+      const levels = [5,20,40,60];
+      const arma =  this.armas.name === "Espada Filosa"?  "Sword": "Daga";
      
-      if (this.armas.name == "Espada Filosa") {
-        this.nivel > 39 ? this.sprite.src = "/img/Level40Sword.png" : this.sprite.src = "/img/baseLongSword.png";
-      } else {
-        this.nivel > 39? this.sprite.src = "/img/level40Daga.png" : this.sprite.src = "/img/Base.png";
+        for(let lv of levels){
+          
+          this.sprite.src = (this.nivel >= lv) ? `/img/Level${lv}${arma}.png`: `/img/base${arma}.png`;
+          if(lv >= this.nivel){
+            break;
+          }
+        }
       }
-
-      if (this.armas.name == "Espada Filosa") {
-        this.nivel > 59 ? this.sprite.src = "/img/level60Sword.png" : this.sprite.src = "/img/baseLongSword.png";
-      } else {
-        this.nivel > 59? this.sprite.src = "/img/level60Daga.png" : this.sprite.src = "/img/Base.png";
-      }*/
-
-
-    }
+    
 
     //Cambio de Frame
     this.frame++;
