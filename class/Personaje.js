@@ -200,7 +200,10 @@ class Personaje {
     const scaleY = this.h * this.animacion.scale;
 
     //Dibuja El Sprite
+    app.context.save();
+    this.muerto? app.context.filter = "grayscale(50%)": null;
     drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.size * i), sy: this.animacion.sy, sw: this.animacion.size, sh: this.animacion.size, x: (this.x - scaleX / 2), y: (this.y - scaleY / 2) }).render()
+    app.context.restore();
     this.acciones();
 
     //Dibuja Vida
@@ -230,7 +233,7 @@ class Personaje {
       drawRect(x + ((sz + mg * 2) * index), y, sz + mg, sz + mg, { color: "#0e1016b0", roundRadius: sz / 8 }).render();
 
       app.context.save();
-      app.context.filter = this.armas.name === item.name? "drop-shadow(0 0 3px #00ff88)" : "";
+      app.context.filter = this.armas.name === item.name? "drop-shadow(0 0 3px #00ff88)" : "grayscale(50%)";
       drawSprite(item.item.icon, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
       app.context.restore();
     });

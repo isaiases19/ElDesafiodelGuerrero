@@ -23,8 +23,10 @@ class Items{
 
         //coutn down
         this.cout = 0;
+        this.timer = (5 * 1000);
         //bucle
         this.bucle = setInterval(()=>{this.update()},340);
+
     }
 
     action(){}
@@ -35,7 +37,7 @@ class Items{
             this.action()
         }
 
-        if(this.cout > (340*15)){
+        if(this.cout > this.timer){
              //avisa de que no se deve renderizar mas
             this.isDone =true;
             //termana el siclo de vida de item
