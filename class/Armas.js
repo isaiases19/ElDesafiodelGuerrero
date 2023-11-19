@@ -9,7 +9,7 @@ class Espada{
         this.sprite="";
         this.animacion = animacionArma1;
         this.rango = 150;
-        this.velicidad = {ataque1:.1/*100ms*/,ataque2:5};
+        this.velicidad = {ataque1:.1/*100ms*/,ataque2:3};
     }
 
     usar(powerUp = "none"){
@@ -25,7 +25,7 @@ class Espada{
 
 class EspadaFilosa extends Espada{
     constructor(){
-        super(5)
+        super(8)
 
         this.velicidad = {ataque1:.6/*100ms*/,ataque2:8.5};
         this.animacion = baseLongSword;
