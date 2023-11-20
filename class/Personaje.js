@@ -202,6 +202,7 @@ class Personaje {
     //Dibuja El Sprite
     app.context.save();
     this.muerto? app.context.filter = "grayscale(50%)": null;
+    (this.animacion === this.animaciones["recibirR"] || this.animacion === this.animaciones["recibirL"]) ? app.context.filter = "drop-shadow(0px 0px 10px red)":null;
     
     drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.size * i), sy: this.animacion.sy, sw: this.animacion.size, sh: this.animacion.size, x: (this.x - scaleX / 2), y: (this.y - scaleY / 2) }).render()
     app.context.restore();
