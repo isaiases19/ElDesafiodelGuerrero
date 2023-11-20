@@ -54,11 +54,12 @@ class Enemigo extends Personaje {
       espada1R: { sx: 0, sy: 326, size: 64, len: 8, scale: .66 },
       espada2R: { sx: 0, sy: 1543, size: 193, len: 6, scale: 2 },
     }
-    this.sprites=["/img/enemyStprite/trollbase.png","/img/enemyStprite/troll.png","/img/enemyStprite/Orc.png","/img/enemyStprite/minotaur.png"];
+    this.sprites=["/img/enemyStprite/trollbase.png","/img/enemyStprite/troll.png","/img/enemyStprite/Orc.png","/img/enemyStprite/minotaur.png","/img/enemyStprite/Esqueleto.png"];
 
     this.sprite.src = this.nivel<=3 ? this.sprites[0]:this.sprites[1];
     this.sprite.src = this.nivel>9 ? this.sprites[2]:this.sprite.src;
     this.sprite.src = this.nivel>15 ? this.sprites[3]:this.sprite.src;
+    this.sprite.src = this.nivel>24 ? this.sprites[4]:this.sprite.src;
 
     this.animacionDefault = "parado";
     this.animacion = this.animaciones[this.animacionDefault];

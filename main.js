@@ -50,7 +50,7 @@ async function setup() {
     //genera enemigo
     generadorEnemigo();
     //crea player
-    app.player = new Guerrero("Conan","player",120,10,7,1);
+    app.player = new Guerrero("Conan","player",5000,100,7,40);
     await delay(1000);
     draw()
 }
