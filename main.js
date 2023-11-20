@@ -59,7 +59,7 @@ async function setup() {
 async function draw(){
     if(!app.pause){
         //delay 
-        await delay(70);
+        await delay(90);
         clearTimeout(app.timeOut);
         //limpia el lienzo
         app.clearCanvas();
