@@ -202,6 +202,7 @@ class Personaje {
     //Dibuja El Sprite
     app.context.save();
     this.muerto? app.context.filter = "grayscale(50%)": null;
+    
     drawSprite(this.sprite, scaleX, scaleY, { sx: this.animacion.sx + (this.animacion.size * i), sy: this.animacion.sy, sw: this.animacion.size, sh: this.animacion.size, x: (this.x - scaleX / 2), y: (this.y - scaleY / 2) }).render()
     app.context.restore();
     this.acciones();
@@ -239,7 +240,7 @@ class Personaje {
     });
 
     drawRect(x, y + (sz + mg * 2), (sz + mg * 1.7) * 3, 20, { color: "black", roundRadius: 3 }).render()
-    drawText("\t⚔️Armas", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
+    drawText("⚔️Armas", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
 
     //Dibuja Opciones de ataques
     const { c1, c2 } = { c1: this.ataques[0].count, c2: this.ataques[1].count };
@@ -262,7 +263,7 @@ class Personaje {
     })
 
     drawRect(x, y + (sz + mg * 2), (sz + mg*2.5) * 2, 20, { color: "black", roundRadius: 3 }).render()
-    drawText("\t🧪Posiones", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
+    drawText("🧪Posiones", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
   }
 
 }

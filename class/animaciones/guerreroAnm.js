@@ -16,8 +16,6 @@ const animacionArma1 = {
 }
 
 const baseLongSword = {
-   
-    
     recibirL:{sx:64,sy:67,size:64,margin:0,len:4,scale:.66},
     recibirR:{sx:64,sy:195,size:64,margin:0,len:4,scale:.66},
     espada1L: { sx: 0, sy: 3077, size: 193, margin: 0, len: 6, scale: 2 },
