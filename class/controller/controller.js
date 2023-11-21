@@ -39,6 +39,7 @@ class Controller{
                     app.player.animacion = app.player.animaciones["caminarR"];
                     app.player.animacionDefault = "parado";
 
+                    app.translate -= app.player.velocidad;
                    
                 }
             },
@@ -46,7 +47,7 @@ class Controller{
                     app.player.x =app.player.x - app.player.velocidad;
                     app.player.animacion = app.player.animaciones["caminarL"];
                     app.player.animacionDefault = "paradoL";
-                   
+                    app.translate += app.player.velocidad;
                 }
             },
             {key:"Escape",name:"Pause",accion:()=>{

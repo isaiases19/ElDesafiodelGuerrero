@@ -3,6 +3,7 @@ import { drawInicio } from "./screens/Inicio.js";
 import { drawPausa } from "./screens/pausa.js";
 import { Guerrero } from "./class/Guerrero.js";
 import { drawRect } from "./class/views/Rect.js";
+import { drawSprite } from "./class/views/Image.js";
 
 
 const canvas = document.querySelector("canvas");
@@ -11,6 +12,7 @@ const app = {
     context: canvas.getContext("2d"),
     width: 1080,
     height: 1080,
+    translate:0,
     turno: 0,
     timeOut: 5,
     gameOver: false,
@@ -56,6 +58,8 @@ async function setup() {
 }
 
 //Bucle que llama el renderizado de los objetos
+const bgPreRender = new Image();
+bgPreRender.src ="/img/backgrondoPreRender.png";
 async function draw(){
     if(!app.pause){
         //delay 
@@ -63,7 +67,8 @@ async function draw(){
         clearTimeout(app.timeOut);
         //limpia el lienzo
         app.clearCanvas();
-        app.context.filter = ""
+        app.context.translate(app.translate,0);
+        drawSprite(bgPreRender,bgPreRender.width,app.height,{x:0,y:0}).render()
          
 
         //Renderiza cada enemigo 
@@ -85,7 +90,7 @@ async function draw(){
          var grd=app.context.createLinearGradient(0,0,app.width/2,app.height);
          grd.addColorStop(0,"#29141a55");
          grd.addColorStop(1,"#0f0f1a55");
-        drawRect(0,0,app.width,app.height,{color:grd}).render()
+        drawRect(-app.translate,0,app.width,app.height,{color:grd}).render()
         //LLama al siguiente frame
         window.requestAnimationFrame(draw);
     }else{

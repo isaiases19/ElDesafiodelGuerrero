@@ -34,7 +34,7 @@ class Guerrero extends Personaje {
     this.armas = { id: 0, name: "Espada Normal", item: espadaNormal() };
     this.posiones = [];
     //Transfrom
-    this.x = 330;
+    this.x = app.width*.5;
     this.y = 830;
     this.w = 500;
     this.h = 400;

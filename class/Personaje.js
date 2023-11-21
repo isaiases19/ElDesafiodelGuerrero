@@ -36,7 +36,6 @@ class Personaje {
     this.y = 0;
     this.w = 0;
     this.h = 0;
-    this.flip = false;
 
     //Audios
     this.sound = new Audio();
@@ -109,7 +108,8 @@ class Personaje {
             enemy.recibirAtaque(totalDamge);
 
             //imprimir dano
-            drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`, { color: "#bc1e1e", x: enemy.x, y: (enemy.y - enemy.h / 1.5), fontSize: 30, roundRadius: 20 }).render()
+            drawText(`${totalDamge} + ${powerUp.name} ${powerUp.power}`, { color: "#cfcfcf", x: enemy.x, y: (enemy.y - enemy.h / 1.5), fontSize: 30, roundRadius: 20 }).render()
+            await delay(2000)
           }
         }
       }
@@ -210,7 +210,7 @@ class Personaje {
 
     //Dibuja Vida
     const style = {
-      player: { color: "white", x: app.width * .085, y: app.height * .92, fontSize: 25, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
+      player: { color: "white", x:-app.translate + app.width * .085, y: app.height * .92, fontSize: 25, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
       enemy: { color: "#ececec", x: this.x, y: this.y - this.h / 2.5, style: "bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius: 10 }
     }
 
@@ -220,8 +220,8 @@ class Personaje {
 
     //Dibuja Inventario
     if (this.tipo === "player") {
-      this.drawInevtario(app.width * .2, app.height * .9, 70, 5);
-      this.drawPosiones(app.width * .425, app.height * .9, 70, 5);
+      this.drawInevtario(-app.translate +app.width * .2, app.height * .9, 70, 5);
+      this.drawPosiones(-app.translate + app.width * .425, app.height * .9, 70, 5);
     }
   }
 
@@ -246,7 +246,7 @@ class Personaje {
     //Dibuja Opciones de ataques
     const { c1, c2 } = { c1: this.ataques[0].count, c2: this.ataques[1].count };
   
-    drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x: app.width * .89, y: app.height * .975, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
+    drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x:-app.translate + app.width * .89, y: app.height * .975, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
     //has muerto MSG
     if (this.tipo === "player" && this.muerto) {
       app.pantalla =  drawMuerte();
