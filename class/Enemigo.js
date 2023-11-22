@@ -31,7 +31,7 @@ class Enemigo extends Personaje {
     this.armas = this.inventario[0];
 
     //Transform -- posicion
-    this.x = x || randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4);
+    this.x = x ;
     this.y = 830;
     this.w = 500;
     this.h = 400;
@@ -77,6 +77,7 @@ class Enemigo extends Personaje {
           return
         }else{   
           //Realiza el ataque
+          this.animacionDefault = app.player.x < this.x? "parado":"paradoR";
           this.realizarAtaque(ataque.name);
         }
         this.target = true;

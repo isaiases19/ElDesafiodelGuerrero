@@ -98,13 +98,14 @@ class Personaje {
         this.animacion = this.animaciones[elegirAnimacion];
 
         for (const enemy of this.enemys) {
-          if (calcularDistancia(enemy.x, enemy.y, this.x, this.y) <= this.rangoAtaque && !enemy.muerto) {
+          if (calcularDistancia(enemy.x, enemy.y, this.x, this.y) <= this.rangoAtaque  && !enemy.muerto) {
             // //Ejecuta un sonido
             // this.playSound(ataque.audio);
 
             //Calcula Dano
             let totalDamge = (this.fuerza + ataque.fuerza) + (this.armas.item ? this.armas.item.usar(powerUp?.name) : 0);
             //hacer dano a enemigo
+            
             enemy.recibirAtaque(totalDamge);
 
             //imprimir dano
@@ -215,7 +216,7 @@ class Personaje {
     }
 
     if (!this.muerto) {
-      drawText(`${this.nombre}\n❤️${this.vida} Lv.${this.nivel}`, style[this.tipo]).render();
+      drawText(`${this.nombre}\n❤️${this.vida} Lv.${this.nivel} X:${this.x}`, style[this.tipo]).render();
     }
 
     //Dibuja Inventario
