@@ -216,7 +216,7 @@ class Personaje {
     }
 
     if (!this.muerto) {
-      drawText(`${this.nombre}\n❤️${this.vida} Lv.${this.nivel} X:${this.x}`, style[this.tipo]).render();
+      drawText(`${this.nombre}\n❤️${this.vida} Lv.${this.nivel}`, style[this.tipo]).render();
     }
 
     //Dibuja Inventario
