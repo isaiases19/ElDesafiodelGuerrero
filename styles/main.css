@@ -22,7 +22,7 @@ canvas {
 
   border: #0b0e13 solid 5px;
   border-radius: 0.5rem;
-
+  background-image: url("../img/inicio.png");
   image-resolution: 1080;
   image-rendering: optimizeQuality;
 }

@@ -6,7 +6,7 @@ class Inicio extends Screens {
     constructor(){
         super()
         this.content =[
-            drawRect(0,0,app.width,app.height,{color:"#0a0c14ec"}),
+            drawRect(0,0,app.width,app.height,{color:"#0a0c149d"}),
             drawText("Press Space\n To Start ",{fontSize:50,fontFamily:"PatrickHand"})
         ];
         this.bucle = setInterval(this.lisien,340);
