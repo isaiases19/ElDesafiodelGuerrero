@@ -35,7 +35,7 @@ class Enemigo extends Personaje {
     this.y = 830;
     this.w = 500;
     this.h = 400;
-
+    this.spawnPos = x;
     //Audio
     this.recibirAudio = "/sounds/recibe1.mp3";
 
@@ -99,7 +99,7 @@ class Enemigo extends Personaje {
       }
       //Si se termina coje otra
       if (!this.target && calcularDistancia(this.x, this.y, this.path, this.y) <= this.rango) {
-        this.path = randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4)
+        this.path = this.spawnPos + randomMinMax(-(app.width/2),(app.width/2))
       }
     }
   }

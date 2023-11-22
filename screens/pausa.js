@@ -9,9 +9,9 @@ class Pausa extends Screens {
         super()
   
         this.content =[
-            drawRect(0,0,app.width,app.height,{color:"#0a0e1ab5"}),
-            drawText("PAUSED",{fontSize:50,fontFamily:"PatrickHand",roundRadius:25}),
-            drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"})
+            drawRect(-app.translate,0,app.width,app.height,{color:"#0a0e1ab5"}),
+            drawText("PAUSED",{x:-app.translate + app.width/2,y:app.height/2,fontSize:50,fontFamily:"PatrickHand",roundRadius:25}),
+            drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{x:-app.translate + app.width/2,y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"})
         ];
         app.keys.unshift("");
         
@@ -33,7 +33,7 @@ class Pausa extends Screens {
                     app.keys.unshift("")
                     app.context.clearRect(-app.translate +app.width/1.95,app.height/1.86,50,35);
                     drawRect(-app.translate + app.width/1.95,app.height/1.86,50,35,{color:"#0a0e1ab5"}).render()
-                    drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"}).render()
+                    drawText(`Music:${app.music.muted? "🔇":"🔊"} `,{x:-app.translate + app.width/2,y:app.height/1.8,fontSize:30,fontFamily:"PatrickHand"}).render()
                    
                 }}
             ]

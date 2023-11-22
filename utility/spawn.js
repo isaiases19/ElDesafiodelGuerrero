@@ -1,6 +1,6 @@
 import { app } from "../main.js";
 import { Enemigo } from "../class/Enemigo.js";
-import { calcularFuerzaPorNivel,calcularVelocidadPorNivel,calcularVidaPorNivel, randomMinMax } from "./utility.js";
+import { calcularFuerzaPorNivel,calcularVelocidadPorNivel,calcularVidaPorNivel, delay, randomMinMax } from "./utility.js";
 class Spawn{
     constructor(x,time,range,level,label,oleada){
         this.x = x;
@@ -13,9 +13,10 @@ class Spawn{
         this.cout = 0;
     }
 
-    spawn(){
+    async spawn(){
         this.cout++;
         for(let i =0; i < this.oleada;i++){
+            await delay(1000);
             app.enemigos.push(new Enemigo(this.label,"enemy",calcularVidaPorNivel(this.level),calcularFuerzaPorNivel(this.level),calcularVelocidadPorNivel(this.level),this.level,{x: this.x +  randomMinMax(-this.range,this.range)}));
         }
         this.oleada = randomMinMax(1,3);

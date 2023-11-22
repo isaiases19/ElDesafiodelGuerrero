@@ -59,8 +59,11 @@ async function setup() {
 
     getSpawn(app.width*6,60*2,200,randomMinMax(11,15),"Orc",1).spawn()
     getSpawn(-app.width*6,60*2,200,randomMinMax(11,15),"Orc",1).spawn()
+
+    getSpawn(app.width*8,60*3,200,randomMinMax(16,20),"minotaur",1).spawn()
+    getSpawn(-app.width*8,60*3,200,randomMinMax(16,20),"minotaur",1).spawn()
     //crea player
-    app.player = new Guerrero("Conan","player",5000,100,7,40);
+    app.player = new Guerrero("Conan","player",120,10,7,1);
     await delay(1000);
     draw()
 }
