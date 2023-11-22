@@ -17,7 +17,7 @@ class Enemigo extends Personaje {
     this.nivel = nivel;
     this.destroyed = false;
     //Acciones
-    this.path = randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4);
+    this.path = x;
     this.target = false;
 
     //Habilidades
