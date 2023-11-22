@@ -35,8 +35,7 @@ const app = {
 
 
 async function main() {
-    const bgs = ["./img/backColi.jpg","./img/fondo.png","./img/arenaPx.jpg","./img/bulkhead.png","/img/bg.jpg"];
-    canvas.style.backgroundImage = `Url(${bgs[randomMinMax(1,bgs.length)-1]})`;
+ 
     app.clearCanvas();
     app.pantalla = drawInicio()
     app.pantalla.render()
@@ -68,7 +67,7 @@ async function setup() {
 
 //Bucle que llama el renderizado de los objetos
 
-app.backgroundImage.src ="/img/backgrondoPreRender.png";
+app.backgroundImage.src ="/img/backgrondoPreRender.jpg";
 async function draw(){
     if(!app.pause){
         //delay 
