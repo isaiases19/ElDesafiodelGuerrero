@@ -1,9 +1,10 @@
-import { delay, generadorEnemigo, randomMinMax } from "./utility/utility.js";
+import { delay, randomMinMax } from "./utility/utility.js";
 import { drawInicio } from "./screens/Inicio.js";
 import { drawPausa } from "./screens/pausa.js";
 import { Guerrero } from "./class/Guerrero.js";
 import { drawRect } from "./class/views/Rect.js";
 import { drawSprite } from "./class/views/Image.js";
+import { getSpawn } from "./utility/spawn.js";
 
 
 const canvas = document.querySelector("canvas");
@@ -51,9 +52,14 @@ async function setup() {
     //app.music.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
     app.music.volume = 0.3;
     //genera enemigo
-    generadorEnemigo();
-    generadorEnemigo();
-    generadorEnemigo();
+    getSpawn(app.width,35,200,randomMinMax(1,4),"troll").spawn()
+    getSpawn(-app.width,35,200,randomMinMax(1,4),"troll").spawn()
+
+    getSpawn(app.width*3,35,200,randomMinMax(5,10),"troll").spawn()
+    getSpawn(-app.width*3,35,200,randomMinMax(5,10),"troll").spawn()
+
+    getSpawn(app.width*6,35,200,randomMinMax(11,15),"Orc").spawn()
+    getSpawn(-app.width*6,35,200,randomMinMax(11,15),"Orc").spawn()
     //crea player
     app.player = new Guerrero("Conan","player",5000,100,7,40);
     await delay(1000);

@@ -1,5 +1,4 @@
 import { app } from "../main.js";
-import { Enemigo } from "../class/Enemigo.js";
 function randomMinMax(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -11,33 +10,19 @@ async function delay(ms) {
 }
 
 function calcularVelocidadPorNivel(nivel) {
-  return Math.max(3,nivel);
+  return Math.max(3,nivel*.7);
 }
 function calcularVidaPorNivel(nivel){
   return Math.max(50,nivel * 20);
 }
-
-function generadorEnemigo(x = 0) {
-  let level = 0;
-  let etiqueta="";
-  //decide que nivel usar
-  level = app.player.nivel > 10 ? randomMinMax(8, 11) : randomMinMax(1, 5);
-  app.player.nivel>19? level=16 : randomMinMax(8, 11); 
-  app.player.nivel>39? level=25 : randomMinMax(8, 18); 
-  etiqueta = level > 10 ? "Orc" : "Troll";
-  //Posicion al spawnear
-  x = x === 0 ? randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4):x;
-  //Caracteristicas
-  const {nombre, tipo, vida, fuerza, velocidad, nivel} = {
-    nombre:etiqueta, tipo: "enemy", vida: calcularVidaPorNivel(level), fuerza: level, velocidad: calcularVelocidadPorNivel(level), nivel: level
-  } 
-  //Crear Enemigo
-  app.enemigos.push(new Enemigo(nombre, tipo, vida, fuerza, velocidad, nivel, { x }));
+function calcularFuerzaPorNivel(nivel){
+    return Math.max(5,nivel*.7);
 }
+
 
 function calcularDistancia(x1, y1, x2, y2) {
   return Math.hypot(x2 - x1, y2 - y1);
 }
 
 
-export { randomMinMax, delay, generadorEnemigo, calcularDistancia }
+export { randomMinMax, delay, calcularDistancia,calcularVidaPorNivel,calcularVelocidadPorNivel,calcularFuerzaPorNivel}
