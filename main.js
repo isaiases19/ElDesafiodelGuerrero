@@ -54,11 +54,11 @@ async function setup() {
     getSpawn(app.width,35,200,randomMinMax(1,4),"troll",3).spawn()
     getSpawn(-app.width,35,200,randomMinMax(1,4),"troll",3).spawn()
 
-    getSpawn(app.width*3,35,200,randomMinMax(5,10),"troll",2).spawn()
-    getSpawn(-app.width*3,35,200,randomMinMax(5,10),"troll",2).spawn()
+    getSpawn(app.width*3,60,200,randomMinMax(5,10),"troll",2).spawn()
+    getSpawn(-app.width*3,60,200,randomMinMax(5,10),"troll",2).spawn()
 
-    getSpawn(app.width*6,35,200,randomMinMax(11,15),"Orc",1).spawn()
-    getSpawn(-app.width*6,35,200,randomMinMax(11,15),"Orc",1).spawn()
+    getSpawn(app.width*6,60*2,200,randomMinMax(11,15),"Orc",1).spawn()
+    getSpawn(-app.width*6,60*2,200,randomMinMax(11,15),"Orc",1).spawn()
     //crea player
     app.player = new Guerrero("Conan","player",5000,100,7,40);
     await delay(1000);
