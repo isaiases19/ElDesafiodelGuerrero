@@ -17,7 +17,7 @@ class Enemigo extends Personaje {
     this.nivel = nivel;
     this.destroyed = false;
     //Acciones
-    this.path = randomMinMax(80, app.width * .7);
+    this.path = randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4);
     this.target = false;
 
     //Habilidades
@@ -31,7 +31,7 @@ class Enemigo extends Personaje {
     this.armas = this.inventario[0];
 
     //Transform -- posicion
-    this.x = x || 750;
+    this.x = x || randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4);
     this.y = 830;
     this.w = 500;
     this.h = 400;
@@ -99,7 +99,7 @@ class Enemigo extends Personaje {
       }
       //Si se termina coje otra
       if (!this.target && calcularDistancia(this.x, this.y, this.path, this.y) <= this.rango) {
-        this.path = randomMinMax(app.width * .2, app.width * .8)
+        this.path = randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4)
       }
     }
   }

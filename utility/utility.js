@@ -26,7 +26,7 @@ function generadorEnemigo(x = 0) {
   app.player.nivel>39? level=25 : randomMinMax(8, 18); 
   etiqueta = level > 10 ? "Orc" : "Troll";
   //Posicion al spawnear
-  x = x === 0 ? ((randomMinMax(1,2) === 1) ? app.width: -100): x;
+  x = x === 0 ? randomMinMax(-app.backgroundImage.width*.4,app.backgroundImage.width*.4):x;
   //Caracteristicas
   const {nombre, tipo, vida, fuerza, velocidad, nivel} = {
     nombre:etiqueta, tipo: "enemy", vida: calcularVidaPorNivel(level), fuerza: level, velocidad: calcularVelocidadPorNivel(level), nivel: level

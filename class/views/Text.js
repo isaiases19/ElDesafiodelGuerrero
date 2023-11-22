@@ -13,8 +13,8 @@ class Text{
         this.ctx = app.context; 
         
         this.textlength = (this.fontSize) * this.text.length ;
-        this.x = x || (app.width/2);
-        this.y = y || (app.height/2);
+        this.x = x || (-app.translate + app.width/2);
+        this.y = y || (-app.translate + app.height/2);
         this.roundRadius = roundRadius || 0;
 
 

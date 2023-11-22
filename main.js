@@ -23,7 +23,8 @@ const app = {
     player:{},
     enemigos:[],
     items:[],
-    music:new Audio("/sounds/background.mp3"),
+    music:new Audio("/sounds/music.wav"),
+    backgroundImage: new Image(),
     setup,
     clearCanvas: () => {
         canvas.width = app.width;
@@ -47,9 +48,11 @@ async function setup() {
     const musicMuted = localStorage.getItem("musicMuted");
     app.music.muted = musicMuted === "false"? false: true;
     const song = [0,1.38,3.04,4.30];
-    app.music.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
+    //app.music.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
     app.music.volume = 0.3;
     //genera enemigo
+    generadorEnemigo();
+    generadorEnemigo();
     generadorEnemigo();
     //crea player
     app.player = new Guerrero("Conan","player",5000,100,7,40);
@@ -58,8 +61,8 @@ async function setup() {
 }
 
 //Bucle que llama el renderizado de los objetos
-const bgPreRender = new Image();
-bgPreRender.src ="/img/backgrondoPreRender.png";
+
+app.backgroundImage.src ="/img/backgrondoPreRender.png";
 async function draw(){
     if(!app.pause){
         //delay 
@@ -67,8 +70,10 @@ async function draw(){
         clearTimeout(app.timeOut);
         //limpia el lienzo
         app.clearCanvas();
+        
         app.context.translate(app.translate,0);
-        drawSprite(bgPreRender,bgPreRender.width,app.height,{x:0,y:0}).render()
+        
+        drawSprite(app.backgroundImage,app.backgroundImage.width,app.height,{x:0,y:0}).render()
          
 
         //Renderiza cada enemigo 
