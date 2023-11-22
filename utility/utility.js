@@ -10,13 +10,13 @@ async function delay(ms) {
 }
 
 function calcularVelocidadPorNivel(nivel) {
-  return Math.max(3,nivel*.7);
+  return  Math.round(Math.max(3,nivel*.7));
 }
 function calcularVidaPorNivel(nivel){
-  return Math.max(50,nivel * 20);
+  return Math.round(Math.max(50,nivel * 20));
 }
 function calcularFuerzaPorNivel(nivel){
-    return Math.max(5,nivel*.7);
+    return  Math.round(Math.max(5,nivel*.7));
 }
 
 

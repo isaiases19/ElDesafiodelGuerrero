@@ -51,17 +51,16 @@ async function setup() {
     //app.music.currentTime = song[randomMinMax(1,song.length) - 1] * 60;
     app.music.volume = 0.3;
     //genera enemigo
-    getSpawn(app.width,35,200,randomMinMax(1,4),"troll",3).spawn()
-    getSpawn(-app.width,35,200,randomMinMax(1,4),"troll",3).spawn()
+    getSpawn(10,35,200,randomMinMax(1,4),"troll",3).spawn()
 
-    getSpawn(app.width*3,60,200,randomMinMax(5,10),"troll",2).spawn()
-    getSpawn(-app.width*3,60,200,randomMinMax(5,10),"troll",2).spawn()
+    getSpawn(app.width,60,200,randomMinMax(5,10),"troll",2).spawn()
+    getSpawn(-app.width,60,200,randomMinMax(5,10),"troll",2).spawn()
 
-    getSpawn(app.width*6,60*2,200,randomMinMax(11,15),"Orc",1).spawn()
-    getSpawn(-app.width*6,60*2,200,randomMinMax(11,15),"Orc",1).spawn()
+    getSpawn(6500,60*2,200,randomMinMax(11,15),"Orc",1)
+    getSpawn(-6500,60*2,200,randomMinMax(11,15),"Orc",1)
 
-    getSpawn(app.width*8,60*3,200,randomMinMax(16,20),"minotaur",1).spawn()
-    getSpawn(-app.width*8,60*3,200,randomMinMax(16,20),"minotaur",1).spawn()
+    getSpawn(7000,60*3,200,randomMinMax(16,20),"minotaur",1)
+    getSpawn(-7000,60*3,200,randomMinMax(16,20),"minotaur",1)
     //crea player
     app.player = new Guerrero("Conan","player",120,10,7,1);
     await delay(1000);
