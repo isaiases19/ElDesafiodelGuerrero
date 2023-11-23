@@ -13,9 +13,9 @@ main {
   margin: 0 auto;
 }
 canvas {
-  width: 95vh;
-  height: 95vh;
-  margin-top: 2vh;
+  width: 100vh;
+  height: 72vh;
+  margin-top: 14vh;
   background-repeat: no-repeat;
   background-size: cover;
   

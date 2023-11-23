@@ -33,9 +33,9 @@ class Personaje {
 
     //Transform -- posicion
     this.x = 0;
-    this.y = 0;
-    this.w = 0;
-    this.h = 0;
+    this.y = app.height*.8;
+    this.w = 600;
+    this.h = 500;
 
     //Audios
     this.sound = new Audio();
@@ -211,7 +211,7 @@ class Personaje {
 
     //Dibuja Vida
     const style = {
-      player: { color: "white", x:-app.translate + app.width * .085, y: app.height * .92, fontSize: 25, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
+      player: { color: "white", x:-app.translate + app.width * .085, y: app.height * .88, fontSize: 25, fontFamily: "PatrickHand", roundRadius: 12, bgColor: '#0a0e1a' },
       enemy: { color: "#ececec", x: this.x, y: this.y - this.h / 2.5, style: "bold", fontSize: 20, fontFamily: "PatrickHand", roundRadius: 10 }
     }
 
@@ -221,8 +221,8 @@ class Personaje {
 
     //Dibuja Inventario
     if (this.tipo === "player") {
-      this.drawInevtario(-app.translate +app.width * .2, app.height * .9, 70, 5);
-      this.drawPosiones(-app.translate + app.width * .425, app.height * .9, 70, 5);
+      this.drawInevtario(-app.translate +app.width * .025, app.height * .25, 70, 5);
+      this.drawPosiones(-app.translate + app.width * .9, app.height * .25, 70, 5);
     }
   }
 
@@ -233,21 +233,21 @@ class Personaje {
       const { sx, sy } = PowerUP.icon;
 
 
-      drawRect(x + ((sz + mg * 2) * index), y, sz + mg, sz + mg, { color: "#0e1016b0", roundRadius: sz / 8 }).render();
+      drawRect(x , y - ((sz + mg * 2) * index), sz + mg, sz + mg, { color: "#0e1016b0", roundRadius: sz / 8 }).render();
 
       app.context.save();
       app.context.filter = this.armas.name === item.name? "drop-shadow(0 0 3px #00ff88)" : "grayscale(50%)";
-      drawSprite(item.item.icon, sz * .9, sz * .9, { x: (x + ((sz + mg * 2) * index)) + mg, y: y + mg, sx, sy, sh: 16, sw: 16 }).render()
+      drawSprite(item.item.icon, sz * .9, sz * .9, { x: x + mg, y: (y - ((sz + mg * 2) * index)) + mg, sx, sy, sh: 16, sw: 16 }).render()
       app.context.restore();
     });
 
-    drawRect(x, y + (sz + mg * 2), (sz + mg * 1.7) * 3, 20, { color: "black", roundRadius: 3 }).render()
-    drawText("⚔️Armas", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
+    drawRect(x, y + (sz + mg * 2), (sz + mg * 1.7) * 1, 20, { color: "black", roundRadius: 3 }).render()
+    drawText("⚔️Armas", { fontSize: 12, x: x + sz / 1.8, y: y + (sz + mg * 4) }).render()
 
     //Dibuja Opciones de ataques
     const { c1, c2 } = { c1: this.ataques[0].count, c2: this.ataques[1].count };
   
-    drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} ⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x:-app.translate + app.width * .89, y: app.height * .975, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
+    drawText(`🗡️${c1 < 1 ? Math.floor(c1 * 1000) + "ms " : c1.toFixed(2) + "s "} \n⚔️${c2 < 1 ? Math.floor(c2 * 1000) + "ms " : c2.toFixed(2) + "s "} `, { x:-app.translate + app.width * .92, y: app.height * .9, fontSize: 18, roundRadius: 15, bgColor: "#0a0e1a" }).render()
     //has muerto MSG
     if (this.tipo === "player" && this.muerto) {
       app.pantalla =  drawMuerte();
@@ -260,12 +260,12 @@ class Personaje {
     this.posiones.forEach((posion, index) => {
       const { sx, sy } = posion;
 
-      drawRect(x + ((sz + mg * 3) * index), y, sz + (mg * 2), sz + mg, { color: "#0e1016b0", roundRadius: sz/8 }).render();
-      drawSprite(posion.sprite, sz, sz, { x: (x + ((sz + mg * 3) * index)) + mg, y: y + (mg/2), sx, sy, sh: 16, sw: 16 }).render()
+      drawRect(x , y - ((sz + mg * 3) * index), sz + (mg * 2), sz + mg, { color: "#0e1016b0", roundRadius: sz/8 }).render();
+      drawSprite(posion.sprite, sz, sz, { x: x+ (mg/2) , y: y - ((sz + mg * 3) * index) + mg, sx, sy, sh: 16, sw: 16 }).render()
     })
 
-    drawRect(x, y + (sz + mg * 2), (sz + mg*2.5) * 2, 20, { color: "black", roundRadius: 3 }).render()
-    drawText("🧪Posiones", { fontSize: 16, x: x + sz / 1.5, y: y + (sz + mg * 4) }).render()
+    drawRect(x, y + (sz + mg * 2), (sz + mg*2), 20, { color: "black", roundRadius: 3 }).render()
+    drawText("🧪Posiones", { fontSize: 12, x: x + sz / 1.8, y: y + (sz + mg * 4) }).render()
   }
 
 }

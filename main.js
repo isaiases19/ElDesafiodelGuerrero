@@ -12,7 +12,7 @@ const canvas = document.querySelector("canvas");
 const app = {
     context: canvas.getContext("2d"),
     width: 1080,
-    height: 1080,
+    height: 720,
     translate:0,
     turno: 0,
     timeOut: 5,
@@ -73,7 +73,7 @@ async function setup() {
 
 //Bucle que llama el renderizado de los objetos
 
-app.backgroundImage.src ="/img/backgrondoPreRender.jpg";
+app.backgroundImage.src ="/img/bgPreRender.png";
 async function draw(){
     if(!app.pause){
         //delay 

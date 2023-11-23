@@ -35,9 +35,6 @@ class Guerrero extends Personaje {
     this.posiones = [];
     //Transfrom
     this.x = app.width*.5;
-    this.y = 830;
-    this.w = 500;
-    this.h = 400;
 
     //Audios
     //Audio

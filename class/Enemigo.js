@@ -32,9 +32,6 @@ class Enemigo extends Personaje {
 
     //Transform -- posicion
     this.x = x ;
-    this.y = 830;
-    this.w = 500;
-    this.h = 400;
     this.spawnPos = x;
     //Audio
     this.recibirAudio = "/sounds/recibe1.mp3";
