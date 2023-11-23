@@ -16,6 +16,7 @@ class Sprite{
         this.sh = sh || h; 
     }
     render(){
+        app.context.imageSmoothingEnabled = false;
         app.context.drawImage(this.sprite,this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w, this.h);
     }
 }

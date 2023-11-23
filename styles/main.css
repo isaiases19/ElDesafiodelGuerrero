@@ -15,6 +15,7 @@ main {
 canvas {
   width: 100vh;
   height: 72vh;
+  display: block;
   margin-top: 14vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,7 +24,7 @@ canvas {
   border: #0b0e13 solid 5px;
   border-radius: 0.5rem;
   background-image: url("../img/inicio.png");
-  image-resolution: 1080;
+ 
   image-rendering: optimizeQuality;
 }
 
