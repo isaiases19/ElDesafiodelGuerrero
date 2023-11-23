@@ -73,7 +73,7 @@ async function setup() {
 
 //Bucle que llama el renderizado de los objetos
 
-app.backgroundImage.src ="/img/bgPreRender.png";
+app.backgroundImage.src ="/img/bgPreRender.jpg";
 async function draw(){
     if(!app.pause){
         //delay 
